@@ -1,0 +1,135 @@
+/*
+ * The PAID stamp — the one signature flourish in ShopOS.
+ * Violet stamp-pad ink, a double rule, condensed heavy type, pressed at a slight angle.
+ * The resting state below is the final state, so reduced motion simply shows it.
+ */
+
+.stamp {
+  --stamp-size: 20px;
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  color: var(--stamp);
+  font-size: var(--stamp-size);
+  opacity: 0.9;
+  transform: rotate(-8deg);
+  transform-origin: 50% 55%;
+  mix-blend-mode: multiply; /* reads as ink sitting on the paper, over text too */
+  pointer-events: none;
+  user-select: none;
+}
+
+.sm {
+  --stamp-size: 13px;
+}
+
+.md {
+  --stamp-size: 20px;
+}
+
+.lg {
+  --stamp-size: 34px;
+}
+
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.frame {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.34em 0.62em 0.28em;
+  border: max(1.5px, 0.13em) solid currentColor;
+  border-radius: 0.34em;
+}
+
+/* The inner rule of the double border. */
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: max(2px, 0.15em);
+  border: max(1px, 0.055em) solid currentColor;
+  border-radius: 0.2em;
+}
+
+.label {
+  display: block;
+  padding-left: 0.08em; /* balances the trailing letter-spacing */
+  font-family: var(--font-display);
+  font-size: 1em;
+  font-weight: 780;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* stamp-in: lifted and turned, it drops onto the paper, presses in, and settles. */
+.animate {
+  animation: stamp-in 420ms both;
+}
+
+.animate .frame::after {
+  content: "";
+  position: absolute;
+  inset: -0.08em;
+  border: max(2px, 0.16em) solid currentColor;
+  border-radius: 0.38em;
+  opacity: 0;
+  animation: ink-spread 560ms 240ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: rotate(-16deg) scale(1.8);
+    animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.35);
+  }
+  58% {
+    opacity: 0.9;
+    transform: rotate(-7deg) scale(0.94);
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  80% {
+    transform: rotate(-8.4deg) scale(1.015);
+  }
+  100% {
+    opacity: 0.9;
+    transform: rotate(-8deg) scale(1);
+  }
+}
+
+/* A brief halo of ink squeezing out at the moment of impact. */
+@keyframes ink-spread {
+  0% {
+    opacity: 0.42;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.13);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate {
+    animation: none;
+  }
+
+  .animate .frame::after {
+    display: none;
+  }
+}
+
+@media print {
+  .stamp {
+    mix-blend-mode: normal;
+  }
+}

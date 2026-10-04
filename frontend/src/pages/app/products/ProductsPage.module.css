@@ -1,0 +1,154 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+/* Filters: one row above the table they scope. */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-top: 8px;
+}
+
+.search {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.toolbarEnd {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.category {
+  width: 200px;
+}
+
+.archived {
+  flex: none;
+  white-space: nowrap;
+}
+
+/* Cells -------------------------------------------------------------------- */
+
+.productCell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  min-width: 0;
+}
+
+.productName {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.productMeta {
+  font-size: var(--text-13);
+  font-weight: 400;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+.sku {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.stockCell {
+  display: inline-grid;
+  justify-items: start;
+  gap: 3px;
+}
+
+.stockTop {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stockQty,
+.qty,
+.margin {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.stockQty {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.qty {
+  color: var(--ink-2);
+}
+
+.margin {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.loss {
+  color: var(--margin-text);
+}
+
+.none {
+  color: var(--ink-4);
+}
+
+.stockNote {
+  font-size: var(--text-12);
+  font-weight: 400;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.noteLow {
+  font-weight: 600;
+  color: var(--haldi-text);
+}
+
+.noteOut {
+  font-weight: 600;
+  color: var(--margin-text);
+}
+
+/* Phone cards: the stock figure sits top-right. */
+@media (max-width: 719px) {
+  .stockCell {
+    justify-items: end;
+  }
+}
+
+@media (max-width: 639px) {
+  .toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 4px;
+  }
+
+  .toolbarEnd {
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .category {
+    flex: 1 1 auto;
+    width: auto;
+  }
+}

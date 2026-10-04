@@ -1,0 +1,166 @@
+.page {
+  min-height: 100vh;
+  padding: 24px 16px 48px;
+  background: var(--desk);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 340px;
+  margin: 0 auto 16px;
+}
+
+.receipt {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  max-width: 340px;
+  margin: 0 auto;
+  padding: 24px 20px 28px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-13);
+  line-height: 1.5;
+  color: var(--ink);
+  /* Torn thermal-paper bottom edge. */
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 12px 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 12px 100%;
+}
+
+.head {
+  display: grid;
+  gap: 2px;
+  text-align: center;
+  color: var(--ink-2);
+}
+
+.head p {
+  margin: 0;
+}
+
+.shop {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-weight: 760;
+  font-size: var(--text-24);
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.rule {
+  margin: 6px 0;
+  border-top: 1px dashed var(--rule-strong);
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.line span:last-child {
+  text-align: right;
+}
+
+.lineStrong {
+  font-weight: 700;
+}
+
+.cancelled {
+  margin: 4px 0 0;
+  color: var(--margin-text);
+  font-weight: 600;
+}
+
+.items {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.items li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 12px;
+}
+
+.itemName {
+  grid-column: 1 / -1;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.itemQty {
+  color: var(--ink-3);
+}
+
+.itemTotal {
+  text-align: right;
+}
+
+.stamp {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 4px;
+}
+
+.upi {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding-top: 12px;
+  text-align: center;
+}
+
+.upi p {
+  margin: 0;
+}
+
+.qr {
+  width: 148px;
+  height: 148px;
+  margin-bottom: 6px;
+}
+
+.upiId {
+  color: var(--ink-3);
+}
+
+.thanks {
+  margin: 4px 0 0;
+  text-align: center;
+  color: var(--ink-2);
+}
+
+@media print {
+  @page {
+    size: 80mm auto;
+    margin: 4mm;
+  }
+
+  .page {
+    min-height: 0;
+    padding: 0;
+    background: none;
+  }
+
+  .toolbar {
+    display: none;
+  }
+
+  .receipt {
+    max-width: none;
+    padding: 0;
+    border: 0;
+    -webkit-mask: none;
+    mask: none;
+  }
+}

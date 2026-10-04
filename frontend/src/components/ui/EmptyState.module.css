@@ -1,0 +1,55 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 44px 24px;
+  text-align: center;
+}
+
+.compact {
+  padding: 24px 16px;
+}
+
+.icon {
+  display: inline-flex;
+  margin-bottom: 6px;
+  color: var(--ink-4);
+}
+
+.icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.compact .icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.title {
+  max-width: 48ch;
+  font-size: var(--text-15);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.description {
+  max-width: 46ch;
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+.action {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.error .icon {
+  color: var(--margin);
+}

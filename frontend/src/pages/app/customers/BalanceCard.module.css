@@ -1,0 +1,190 @@
+.card {
+  container-type: inline-size;
+  min-width: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.balance {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.label {
+  font-size: var(--text-13);
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.valueRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  min-height: 48px;
+}
+
+/* The headline amount: display face, proportional figures. */
+.valueRow .value {
+  font-size: var(--text-44);
+  line-height: 1;
+}
+
+.caption {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+  min-width: 0;
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 4px;
+  min-width: 0;
+}
+
+.stat dt {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.stat dd {
+  min-width: 0;
+  color: var(--ink);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: var(--text-17);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.last {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  font-size: var(--text-15);
+  font-weight: 500;
+}
+
+/* Payment promise ---------------------------------------------------------- */
+
+.promise {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 14px 10px 20px;
+  border-top: 1px solid var(--rule-line);
+}
+
+.promise > :only-child {
+  margin-left: -10px;
+}
+
+.promiseIcon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--ink-3);
+}
+
+.promiseText {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.promiseLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  font-size: var(--text-15);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.overdue {
+  margin-left: 4px;
+}
+
+.promiseNote {
+  margin-top: 2px;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.promiseActions {
+  display: flex;
+  flex: none;
+  gap: 4px;
+}
+
+.about {
+  padding: 14px 20px 16px;
+  border-top: 1px solid var(--rule-line);
+}
+
+/* Wide card: the balance on the left, the four totals beside it. */
+@container (min-width: 640px) {
+  .top {
+    grid-template-columns: minmax(200px, 0.9fr) minmax(0, 2fr);
+    align-items: center;
+    gap: 24px;
+    padding: 22px 24px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding-left: 24px;
+    border-left: 1px solid var(--rule);
+  }
+
+  .promise {
+    padding-left: 24px;
+    padding-right: 16px;
+  }
+
+  .about {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 639px) {
+  .top {
+    padding: 16px;
+  }
+
+  .valueRow .value {
+    font-size: 38px;
+  }
+
+  .promise {
+    padding-left: 16px;
+  }
+
+  .about {
+    padding: 12px 16px 14px;
+  }
+}

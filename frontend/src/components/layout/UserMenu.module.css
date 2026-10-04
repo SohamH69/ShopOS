@@ -1,0 +1,43 @@
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  text-align: left;
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+.user:hover,
+.user[aria-expanded="true"] {
+  background: var(--desk);
+}
+
+.text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  flex: 1;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.name {
+  overflow: hidden;
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.role {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--ink-3);
+}

@@ -1,0 +1,35 @@
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 18px;
+}
+
+/* Proportional figures for the headline total. */
+.total {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.meta {
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.loading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 639px) {
+  .total {
+    font-size: 26px;
+  }
+}

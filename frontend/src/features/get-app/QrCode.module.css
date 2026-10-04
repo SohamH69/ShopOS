@@ -1,0 +1,14 @@
+.qr {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.paper {
+  fill: var(--paper);
+}
+
+.ink {
+  fill: var(--ink);
+}

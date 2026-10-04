@@ -1,0 +1,80 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.nameCell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.contact {
+  font-size: var(--text-13);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.phone {
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.phone:hover {
+  text-decoration: underline;
+}
+
+.supplies {
+  display: block;
+  max-width: 320px;
+  overflow: hidden;
+  color: var(--ink-2);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.when {
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.none {
+  color: var(--ink-4);
+}
+
+.settled {
+  font-weight: 500;
+  color: var(--leaf-text);
+}
+
+/* Phone cards: let the supplies wrap instead of cutting them off. */
+@media (max-width: 719px) {
+  .supplies {
+    max-width: none;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 639px) {
+  .toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 4px;
+  }
+}

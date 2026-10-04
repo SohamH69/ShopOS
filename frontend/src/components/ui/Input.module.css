@@ -1,0 +1,220 @@
+/* Shared by Input, Textarea, Select, MoneyInput, SearchInput and QuantityInput. */
+
+.control {
+  display: block;
+  width: 100%;
+  height: var(--control-md);
+  padding: 0 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--text-15);
+  line-height: 1.4;
+  transition:
+    border-color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.control:hover {
+  border-color: var(--ink-4);
+}
+
+.control:focus,
+.control:focus-visible {
+  outline: 2px solid transparent;
+  border-color: var(--pen);
+  box-shadow: var(--focus-ring);
+}
+
+.control[aria-invalid="true"] {
+  border-color: var(--margin);
+}
+
+.control[aria-invalid="true"]:focus {
+  box-shadow: var(--focus-ring-danger);
+}
+
+.control:disabled {
+  border-color: var(--rule);
+  background: var(--desk);
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+.control[readonly] {
+  background: var(--desk);
+}
+
+.sm {
+  height: var(--control-sm);
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-14);
+}
+
+.lg {
+  height: var(--control-lg);
+  padding: 0 14px;
+  font-size: 16px;
+}
+
+/* With adornments the wrapper draws the box. ------------------------------ */
+
+.group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  height: var(--control-md);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--text-15);
+  cursor: text;
+  transition:
+    border-color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.group:hover {
+  border-color: var(--ink-4);
+}
+
+.group:focus-within {
+  border-color: var(--pen);
+  box-shadow: var(--focus-ring);
+}
+
+.group[data-invalid="true"] {
+  border-color: var(--margin);
+}
+
+.group[data-invalid="true"]:focus-within {
+  box-shadow: var(--focus-ring-danger);
+}
+
+.group[data-disabled="true"] {
+  border-color: var(--rule);
+  background: var(--desk);
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+.group.sm {
+  height: var(--control-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-14);
+}
+
+.group.lg {
+  height: var(--control-lg);
+  font-size: 16px;
+}
+
+.bare {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 12px;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+
+.bare:focus,
+.bare:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.bare:disabled {
+  cursor: not-allowed;
+}
+
+.bareAfterLeading {
+  padding-left: 6px;
+}
+
+.bareBeforeTrailing {
+  padding-right: 4px;
+}
+
+.adornment {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  color: var(--ink-3);
+  line-height: 1;
+}
+
+.adornment svg {
+  width: 16px;
+  height: 16px;
+}
+
+.leading {
+  padding-left: 12px;
+}
+
+.trailing {
+  padding-right: 6px;
+}
+
+/* Textarea --------------------------------------------------------------- */
+
+.textarea {
+  height: auto;
+  min-height: 88px;
+  padding: 10px 12px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* Native select ----------------------------------------------------------- */
+
+.selectWrap {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.select {
+  appearance: none;
+  padding-right: 36px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.placeholder {
+  color: var(--ink-3);
+}
+
+.select option {
+  color: var(--ink);
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  width: 16px;
+  height: 16px;
+  color: var(--ink-3);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Inputs under 16px make iOS Safari zoom in on focus. */
+@media (max-width: 767px) {
+  .control,
+  .group {
+    font-size: 16px;
+  }
+}

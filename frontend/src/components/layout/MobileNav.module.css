@@ -1,0 +1,148 @@
+.tabbar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-nav);
+  padding-bottom: var(--safe-bottom);
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.tabs {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  height: var(--tabbar-h);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
+  color: var(--ink-3);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition: color var(--dur-1) var(--ease);
+}
+
+.tab:hover {
+  color: var(--ink);
+}
+
+.tab:focus-visible {
+  border-radius: var(--radius);
+  box-shadow: inset var(--focus-ring);
+}
+
+.active,
+.active:hover {
+  color: var(--pen);
+}
+
+.iconWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+.iconWrap svg {
+  width: 21px;
+  height: 21px;
+}
+
+.active .iconWrap {
+  background: var(--pen-tint);
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  left: calc(50% + 4px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border: 2px solid var(--paper);
+  border-radius: var(--radius-pill);
+  background: var(--pen);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.label {
+  padding-top: 1px;
+}
+
+/* Floating New order button, above the tab bar. */
+.fab {
+  position: fixed;
+  right: 16px;
+  bottom: calc(var(--tabbar-h) + var(--safe-bottom) + 16px);
+  z-index: var(--z-fab);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--pen);
+  color: #ffffff;
+  box-shadow: var(--shadow-float);
+  transition:
+    background-color var(--dur-1) var(--ease),
+    transform var(--dur-1) var(--ease);
+}
+
+.fab:hover {
+  background: var(--pen-hover);
+}
+
+.fab:active {
+  background: var(--pen-press);
+  transform: scale(0.96);
+}
+
+.fab svg {
+  width: 26px;
+  height: 26px;
+}
+
+.fab:focus-visible {
+  box-shadow:
+    var(--shadow-float),
+    0 0 0 3px var(--paper),
+    0 0 0 6px rgba(43, 69, 181, 0.45);
+}
+
+@media (min-width: 1024px) {
+  .tabbar,
+  .fab {
+    display: none;
+  }
+}
+
+@media print {
+  .tabbar,
+  .fab {
+    display: none;
+  }
+}

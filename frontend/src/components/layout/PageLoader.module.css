@@ -1,0 +1,100 @@
+.full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 24px;
+  background: var(--desk);
+  color: var(--ink-3);
+  font-size: var(--text-14);
+}
+
+.mark {
+  animation: breathe 1.8s var(--ease) infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.skeleton {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.skeletonHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.skeletonCards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.skeletonCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+@media (max-width: 767px) {
+  .skeletonCards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Auth error and no-access screens */
+
+.screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 24px 16px;
+  background: var(--desk);
+}
+
+.screenCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 440px;
+  padding: 28px 24px 8px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+}
+
+.inline {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.inlineCard {
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}

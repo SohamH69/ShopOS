@@ -1,0 +1,58 @@
+/* Shared layout for the customer dialogs: add/edit customer, record payment, payment promise. */
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+@media (min-width: 520px) {
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+.lead {
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.formError {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--margin-tint);
+  color: var(--margin-text);
+  font-size: var(--text-14);
+  line-height: 1.45;
+}
+
+.formError svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+/* A quiet summary line inside a dialog, e.g. "Clears #1045 first, then #1050". */
+.note {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}

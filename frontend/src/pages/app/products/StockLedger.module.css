@@ -1,0 +1,174 @@
+/* A ruled stock ledger: dates left, figures right-aligned in mono, newest at the top. */
+
+.ledger {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+.table {
+  width: 100%;
+  font-size: var(--text-14);
+}
+
+.table th {
+  height: 34px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-3);
+  font-size: var(--text-12);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--rule-line);
+  vertical-align: top;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 0;
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: 0;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.dateCol {
+  width: 68px;
+}
+
+.activityCol {
+  min-width: 0;
+}
+
+.date,
+.time {
+  display: block;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.date {
+  font-size: var(--text-13);
+  color: var(--ink);
+}
+
+.time {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}
+
+.activity {
+  display: block;
+  color: var(--ink);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  display: block;
+  margin-top: 1px;
+  font-size: var(--text-12);
+  line-height: 1.45;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+.inlineDate {
+  display: none;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.num {
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.figure {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.up {
+  color: var(--leaf-text);
+}
+
+.down {
+  color: var(--ink-2);
+}
+
+.after {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.out {
+  color: var(--margin-text);
+}
+
+.link {
+  border-radius: 4px;
+  color: var(--pen);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.link:hover {
+  color: var(--pen-hover);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-line);
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.skeleton {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.skeletonRow {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule-line);
+}
+
+/* Narrow drawers (phones): the date moves under the activity. */
+@container (max-width: 400px) {
+  .dateCol {
+    display: none;
+  }
+
+  .inlineDate {
+    display: inline;
+  }
+
+  .table th:nth-child(2),
+  .table td:nth-child(2) {
+    padding-left: 0;
+  }
+}

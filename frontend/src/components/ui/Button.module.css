@@ -1,0 +1,165 @@
+.button {
+  --btn-height: var(--control-md);
+  --btn-icon: 18px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: var(--btn-height);
+  min-width: 0;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: var(--text-15);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.button:hover {
+  text-decoration: none;
+}
+
+.button svg {
+  width: var(--btn-icon);
+  height: var(--btn-icon);
+}
+
+.label {
+  /* Mukta sits slightly high in its box; nudge the text so it centres optically with icons. */
+  padding-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sm {
+  --btn-height: var(--control-sm);
+  --btn-icon: 16px;
+  gap: 6px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-14);
+}
+
+.lg {
+  --btn-height: var(--control-lg);
+  --btn-icon: 20px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.block {
+  display: flex;
+  width: 100%;
+}
+
+/* Variants ---------------------------------------------------------------- */
+
+.primary {
+  background: var(--pen);
+  color: #ffffff;
+}
+
+.primary:hover {
+  background: var(--pen-hover);
+  color: #ffffff;
+}
+
+.primary:active {
+  background: var(--pen-press);
+}
+
+.secondary {
+  background: var(--paper);
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+.secondary:hover {
+  background: var(--desk);
+  border-color: var(--ink-4);
+  color: var(--ink);
+}
+
+.secondary:active {
+  background: var(--desk-2);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--ink-2);
+}
+
+.ghost:hover {
+  background: var(--desk-2);
+  color: var(--ink);
+}
+
+.ghost:active {
+  background: var(--rule);
+}
+
+.danger {
+  background: var(--margin-text);
+  color: #ffffff;
+}
+
+.danger:hover {
+  background: #9c2020;
+  color: #ffffff;
+}
+
+.danger:active {
+  background: #861b1b;
+}
+
+.danger:focus-visible {
+  box-shadow: var(--focus-ring-danger);
+}
+
+/* States ------------------------------------------------------------------ */
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button[aria-disabled="true"] {
+  pointer-events: none;
+}
+
+.loading,
+.loading:disabled {
+  opacity: 1;
+  cursor: progress;
+}
+
+.loading.primary,
+.loading.danger {
+  opacity: 0.86;
+}
+
+/* Icon-only buttons are square. */
+.icon {
+  width: var(--btn-height);
+  padding: 0;
+  flex: none;
+}
+
+@media (max-width: 1023px) {
+  /* Comfortable touch targets. */
+  .sm {
+    --btn-height: 40px;
+  }
+}

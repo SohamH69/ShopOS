@@ -1,0 +1,106 @@
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.filterEnd {
+  display: flex;
+  flex: 1 1 420px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-width: 0;
+}
+
+.sort {
+  flex: 0 1 200px;
+  min-width: 0;
+}
+
+.search {
+  flex: 1 1 240px;
+  min-width: 0;
+  max-width: 340px;
+}
+
+.nameCell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* On phones the Phone column is hidden, so the number sits under the name instead. */
+.phoneBelow {
+  font-size: var(--text-13);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.phone {
+  font-size: var(--text-14);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.relative {
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.due {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.promise {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.settled {
+  font-size: var(--text-14);
+  font-weight: 500;
+  color: var(--leaf-text);
+}
+
+@media (min-width: 720px) {
+  .phoneBelow {
+    display: none;
+  }
+}
+
+@media (max-width: 719px) {
+  .filters {
+    align-items: stretch;
+  }
+
+  .filterEnd {
+    flex-basis: 100%;
+  }
+
+  .sort,
+  .search {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+}

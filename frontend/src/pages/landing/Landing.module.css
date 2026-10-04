@@ -1,0 +1,117 @@
+/* Layout primitives shared by the landing page sections. */
+
+.page {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: clip;
+}
+
+.main:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Hidden until a keyboard user tabs to it. */
+.skipLink {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: var(--z-toast);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--paper);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--dur-2) var(--ease);
+}
+
+.skipLink:hover {
+  color: var(--paper);
+}
+
+.skipLink:focus-visible {
+  transform: none;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+/* A full-width band of the page; alternate paper and desk to pace the scroll. */
+.band {
+  padding: 96px 0;
+}
+
+.desk {
+  background: var(--desk);
+}
+
+.ruled {
+  border-top: 1px solid var(--rule);
+}
+
+/* Every anchored section clears the sticky header. */
+.anchor {
+  scroll-margin-top: 88px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.title {
+  margin-top: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-44);
+  font-stretch: var(--display-stretch);
+  font-weight: 720;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* Section headings receive focus after an in-page link; the scroll itself is the cue. */
+.title:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.lede {
+  margin-top: var(--space-4);
+  max-width: 34em;
+  font-size: var(--text-17);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.intro {
+  max-width: 720px;
+}
+
+@media (max-width: 767px) {
+  .band {
+    padding: 64px 0;
+  }
+
+  .title {
+    font-size: var(--text-32);
+  }
+
+  .lede {
+    font-size: var(--text-15);
+  }
+}

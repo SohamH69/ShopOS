@@ -1,0 +1,290 @@
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+/* ------------------------------------------------------------ people */
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.personText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.personName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.personNameText {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.personMeta {
+  font-size: var(--text-13);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--text-14);
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--leaf);
+}
+
+.statusOff {
+  color: var(--ink-3);
+}
+
+.statusOff .dot {
+  background: var(--ink-4);
+}
+
+.never {
+  color: var(--ink-3);
+}
+
+.footerHint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+/* ------------------------------------------------------------ modals */
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+.formError {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--margin-tint);
+  color: var(--margin-text);
+  font-size: var(--text-14);
+  line-height: 1.45;
+}
+
+.formError svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+}
+
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pen);
+  font-size: var(--text-13);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.linkButton:hover {
+  color: var(--pen-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lead {
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* Role choice: radio rows with a one-line description each. */
+.roleOptions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.roleLegend {
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.roleOption {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-1) var(--ease),
+    background-color var(--dur-1) var(--ease);
+}
+
+.roleOption:hover {
+  border-color: var(--ink-4);
+}
+
+.roleOption[data-checked="true"] {
+  border-color: var(--pen);
+  background: var(--pen-tint);
+}
+
+.roleRadio {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--pen);
+  cursor: pointer;
+}
+
+.roleText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.roleTitle {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.roleDescription {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.areas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+/* Login details to share with a new staff member. */
+.loginBox {
+  margin: 0;
+  padding: 2px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--desk);
+}
+
+.loginRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule-line);
+}
+
+.loginRow:last-child {
+  border-bottom: 0;
+}
+
+.loginLabel {
+  flex: none;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.loginValue {
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-14);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.password {
+  font-size: var(--text-17);
+  font-weight: 600;
+}
+
+.shareActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.note {
+  margin-top: 14px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+@media (max-width: 639px) {
+  .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .shareActions > * {
+    flex: 1 1 100%;
+  }
+}

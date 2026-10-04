@@ -1,0 +1,101 @@
+.root {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 2px;
+  /* Shrink inside flex rows and grids on small screens; the segments then scroll sideways. */
+  min-width: 0;
+  max-width: 100%;
+  height: var(--control-md);
+  padding: 3px;
+  border-radius: var(--radius);
+  background: var(--desk-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.root::-webkit-scrollbar {
+  display: none;
+}
+
+.block {
+  display: flex;
+  width: 100%;
+}
+
+.block .segment {
+  flex: 1 1 0;
+}
+
+.sm {
+  height: var(--control-sm);
+  padding: 2px;
+  border-radius: 8px;
+}
+
+.segment {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 0 12px;
+  border-radius: 7px;
+  color: var(--ink-2);
+  font-size: var(--text-14);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.sm .segment {
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: var(--text-13);
+}
+
+.segment:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.segment[aria-checked="true"] {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow:
+    var(--shadow-sm),
+    0 0 0 1px var(--rule);
+}
+
+.segment:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.segment:disabled {
+  color: var(--ink-4);
+  cursor: not-allowed;
+}
+
+.label {
+  padding-top: 1px;
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+
+.segment[aria-checked="true"] .count {
+  color: var(--pen);
+}
+
+@media (max-width: 1023px) {
+  .sm {
+    height: 40px;
+  }
+}

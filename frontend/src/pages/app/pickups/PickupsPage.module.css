@@ -1,0 +1,182 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.column {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--desk-2);
+  min-width: 0;
+}
+
+.columnReady {
+  border-color: var(--pen-tint-2);
+  background: var(--pen-tint);
+}
+
+.columnHead {
+  display: grid;
+  gap: 2px;
+  padding: 2px 2px 4px;
+}
+
+.columnTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  font-size: var(--text-20);
+  line-height: 1.1;
+}
+
+.columnCount {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-weight: 600;
+  font-stretch: normal;
+  color: var(--ink-3);
+}
+
+.columnReady .columnCount {
+  color: var(--pen);
+}
+
+.columnHint {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.columnEmpty {
+  margin: 0;
+  padding: 18px 8px;
+  text-align: center;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.cardOverdue {
+  border-color: color-mix(in srgb, var(--margin) 45%, var(--rule));
+}
+
+.open {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.open:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.open:hover .customer {
+  color: var(--pen);
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.customer {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  transition: color var(--dur-1) var(--ease);
+}
+
+.number {
+  flex: none;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.items {
+  font-size: var(--text-14);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.money {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.when {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.overdue {
+  color: var(--margin-text);
+  font-weight: 600;
+}
+
+.address {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--text-13);
+  color: var(--ink-2);
+}
+
+.address svg {
+  flex: none;
+  margin-top: 3px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-line);
+}
+
+@media (max-width: 1100px) {
+  .board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

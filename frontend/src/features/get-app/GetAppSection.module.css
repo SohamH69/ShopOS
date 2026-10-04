@@ -1,0 +1,331 @@
+/* "Get the app": a heading and two cards (install / use in the browser), side by side from 900px. */
+
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
+  /* Clears the sticky site header when reached from a #get-app link. */
+  scroll-margin-top: 88px;
+}
+
+.intro {
+  max-width: 680px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-44);
+  font-stretch: var(--display-stretch);
+  font-weight: 720;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.title:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.lede {
+  margin-top: var(--space-3);
+  max-width: 36em;
+  font-size: var(--text-17);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+  padding: var(--space-6);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.cardTitle {
+  font-size: var(--text-20);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.cardSub {
+  margin-top: var(--space-1);
+  max-width: 34em;
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.quiet {
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Install card ------------------------------------------------------------ */
+
+.installLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 164px;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.installBody {
+  min-width: 0;
+}
+
+.installNow,
+.installed,
+.manual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.installNow .quiet {
+  max-width: 30em;
+}
+
+.installedRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.installedIcon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--leaf-text);
+}
+
+.installedTitle {
+  font-size: var(--text-17);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.notice {
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: var(--space-2);
+  align-items: baseline;
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.step strong {
+  font-weight: 600;
+}
+
+.stepNo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--ink-2);
+  transform: translateY(1px);
+}
+
+/* A browser control drawn inside a sentence ("Tap Share [icon]"). */
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 22px;
+  margin: 0 2px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--desk);
+  color: var(--ink-2);
+  vertical-align: -5px;
+}
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--haldi-tint);
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--haldi-text);
+}
+
+.note svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+/* QR code ----------------------------------------------------------------- */
+
+.qr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+  justify-items: center;
+  text-align: center;
+}
+
+.qrFrame {
+  width: 164px;
+  padding: var(--space-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.qrCaption {
+  display: grid;
+  gap: 2px;
+}
+
+.qrTitle {
+  font-size: var(--text-14);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.qrUrl {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+/* Browser card ------------------------------------------------------------ */
+
+.signedIn {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--pen-tint);
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.signedIn strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.browserActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+ul.facts {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+
+.facts li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.facts svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--leaf-text);
+}
+
+/* Responsive -------------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .section {
+    gap: var(--space-6);
+  }
+
+  .title {
+    font-size: var(--text-32);
+  }
+
+  .lede {
+    font-size: var(--text-15);
+  }
+
+  .card {
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .installLayout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  /* On a phone the QR sits beside its caption to save height. */
+  .qr {
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: center;
+    justify-items: start;
+    gap: var(--space-4);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--rule);
+    text-align: left;
+  }
+
+  .qrFrame {
+    width: 112px;
+    padding: 6px;
+  }
+
+  .browserActions > * {
+    flex: 1 1 100%;
+  }
+}

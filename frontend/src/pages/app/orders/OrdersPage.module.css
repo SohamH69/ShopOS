@@ -1,0 +1,114 @@
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.search {
+  flex: 1 1 260px;
+  min-width: 0;
+  max-width: 380px;
+}
+
+.selects {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.selects > select,
+.selects > div {
+  flex: 0 1 190px;
+  min-width: 0;
+}
+
+.clear {
+  margin-left: auto;
+}
+
+.count {
+  margin: 0 0 10px;
+  min-height: 20px;
+  font-size: var(--text-13);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.countHint {
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.orderCell {
+  display: grid;
+  gap: 2px;
+}
+
+.orderNo {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.when {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.customer {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.walkIn {
+  color: var(--ink-3);
+}
+
+.items {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--text-14);
+  color: var(--ink-2);
+}
+
+.status {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.none {
+  color: var(--ink-4);
+}
+
+@media (max-width: 720px) {
+  .search {
+    max-width: none;
+  }
+
+  .selects > select,
+  .selects > div {
+    flex: 1 1 140px;
+  }
+
+  .clear {
+    margin-left: 0;
+  }
+}

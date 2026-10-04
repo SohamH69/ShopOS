@@ -1,0 +1,33 @@
+.change {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 6px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.before {
+  color: var(--ink-3);
+}
+
+.arrow {
+  width: 14px;
+  height: 14px;
+  color: var(--ink-4);
+}
+
+.after {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.low {
+  color: var(--haldi-text);
+}
+
+.out {
+  color: var(--margin-text);
+}

@@ -1,0 +1,47 @@
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+/* The card grid reacts to the space it actually has (the sidebar takes 240px on desktop). */
+.gridWrap {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+@container (min-width: 860px) {
+  .grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .attention,
+  .pickups {
+    grid-column: span 6;
+  }
+
+  .week {
+    grid-column: span 7;
+  }
+
+  .lowStock {
+    grid-column: span 5;
+  }
+
+  .recent {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 639px) {
+  .stack,
+  .grid {
+    gap: 16px;
+  }
+}

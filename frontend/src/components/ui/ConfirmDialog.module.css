@@ -1,0 +1,18 @@
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--margin-tint);
+  color: var(--margin-text);
+  font-size: var(--text-14);
+  line-height: 1.45;
+}
+
+.error svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex: none;
+}

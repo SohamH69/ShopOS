@@ -1,0 +1,268 @@
+/* BarList ----------------------------------------------------------------- */
+
+.barList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.barRow {
+  margin: -6px -8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+}
+
+a.barRow:hover {
+  background: var(--desk);
+  color: inherit;
+}
+
+.barTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.barLabel {
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--text-14);
+  color: var(--ink);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.barValue {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+.barHint {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}
+
+.track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--desk-2);
+}
+
+.fill {
+  height: 100%;
+  min-width: 2px;
+  border-radius: 3px;
+  background: var(--pen);
+  transition: width var(--dur-3) var(--ease);
+}
+
+.tone_leaf .fill {
+  background: var(--leaf);
+}
+
+.tone_haldi .fill {
+  background: var(--haldi);
+}
+
+.tone_margin .fill {
+  background: var(--margin);
+}
+
+.tone_ink .fill {
+  background: var(--ink-3);
+}
+
+.barEmpty {
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+/* Sparkline --------------------------------------------------------------- */
+
+.sparkline {
+  display: inline-block;
+  overflow: visible;
+  vertical-align: middle;
+}
+
+/* ColumnChart ------------------------------------------------------------- */
+
+.chart {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: opacity var(--dur-2) var(--ease);
+}
+
+.chart:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.refreshing {
+  opacity: 0.6;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.baseline {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.axisLabel {
+  fill: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.xLabel {
+  fill: var(--ink-3);
+  font-family: var(--font-body);
+  font-size: 12px;
+}
+
+.xLabelActive {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+.column {
+  fill: var(--pen-tint-2);
+  transition: fill var(--dur-1) var(--ease);
+}
+
+.columnHighlight {
+  fill: var(--pen);
+}
+
+.columnActive {
+  fill: color-mix(in srgb, var(--pen) 38%, var(--pen-tint-2));
+}
+
+.columnHighlight.columnActive {
+  fill: var(--pen-hover);
+}
+
+.hit {
+  fill: transparent;
+  cursor: default;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  min-width: 96px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper);
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 10px));
+  white-space: nowrap;
+}
+
+.tooltipValue {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-14);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.tooltipLabel {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}
+
+/* StockMeter -------------------------------------------------------------- */
+
+.meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.meterTrack {
+  flex: none;
+  width: var(--meter-width, 64px);
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.meterFill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.meter_ok .meterTrack {
+  background: var(--leaf-tint);
+}
+
+.meter_ok .meterFill {
+  background: var(--leaf);
+}
+
+.meter_low .meterTrack {
+  background: var(--haldi-tint);
+}
+
+.meter_low .meterFill {
+  background: var(--haldi);
+}
+
+.meter_out .meterTrack {
+  background: var(--margin-tint);
+}
+
+.meter_out .meterFill {
+  background: var(--margin);
+}
+
+.meterLabel {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.meter_low .meterLabel {
+  color: var(--haldi-text);
+}
+
+.meter_out .meterLabel {
+  color: var(--margin-text);
+}

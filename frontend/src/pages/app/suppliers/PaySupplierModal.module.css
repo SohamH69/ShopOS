@@ -1,0 +1,59 @@
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.amountRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+}
+
+.amount {
+  flex: 1 1 160px;
+  max-width: 220px;
+}
+
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--desk);
+}
+
+.previewLabel {
+  font-size: var(--text-14);
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.previewChange {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-17);
+}
+
+.arrow {
+  width: 16px;
+  height: 16px;
+  color: var(--ink-4);
+}
+
+.settled {
+  font-weight: 600;
+  color: var(--leaf-text);
+}
+
+@media (max-width: 479px) {
+  .amount {
+    max-width: none;
+  }
+}

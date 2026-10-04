@@ -1,0 +1,146 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--desk);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  align-content: start;
+  gap: var(--space-6);
+  width: 100%;
+  padding: var(--space-12) var(--page-pad) calc(var(--space-12) + var(--safe-bottom));
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--space-8);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  font-stretch: var(--display-stretch);
+  font-weight: 720;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.description {
+  margin-top: var(--space-2);
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--margin-tint);
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--margin-text);
+}
+
+.alert svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+.alertInfo {
+  background: var(--pen-tint);
+  color: var(--ink-2);
+}
+
+.alertInfo svg {
+  color: var(--pen);
+}
+
+.alertText {
+  min-width: 0;
+}
+
+.alertText a {
+  font-weight: 600;
+  color: inherit;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.demo {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.demoHint {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  text-align: center;
+  color: var(--ink-3);
+}
+
+.footer {
+  font-size: var(--text-15);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--ink-2);
+}
+
+.footer a {
+  font-weight: 600;
+}
+
+@media (max-width: 639px) {
+  .main {
+    gap: var(--space-5);
+    padding-top: var(--space-8);
+  }
+
+  .card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .title {
+    font-size: var(--text-24);
+  }
+}

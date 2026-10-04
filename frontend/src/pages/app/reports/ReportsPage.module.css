@@ -1,0 +1,344 @@
+/* Reports: one column of key numbers and the sales chart, then a two-column grid of cards. */
+
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.totals {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.footnote {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+/* While a new range loads, the previous numbers stay in place, dimmed (no skeleton flash). */
+.refreshing {
+  opacity: 0.6;
+  transition: opacity var(--dur-2) var(--ease);
+}
+
+.settled {
+  transition: opacity var(--dur-2) var(--ease);
+}
+
+/* ------------------------------------------------------------ sales card */
+
+.chartWrap {
+  position: relative;
+  min-width: 0;
+}
+
+.chartEmpty {
+  position: absolute;
+  /* Centred over the plot: clear of the y-axis labels and the x-axis band. */
+  inset: 0 0 26px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+  text-align: center;
+  pointer-events: none;
+}
+
+.tableScroll {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.dataTable {
+  width: 100%;
+  font-size: var(--text-14);
+}
+
+.dataTable th,
+.dataTable td {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule-line);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.dataTable thead th {
+  padding-top: 0;
+  border-bottom-color: var(--rule);
+  font-size: var(--text-12);
+  font-weight: 600;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.dataTable tbody th {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.dataTable tfoot th,
+.dataTable tfoot td {
+  border-top: 1px solid var(--rule);
+  border-bottom: 0;
+  font-weight: 600;
+}
+
+.numCell {
+  padding-left: 16px !important;
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.zero {
+  color: var(--ink-4);
+}
+
+/* ------------------------------------------------------------ facts */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.factLabel {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.factValue {
+  font-family: var(--font-display);
+  font-size: var(--text-24);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.factHint {
+  font-size: var(--text-12);
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.tone_margin .factValue {
+  color: var(--margin-text);
+}
+
+.tone_leaf .factValue {
+  color: var(--leaf-text);
+}
+
+/* ------------------------------------------------------------ lists */
+
+.subhead {
+  margin: 22px 0 10px;
+  font-size: var(--text-13);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule-line);
+}
+
+.listItem:last-child {
+  border-bottom: 0;
+}
+
+.itemMain {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.itemName {
+  overflow: hidden;
+  color: var(--ink);
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+a.itemName {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a.itemName:hover {
+  color: var(--pen);
+  text-decoration: underline;
+}
+
+.itemMeta {
+  overflow: hidden;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.itemAside {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+
+.rank {
+  flex: none;
+  width: 22px;
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  text-align: right;
+}
+
+.rankRow {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.lowStock {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 32px;
+}
+
+/* In two columns the second-to-last item always ends a column, so it loses its rule too. */
+.lowStock .listItem:nth-last-child(2) {
+  border-bottom: 0;
+}
+
+.cardLink {
+  white-space: nowrap;
+}
+
+.more {
+  margin-top: 8px;
+}
+
+/* ------------------------------------------------------------ movers */
+
+.miniTable {
+  width: 100%;
+  table-layout: fixed;
+  font-size: var(--text-14);
+}
+
+.miniTable th,
+.miniTable td {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule-line);
+  text-align: left;
+}
+
+.miniTable thead th {
+  padding-top: 0;
+  border-bottom-color: var(--rule);
+  font-size: var(--text-12);
+  font-weight: 600;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.miniTable tbody tr:last-child th,
+.miniTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.miniTable tbody th {
+  overflow: hidden;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.qtyCol {
+  width: 92px;
+}
+
+.outOfStock {
+  color: var(--margin-text);
+}
+
+.notSold {
+  color: var(--ink-4);
+}
+
+/* ------------------------------------------------------------ skeleton */
+
+.skeletonCard {
+  display: grid;
+  gap: 14px;
+}
+
+@media (max-width: 899px) {
+  .grid,
+  .lowStock {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lowStock .listItem:nth-last-child(2) {
+    border-bottom: 1px solid var(--rule-line);
+  }
+}
+
+@media (max-width: 639px) {
+  .facts {
+    gap: 12px;
+  }
+
+  .factValue {
+    font-size: var(--text-20);
+  }
+
+  .qtyCol {
+    width: 78px;
+  }
+}

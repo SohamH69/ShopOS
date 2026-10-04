@@ -1,0 +1,239 @@
+.page {
+  min-height: 100vh;
+  background: var(--desk);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.headerInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  max-width: calc(var(--content-max) + var(--page-pad) * 2);
+  margin: 0 auto;
+  padding: 12px var(--page-pad);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  font-size: var(--text-13);
+}
+
+.nav a {
+  color: var(--ink-3);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--pen);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  max-width: calc(var(--content-max) + var(--page-pad) * 2);
+  margin: 0 auto;
+  padding: 32px var(--page-pad) 96px;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  scroll-margin-top: 96px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-24);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.sectionNote {
+  margin-top: -10px;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.rowTop {
+  align-items: flex-start;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  align-content: start;
+}
+
+.label {
+  min-width: 88px;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.swatch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+  font-size: var(--text-12);
+}
+
+.swatchColor {
+  height: 44px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.swatchName {
+  padding: 6px 10px 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.swatchValue {
+  padding: 0 10px 8px;
+  font-family: var(--font-mono);
+  color: var(--ink-3);
+}
+
+.typeSample {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.displayXL {
+  font-family: var(--font-display);
+  font-size: var(--text-44);
+  font-stretch: var(--display-stretch);
+  font-weight: 760;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.displayL {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.bodyL {
+  font-size: var(--text-17);
+}
+
+.monoSample {
+  font-family: var(--font-mono);
+  font-size: var(--text-14);
+  font-variant-numeric: tabular-nums;
+}
+
+.paymentBlock {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.paymentCell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.paymentCell strong {
+  font-family: var(--font-mono);
+  font-size: var(--text-17);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.overlayStamp {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  margin-top: -20px;
+}
+
+.stampStage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.chartCard {
+  min-width: 0;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+@media (max-width: 900px) {
+  .grid2,
+  .grid3,
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .paymentBlock {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 12px;
+  }
+}

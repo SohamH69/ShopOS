@@ -1,0 +1,124 @@
+.hero {
+  padding: 72px 0 96px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.copy {
+  min-width: 0;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-15);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+/* A short stroke of pen ink before the line. */
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 24px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--pen);
+}
+
+.title {
+  margin-top: var(--space-5);
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-stretch: var(--display-stretch);
+  font-weight: 760;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.sub {
+  margin-top: var(--space-6);
+  max-width: 31em;
+  font-size: var(--text-20);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: 36px;
+}
+
+.demo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-3);
+  font-size: var(--text-15);
+  color: var(--ink-3);
+}
+
+.demoLink {
+  min-height: 40px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  color: var(--pen);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-1) var(--ease);
+}
+
+.demoLink:hover:not(:disabled) {
+  color: var(--pen-hover);
+}
+
+.demoLink:disabled {
+  color: var(--ink-3);
+  cursor: progress;
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-12);
+  }
+
+  .copy {
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero {
+    padding: 40px 0 64px;
+  }
+
+  .title {
+    margin-top: var(--space-4);
+  }
+
+  .sub {
+    margin-top: var(--space-5);
+    font-size: var(--text-17);
+  }
+
+  .actions {
+    margin-top: var(--space-8);
+  }
+
+  .actions > * {
+    flex: 1 1 auto;
+  }
+}

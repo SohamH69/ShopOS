@@ -1,0 +1,312 @@
+/* Shared by Modal and Drawer. */
+
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 26, 35, 0.42);
+  animation: fade-in var(--dur-3) var(--ease) both;
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100dvh - 48px);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  box-shadow: var(--shadow-lg);
+  outline: none;
+  animation: modal-in var(--dur-3) var(--ease) both;
+}
+
+.sm {
+  max-width: 400px;
+}
+
+.md {
+  max-width: 520px;
+}
+
+.lg {
+  max-width: 720px;
+}
+
+.header {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 20px 12px 24px;
+}
+
+.headings {
+  min-width: 0;
+  padding-top: 6px;
+}
+
+.title {
+  font-size: var(--text-20);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.description {
+  margin-top: 4px;
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+.headerActions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  padding: 4px 24px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.footer {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 14px 24px;
+  border-top: 1px solid var(--rule);
+}
+
+.grabber {
+  display: none;
+}
+
+.root[data-state="closed"] .backdrop {
+  animation: fade-out var(--dur-2) var(--ease) both;
+}
+
+.root[data-state="closed"] .panel {
+  animation: modal-out var(--dur-2) var(--ease) both;
+}
+
+/* Bottom sheet: always for placement="bottom", and for every modal on phones. */
+.bottom {
+  align-items: flex-end;
+  padding: 0;
+}
+
+.bottom .panel {
+  max-width: none;
+  max-height: 92dvh;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding-bottom: var(--safe-bottom);
+  animation-name: sheet-in;
+}
+
+.bottom[data-state="closed"] .panel {
+  animation-name: sheet-out;
+}
+
+.bottom .grabber {
+  display: block;
+  flex: none;
+  width: 36px;
+  height: 4px;
+  margin: 8px auto 0;
+  border-radius: 2px;
+  background: var(--rule-strong);
+}
+
+@media (max-width: 639px) {
+  .root {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .panel {
+    max-width: none;
+    max-height: 92dvh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding-bottom: var(--safe-bottom);
+    animation-name: sheet-in;
+  }
+
+  .root[data-state="closed"] .panel {
+    animation-name: sheet-out;
+  }
+
+  .grabber {
+    display: block;
+    flex: none;
+    width: 36px;
+    height: 4px;
+    margin: 8px auto 0;
+    border-radius: 2px;
+    background: var(--rule-strong);
+  }
+
+  .header {
+    padding: 14px 12px 10px 16px;
+  }
+
+  .body {
+    padding: 4px 16px 20px;
+  }
+
+  .footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    padding: 12px 16px;
+  }
+}
+
+/* Drawer ------------------------------------------------------------------ */
+
+.drawerRoot {
+  justify-content: flex-end;
+  align-items: stretch;
+  padding: 0;
+}
+
+.drawer {
+  max-width: none;
+  width: min(var(--drawer-width, 520px), calc(100vw - 48px));
+  height: 100%;
+  max-height: none;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  animation-name: drawer-in;
+}
+
+.drawerRoot[data-state="closed"] .drawer {
+  animation-name: drawer-out;
+}
+
+.drawerHeader {
+  padding: 16px 16px 14px 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.drawerHeader .headings {
+  padding-top: 4px;
+}
+
+.drawerBody {
+  padding: 20px 24px 28px;
+}
+
+@media (max-width: 639px) {
+  .drawerRoot {
+    align-items: stretch;
+  }
+
+  .drawer {
+    width: 100%;
+    max-height: none;
+    border-radius: 0;
+    padding-bottom: 0;
+    animation-name: drawer-in;
+  }
+
+  .drawerRoot[data-state="closed"] .drawer {
+    animation-name: drawer-out;
+  }
+
+  .drawer .grabber {
+    display: none;
+  }
+
+  .drawerHeader {
+    padding: calc(10px + var(--safe-top)) 8px 10px 16px;
+  }
+
+  .drawerBody {
+    padding: 16px 16px 24px;
+  }
+
+  .drawer .footer {
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: calc(12px + var(--safe-bottom));
+  }
+}
+
+/* Animations -------------------------------------------------------------- */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes modal-out {
+  to {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes sheet-out {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    opacity: 0.6;
+    transform: translateX(32px);
+  }
+}
+
+@keyframes drawer-out {
+  to {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}

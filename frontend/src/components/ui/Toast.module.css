@@ -1,0 +1,147 @@
+.viewport {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: var(--z-toast);
+  width: min(380px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 8px 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+  animation: toast-in var(--dur-3) var(--ease) both;
+}
+
+.leaving {
+  animation: toast-out var(--dur-2) var(--ease) both;
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  margin-top: 1px;
+}
+
+.icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.success .icon {
+  color: var(--leaf);
+}
+
+.error .icon {
+  color: var(--margin);
+}
+
+.info .icon {
+  color: var(--pen);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.message {
+  font-size: var(--text-14);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.description {
+  margin-top: 2px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 6px;
+}
+
+.action {
+  padding: 2px 0;
+  color: var(--pen);
+  font-size: var(--text-14);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.action:hover {
+  color: var(--pen-hover);
+  text-decoration: underline;
+}
+
+.dismiss {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-top: -4px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-3);
+}
+
+.dismiss:hover {
+  background: var(--desk-2);
+  color: var(--ink);
+}
+
+.dismiss svg {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (max-width: 1023px) {
+  .viewport {
+    right: 16px;
+    left: 16px;
+    width: auto;
+    margin: 0 auto;
+    max-width: 420px;
+  }
+
+  /* Inside the app shell, sit above the tab bar and the floating New order button. */
+  :global(body:has([data-tabbar])) .viewport {
+    bottom: calc(var(--tabbar-h) + var(--safe-bottom) + 88px);
+  }
+}

@@ -1,0 +1,149 @@
+ul.plans {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-12);
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--space-6);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+/* The plan most shops pick: a pen outline two pixels deep (no layout shift). */
+.featured {
+  border-color: var(--pen);
+  box-shadow: 0 0 0 1px var(--pen);
+}
+
+.planHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 28px;
+}
+
+.planName {
+  font-size: var(--text-17);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.flag {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--pen-tint);
+  font-size: var(--text-12);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--pen);
+  white-space: nowrap;
+}
+
+.price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 4px;
+  margin-top: var(--space-5);
+}
+
+.pricePrefix {
+  font-size: var(--text-15);
+  color: var(--ink-3);
+}
+
+.amount {
+  font-family: var(--font-display);
+  font-size: var(--text-44);
+  font-stretch: var(--display-stretch);
+  font-weight: 720;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.period {
+  font-size: var(--text-15);
+  color: var(--ink-3);
+}
+
+.summary {
+  margin-top: var(--space-2);
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.features {
+  flex: 1;
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+
+.includes {
+  margin-bottom: var(--space-2);
+  font-size: var(--text-13);
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.featureList {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.featureList li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.featureList svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--leaf-text);
+}
+
+.cta {
+  margin-top: var(--space-6);
+}
+
+.smallPrint {
+  margin-top: var(--space-6);
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+@media (max-width: 1079px) {
+  ul.plans {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 599px) {
+  ul.plans {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: var(--space-8);
+  }
+
+  .plan {
+    padding: var(--space-5);
+  }
+}

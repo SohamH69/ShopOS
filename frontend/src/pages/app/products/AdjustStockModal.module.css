@@ -1,0 +1,126 @@
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+/* Before → after ------------------------------------------------------------ */
+
+.preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 4px 16px;
+  padding: 14px 18px 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--desk);
+}
+
+.side {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  min-width: 0;
+}
+
+.sideLabel {
+  font-size: var(--text-13);
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-size: var(--text-24);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.valueNow {
+  color: var(--ink-2);
+}
+
+.level_low {
+  color: var(--haldi-text);
+}
+
+.level_out {
+  color: var(--margin-text);
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 6px;
+  color: var(--ink-4);
+}
+
+.note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  font-size: var(--text-14);
+  line-height: 1.45;
+}
+
+.change {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.up {
+  color: var(--leaf-text);
+}
+
+.down {
+  color: var(--ink-2);
+}
+
+.tone_muted {
+  color: var(--ink-3);
+}
+
+.tone_ok {
+  color: var(--ink-2);
+}
+
+.tone_low {
+  color: var(--haldi-text);
+}
+
+.tone_out {
+  color: var(--margin-text);
+}
+
+@media (max-width: 479px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .preview {
+    padding: 12px 14px 10px;
+    column-gap: 10px;
+  }
+
+  .value {
+    font-size: var(--text-20);
+  }
+}

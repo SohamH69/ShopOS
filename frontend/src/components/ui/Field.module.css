@@ -1,0 +1,50 @@
+.field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 20px;
+}
+
+.label {
+  font-size: var(--text-14);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.optional {
+  margin-left: 6px;
+  font-size: var(--text-13);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.hint {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--margin-text);
+}
+
+.error svg {
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+}

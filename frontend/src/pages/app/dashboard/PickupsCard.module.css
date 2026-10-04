@@ -1,0 +1,115 @@
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  margin-left: 8px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--pen-tint);
+  color: var(--pen);
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  vertical-align: 2px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.item + .item {
+  border-top: 1px solid var(--rule-line);
+}
+
+/* Who and how much on the first line; order status, payment status and timing on the second. */
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "who total"
+    "badges when";
+  align-items: center;
+  gap: 6px 16px;
+  width: 100%;
+  padding: 12px 20px;
+  color: var(--ink);
+  font-size: var(--text-15);
+  text-align: left;
+}
+
+.clickable {
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+.clickable:hover {
+  background: var(--desk);
+}
+
+.clickable:focus-visible {
+  box-shadow: inset var(--focus-ring);
+}
+
+.item:last-child .clickable {
+  border-radius: 0 0 calc(var(--radius) - 1px) calc(var(--radius) - 1px);
+}
+
+.who {
+  grid-area: who;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.name {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.number {
+  flex: none;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.total {
+  grid-area: total;
+  justify-self: end;
+}
+
+.badges {
+  grid-area: badges;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  min-width: 0;
+}
+
+.when {
+  grid-area: when;
+  justify-self: end;
+  font-size: var(--text-13);
+  line-height: 1.3;
+  color: var(--ink-3);
+  text-align: right;
+}
+
+.overdue {
+  color: var(--margin-text);
+  font-weight: 600;
+}
+
+@media (max-width: 639px) {
+  .row {
+    padding: 12px 16px;
+  }
+}

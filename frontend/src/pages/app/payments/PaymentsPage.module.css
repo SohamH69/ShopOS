@@ -1,0 +1,140 @@
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+/* The list and the method breakdown sit side by side only when there is room for both. */
+.layoutWrap {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.side {
+  min-width: 0;
+}
+
+@container (min-width: 980px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    align-items: start;
+  }
+
+  .side {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .main {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.methodSelect {
+  flex: 0 1 220px;
+  min-width: 0;
+}
+
+.when {
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.customerLink {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.customerLink:hover {
+  text-decoration: underline;
+}
+
+.orderLink {
+  border-radius: 4px;
+  color: var(--pen);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  text-decoration: underline;
+  text-decoration-color: var(--pen-tint-2);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.orderLink:hover {
+  color: var(--pen-hover);
+  text-decoration-color: currentColor;
+}
+
+.method {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+}
+
+.sub {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* By method --------------------------------------------------------------- */
+
+.methodCard {
+  min-width: 0;
+}
+
+.methodWrap {
+  container-type: inline-size;
+}
+
+.methodSkeleton {
+  display: grid;
+  gap: 14px;
+}
+
+/* A full-width card lays the four methods out two by two. */
+@container (min-width: 520px) {
+  .methodWrap .methodList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 40px;
+  }
+}
+
+@media (max-width: 639px) {
+  .stack {
+    gap: 20px;
+  }
+
+  .filters {
+    align-items: stretch;
+  }
+
+  .methodSelect {
+    flex: 1 1 100%;
+  }
+}

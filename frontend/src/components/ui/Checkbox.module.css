@@ -1,0 +1,147 @@
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  color: var(--ink);
+  font-size: var(--text-15);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+/* Extends the touch target beyond the 20px box without changing layout. */
+.root::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+}
+
+.root[data-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  min-width: 0;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.description {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+/* Checkbox ---------------------------------------------------------------- */
+
+.box {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: #ffffff;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.root .box svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.6;
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity var(--dur-1) var(--ease),
+    transform var(--dur-2) var(--ease);
+}
+
+.root:hover .box {
+  border-color: var(--ink-4);
+}
+
+.input:checked + .box,
+.input:indeterminate + .box {
+  border-color: var(--pen);
+  background: var(--pen);
+}
+
+.root .input:checked + .box svg,
+.root .input:indeterminate + .box svg {
+  opacity: 1;
+  transform: none;
+}
+
+.input:focus-visible + .box,
+.input:focus-visible + .track {
+  box-shadow: var(--focus-ring);
+}
+
+/* Switch ------------------------------------------------------------------ */
+
+.switchInput {
+  width: 36px;
+}
+
+.track {
+  position: relative;
+  flex: none;
+  width: 36px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: var(--radius-pill);
+  background: var(--rule-strong);
+  transition:
+    background-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(22, 26, 35, 0.22);
+  transition: transform var(--dur-2) var(--ease);
+}
+
+.root:hover .track {
+  background: var(--ink-4);
+}
+
+.input:checked + .track,
+.root:hover .input:checked + .track {
+  background: var(--pen);
+}
+
+.input:checked + .track .thumb {
+  transform: translateX(16px);
+}

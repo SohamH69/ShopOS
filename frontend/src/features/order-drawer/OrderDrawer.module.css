@@ -1,0 +1,620 @@
+/* Order drawer: customer, status track, payment, items, details — separated by ledger rules. */
+
+/* Header ------------------------------------------------------------------ */
+
+.number {
+  font-family: var(--font-mono);
+  font-size: var(--text-24);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.headerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: var(--text-12);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Customer ---------------------------------------------------------------- */
+
+.customer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding-bottom: 18px;
+}
+
+.customerText {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.customerName {
+  justify-self: start;
+  font-size: var(--text-17);
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+a.customerName:hover {
+  color: var(--pen);
+  text-decoration: underline;
+}
+
+.customerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 14px;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.phone:hover {
+  color: var(--pen);
+}
+
+.phone svg {
+  width: 14px;
+  height: 14px;
+}
+
+.customerDue {
+  font-weight: 500;
+  color: var(--margin-text);
+}
+
+/* Status ------------------------------------------------------------------ */
+
+.statusBlock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  padding: 18px 0 20px;
+  border-top: 1px solid var(--rule-line);
+}
+
+.track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.step {
+  --status: var(--ink-3);
+  --status-tint: var(--desk-2);
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+  text-align: center;
+}
+
+.step[data-status="preparing"] {
+  --status: var(--haldi);
+  --status-tint: var(--haldi-tint);
+}
+
+.step[data-status="ready"] {
+  --status: var(--pen);
+  --status-tint: var(--pen-tint);
+}
+
+.step[data-status="collected"],
+.step[data-status="delivered"] {
+  --status: var(--leaf);
+  --status-tint: var(--leaf-tint);
+}
+
+/* The line from the previous step's marker to this one. */
+.step + .step::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: calc(50% + 15px);
+  left: calc(-50% + 15px);
+  height: 2px;
+  border-radius: 1px;
+  background: var(--rule);
+}
+
+.step[data-state="done"]::before,
+.step[data-state="current"]::before {
+  background: var(--ink-4);
+}
+
+.marker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--rule-strong);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--paper);
+  transition:
+    background-color var(--dur-2) var(--ease),
+    border-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease);
+}
+
+.marker svg {
+  width: 13px;
+  height: 13px;
+}
+
+.step[data-state="done"] .marker {
+  border-color: var(--ink-3);
+  background: var(--ink-3);
+}
+
+.step[data-state="current"] .marker {
+  border-color: var(--status);
+  background: var(--status);
+  box-shadow: 0 0 0 4px var(--status-tint);
+}
+
+.markerDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.stepLabel {
+  font-size: var(--text-13);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ink-4);
+  overflow-wrap: anywhere;
+}
+
+.step[data-state="done"] .stepLabel {
+  color: var(--ink-3);
+}
+
+.step[data-state="current"] .stepLabel {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.statusActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.statusHint {
+  margin-top: -6px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.doneNote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--leaf-text);
+}
+
+.doneNote svg {
+  width: 16px;
+  height: 16px;
+}
+
+.doneWhen {
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.cancelled {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 12px;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--desk);
+}
+
+.cancelledText {
+  display: grid;
+  gap: 2px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+/* Sections ---------------------------------------------------------------- */
+
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+  padding: 20px 0;
+  border-top: 1px solid var(--rule-line);
+}
+
+.section:last-child {
+  padding-bottom: 4px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 32px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-15);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--desk-2);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.quiet {
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.quietValue {
+  color: var(--ink-3);
+}
+
+.formError {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--margin-text);
+}
+
+/* Payment ----------------------------------------------------------------- */
+
+.paymentSection {
+  outline: none;
+}
+
+/* Focus lands here after the collect form closes; the toast and stamp say what happened. */
+.paymentSection:focus-visible {
+  box-shadow: none;
+}
+
+.paymentBlock {
+  position: relative;
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.stripCell {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px 14px;
+}
+
+.stripCell + .stripCell {
+  border-left: 1px solid var(--rule);
+}
+
+.stripCell dt {
+  font-size: var(--text-12);
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.stripCell dd {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The PAID stamp, pressed over the Due corner of the strip. */
+/* The stamp lands on the Due cell (now ₹0), clear of the PAID badge above the strip. */
+.stampSlot {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  z-index: 1;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.stampSlotLanding {
+  right: 10px;
+}
+
+.listLoading {
+  display: grid;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.payments {
+  display: grid;
+}
+
+.payment {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0 12px;
+  min-height: 44px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--rule-line);
+}
+
+.payment:first-child {
+  border-top: 1px solid var(--rule-line);
+}
+
+.paymentMeta {
+  min-width: 0;
+  font-size: var(--text-13);
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.paymentNote {
+  grid-column: 2 / 3;
+  padding-bottom: 6px;
+  font-size: var(--text-13);
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.collect {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--desk);
+}
+
+.collectTitle {
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.collectRow {
+  display: grid;
+  grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+}
+
+.collectButton {
+  justify-self: start;
+}
+
+/* Items ------------------------------------------------------------------- */
+
+.items {
+  display: grid;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "name total"
+    "meta meta";
+  gap: 2px 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule-line);
+}
+
+.item:first-child {
+  border-top: 1px solid var(--rule-line);
+}
+
+.itemName {
+  grid-area: name;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.itemTotal {
+  grid-area: total;
+  text-align: right;
+}
+
+.itemMeta {
+  grid-area: meta;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.totals {
+  display: grid;
+  gap: 4px;
+  font-size: var(--text-14);
+}
+
+.totalsRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.totalsRow dt {
+  color: var(--ink-3);
+}
+
+.grandTotal {
+  font-size: var(--text-15);
+  font-weight: 600;
+}
+
+.grandTotal dt {
+  color: var(--ink);
+}
+
+/* Inline editors (items, details) ------------------------------------------ */
+
+.editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  min-width: 0;
+}
+
+.editorTotals {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.discountField {
+  flex: 0 1 180px;
+}
+
+.editorTotal {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 8px;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.editorTwoUp {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.editActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Details ----------------------------------------------------------------- */
+
+.overdueText {
+  font-weight: 500;
+  color: var(--margin-text);
+}
+
+.note {
+  white-space: pre-wrap;
+}
+
+/* Loading ----------------------------------------------------------------- */
+
+.skeleton {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.skeletonRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skeletonText {
+  display: grid;
+  flex: 1;
+  gap: 8px;
+}
+
+@media (max-width: 639px) {
+  .statusActions > * {
+    flex: 1 1 0;
+  }
+
+  .editActions > * {
+    flex: 1 1 0;
+  }
+}
+
+@media (max-width: 519px) {
+  .collectRow,
+  .editorTwoUp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .collectButton {
+    justify-self: stretch;
+  }
+}

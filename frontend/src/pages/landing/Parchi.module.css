@@ -1,0 +1,425 @@
+/*
+ * The hero parchi: a paper order slip lying on the counter (a --desk panel), torn along the
+ * bottom, with an order track and a payment track that move independently.
+ */
+
+.figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.counter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: var(--space-3);
+  padding: 44px var(--space-8) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--desk);
+  /* The slip is turned slightly; keep its corners inside the panel. */
+  overflow: hidden;
+}
+
+/* Shadows follow the torn edge only as a filter on a wrapper (a mask clips box-shadows). */
+.lift {
+  width: 100%;
+  max-width: 380px;
+  filter: drop-shadow(0 0 1px var(--rule-strong)) drop-shadow(var(--shadow-sm));
+  transform: rotate(-1.2deg);
+}
+
+.slip {
+  --tooth: 14px;
+  position: relative;
+  padding: 22px 24px 34px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: var(--paper);
+  color: var(--ink);
+  /* Torn zig-zag bottom edge: each tile keeps everything above a V cut into its bottom. */
+  -webkit-mask-image: conic-gradient(from -45deg at bottom, transparent, black 1deg 89deg, transparent 90deg);
+  mask-image: conic-gradient(from -45deg at bottom, transparent, black 1deg 89deg, transparent 90deg);
+  -webkit-mask-size: var(--tooth) 100%;
+  mask-size: var(--tooth) 100%;
+  -webkit-mask-repeat: round;
+  mask-repeat: round;
+  -webkit-mask-position: 50% 0;
+  mask-position: 50% 0;
+}
+
+/* The slip gives a little under the stamp. */
+.slip[data-stamped] {
+  animation: press 300ms 200ms var(--ease) both;
+}
+
+@keyframes press {
+  0%,
+  100% {
+    transform: none;
+  }
+
+  35% {
+    transform: translateY(1.5px) scale(0.996);
+  }
+}
+
+/* Slip header ------------------------------------------------------------- */
+
+.shop {
+  font-family: var(--font-display);
+  font-size: var(--text-14);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.orderLine {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.orderNo {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Items and totals ---------------------------------------------------------- */
+
+.slip .items,
+.totalsWrap,
+.tracks {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--rule-strong);
+}
+
+.items {
+  display: grid;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+}
+
+.items li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.amount {
+  flex: none;
+}
+
+.totalsWrap {
+  position: relative;
+}
+
+.totals {
+  display: grid;
+  gap: 4px;
+}
+
+.totals > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.totals dt {
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.totals dd {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+}
+
+.totalRow dt,
+.totalRow dd {
+  font-size: var(--text-15);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.paidRow dd {
+  color: var(--leaf-text);
+}
+
+.dueRow dd {
+  color: var(--margin-text);
+}
+
+.paidRow[data-zero] dd,
+.dueRow[data-zero] dd {
+  color: var(--ink-3);
+}
+
+/* Pressed across the totals, the way a real stamp lands on a slip. (Two classes so this wins
+   over the Stamp's own positioning whatever order the stylesheets load in.) */
+.totalsWrap .stamp {
+  position: absolute;
+  top: 50%;
+  left: 56%;
+  translate: -50% -50%;
+}
+
+/* Status tracks --------------------------------------------------------------- */
+
+.tracks {
+  display: grid;
+  gap: 18px;
+  padding-top: 16px;
+}
+
+.trackLabel {
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* "Partial ₹300" needs room; "Paid" needs little. */
+.payment {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr) minmax(0, 0.6fr);
+}
+
+.step {
+  min-width: 0;
+}
+
+/* Colours by stage: the same status encoding as the app. */
+.step[data-stage="new"] {
+  --stage: var(--ink-3);
+  --stage-tint: var(--desk-2);
+  --stage-text: var(--ink-2);
+}
+
+.step[data-stage="preparing"],
+.step[data-stage="partial"] {
+  --stage: var(--haldi);
+  --stage-tint: var(--haldi-tint);
+  --stage-text: var(--haldi-text);
+}
+
+.step[data-stage="ready"] {
+  --stage: var(--pen);
+  --stage-tint: var(--pen-tint);
+  --stage-text: var(--pen);
+}
+
+.step[data-stage="collected"] {
+  --stage: var(--leaf);
+  --stage-tint: var(--leaf-tint);
+  --stage-text: var(--leaf-text);
+}
+
+.step[data-stage="unpaid"] {
+  --stage: var(--margin);
+  --stage-tint: var(--margin-tint);
+  --stage-text: var(--margin-text);
+}
+
+.step[data-stage="paid"] {
+  --stage: var(--stamp);
+  --stage-tint: var(--stamp-tint);
+  --stage-text: var(--stamp);
+}
+
+.rail {
+  display: flex;
+  align-items: center;
+  height: 18px;
+}
+
+.node {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: 50%;
+  background: var(--paper);
+  transition:
+    background-color var(--dur-2) var(--ease),
+    border-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-3) var(--ease),
+    transform var(--dur-3) var(--ease);
+}
+
+.step[data-state="done"] .node {
+  border-color: var(--ink-3);
+  background: var(--ink-3);
+  transform: scale(0.8);
+}
+
+.step[data-state="current"] .node {
+  border-color: var(--stage);
+  background: var(--stage);
+  box-shadow: 0 0 0 4px var(--stage-tint);
+}
+
+.connector {
+  flex: 1;
+  height: 2px;
+  margin: 0 6px;
+  border-radius: 1px;
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  background: var(--ink-3);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 320ms var(--ease);
+}
+
+.step[data-state="done"] .fill {
+  transform: scaleX(1);
+}
+
+.stepLabel {
+  display: block;
+  margin-top: 6px;
+  overflow: hidden;
+  font-size: var(--text-13);
+  line-height: 1.25;
+  color: var(--ink-4);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: color var(--dur-2) var(--ease);
+}
+
+.order .step[data-state="done"] .stepLabel {
+  color: var(--ink-3);
+}
+
+.order .step[data-state="current"] .stepLabel {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Payment labels are stamped marks, like the PaymentStatusBadge. */
+.payment .stepLabel {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  height: 20px;
+  margin-left: -6px;
+  padding: 0 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    color var(--dur-2) var(--ease),
+    background-color var(--dur-2) var(--ease),
+    border-color var(--dur-2) var(--ease);
+}
+
+.payment .step[data-state="done"] .stepLabel {
+  color: var(--ink-3);
+}
+
+.payment .step[data-state="current"] .stepLabel {
+  border-color: color-mix(in srgb, currentColor 35%, transparent);
+  background: var(--stage-tint);
+  color: var(--stage-text);
+}
+
+/* Activity line -------------------------------------------------------------- */
+
+.log {
+  min-height: 20px;
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+.logTime {
+  color: var(--ink-2);
+}
+
+/* A changed value settles in from just below. */
+.tick {
+  display: inline-block;
+  animation: tick-in var(--dur-3) var(--ease) both;
+}
+
+@keyframes tick-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.replayRow {
+  display: flex;
+  justify-content: center;
+  min-height: 40px;
+  visibility: hidden;
+}
+
+.replayRow[data-visible] {
+  visibility: visible;
+}
+
+@media (max-width: 639px) {
+  .counter {
+    padding: 32px var(--space-3) var(--space-3);
+  }
+
+  .slip {
+    padding: 20px 18px 30px;
+  }
+
+  .payment .stepLabel {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .totalsWrap .stamp {
+    scale: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slip[data-stamped],
+  .tick {
+    animation: none;
+  }
+}

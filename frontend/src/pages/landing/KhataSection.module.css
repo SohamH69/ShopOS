@@ -1,0 +1,275 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.copy {
+  min-width: 0;
+}
+
+ul.points {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.points li {
+  position: relative;
+  padding-left: var(--space-5);
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* A short ruled dash instead of a bullet. */
+.points li::before {
+  content: "";
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  width: 10px;
+  height: 1px;
+  background: var(--ink-4);
+}
+
+.illustration {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+/* The ledger: ruled rows, a red margin line 44px in, amounts in mono on the right. */
+.ledger {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.ledger::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 44px;
+  width: 1px;
+  background: var(--margin);
+  pointer-events: none;
+}
+
+.ledgerHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-5) var(--space-4) 60px;
+  border-bottom: 1px solid var(--rule-line);
+}
+
+.customer {
+  font-size: var(--text-17);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.phone {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+
+.headBalance {
+  text-align: right;
+}
+
+.headLabel {
+  font-size: var(--text-12);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.headAmount {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  font-stretch: var(--display-stretch);
+  font-weight: 720;
+  line-height: 1;
+  color: var(--margin-text);
+}
+
+.table {
+  width: 100%;
+  font-size: var(--text-14);
+}
+
+.table th,
+.table td {
+  height: 44px;
+  padding: 0 var(--space-3);
+  border-bottom: 1px solid var(--rule-line);
+  vertical-align: middle;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 60px;
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: var(--space-5);
+}
+
+.table thead th {
+  height: 36px;
+  font-size: var(--text-12);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.table thead .numeric {
+  font-family: var(--font-body);
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.activity {
+  color: var(--ink);
+}
+
+.reference {
+  color: var(--ink-3);
+}
+
+.purchase {
+  color: var(--ink);
+}
+
+.payment {
+  color: var(--leaf-text);
+}
+
+.balance {
+  color: var(--ink-2);
+}
+
+.table tfoot th,
+.table tfoot td {
+  height: 52px;
+  border-bottom: 0;
+  background: var(--desk);
+}
+
+.table tfoot th {
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.outstanding {
+  font-weight: 600;
+  color: var(--margin-text);
+}
+
+/* The reminder: a light message bubble, no app chrome or logos. */
+.reminder {
+  justify-self: end;
+  width: min(100%, 360px);
+  margin: 0;
+}
+
+.reminderCaption {
+  margin-bottom: var(--space-2);
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.bubble {
+  padding: var(--space-3) var(--space-4) var(--space-2);
+  border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
+  background: var(--leaf-tint);
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.bubbleTime {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-align: right;
+  color: var(--ink-3);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-10);
+  }
+
+  .copy {
+    max-width: 720px;
+  }
+
+  .illustration {
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 639px) {
+  .ledger::before {
+    left: 28px;
+  }
+
+  .ledgerHead {
+    padding: var(--space-4) var(--space-4) var(--space-3) 40px;
+  }
+
+  .headAmount {
+    font-size: var(--text-24);
+  }
+
+  .table th,
+  .table td {
+    padding: 0 var(--space-2);
+  }
+
+  .table th:first-child,
+  .table td:first-child {
+    padding-left: 40px;
+  }
+
+  .table th:last-child,
+  .table td:last-child {
+    padding-right: var(--space-3);
+  }
+
+  /* Narrow screens keep the activity, drop the reference. */
+  .reference {
+    display: none;
+  }
+}

@@ -1,0 +1,133 @@
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.progressText {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+.track {
+  flex: 1;
+  max-width: 240px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--desk-2);
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--leaf);
+  transition: width var(--dur-3) var(--ease);
+}
+
+.stepsWrap {
+  container-type: inline-size;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 14px;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule-line);
+}
+
+.marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-weight: 500;
+}
+
+.marker svg {
+  width: 16px;
+  height: 16px;
+}
+
+.complete .marker {
+  border-color: transparent;
+  background: var(--leaf-tint);
+  color: var(--leaf-text);
+}
+
+.stepText {
+  min-width: 0;
+}
+
+.stepTitle {
+  font-size: var(--text-15);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.complete .stepTitle {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-4);
+  text-decoration-thickness: 1px;
+}
+
+.stepDescription {
+  margin-top: 2px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.stepAction {
+  display: flex;
+}
+
+/* Wide cards: the four steps sit side by side, each a short column. */
+@container (min-width: 760px) {
+  .steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 24px;
+  }
+
+  .step {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    align-items: start;
+    gap: 10px;
+    padding: 16px 0 0;
+  }
+
+  .stepAction {
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 479px) {
+  .step {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .stepAction {
+    grid-column: 2;
+  }
+}

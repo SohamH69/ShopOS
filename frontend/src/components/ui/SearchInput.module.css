@@ -1,0 +1,22 @@
+.clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-3);
+  transition:
+    background-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease);
+}
+
+.clear:hover {
+  background: var(--desk-2);
+  color: var(--ink);
+}
+
+.clear svg {
+  width: 16px;
+  height: 16px;
+}

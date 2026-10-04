@@ -1,0 +1,185 @@
+/* Needs attention ----------------------------------------------------------- */
+
+.attentionGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.attentionCopy {
+  min-width: 0;
+}
+
+/* Drawn in the app's own card language: paper, a 1px rule, rows split by rules. */
+.panel {
+  min-width: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.panelHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5) 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.panelTitle {
+  font-size: var(--text-17);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.panelHint {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) 18px;
+  gap: 14px;
+  align-items: center;
+  min-height: 64px;
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+
+.row:first-child {
+  border-top: 0;
+}
+
+.severity {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.high {
+  background: var(--margin);
+}
+
+.medium {
+  background: var(--haldi);
+}
+
+.low {
+  background: var(--ink-4);
+}
+
+.rowText {
+  display: grid;
+  min-width: 0;
+}
+
+.rowMain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-2);
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: var(--text-24);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.label {
+  font-size: var(--text-15);
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.detail {
+  margin-top: 2px;
+  font-size: var(--text-13);
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+
+.chevron {
+  color: var(--ink-4);
+}
+
+/* What's inside --------------------------------------------------------------- */
+
+.insideBand {
+  padding-top: 0;
+}
+
+.modules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-12);
+  margin-top: var(--space-12);
+}
+
+.module {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: var(--space-4);
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.moduleName {
+  font-size: var(--text-17);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.moduleLine {
+  font-size: var(--text-15);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+@media (max-width: 1023px) {
+  .attentionGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-10);
+  }
+
+  .attentionCopy {
+    max-width: 720px;
+  }
+
+  .panel {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 899px) {
+  .modules {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .panelHead,
+  .row {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .modules {
+    margin-top: var(--space-8);
+  }
+
+  .module {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+    padding: var(--space-4) 0;
+  }
+}

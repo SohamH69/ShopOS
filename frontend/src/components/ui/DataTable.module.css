@@ -1,0 +1,211 @@
+.frame {
+  min-width: 0;
+}
+
+.framed {
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  font-size: var(--text-14);
+  transition: opacity var(--dur-2) var(--ease);
+}
+
+.table th {
+  height: 40px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-3);
+  font-size: var(--text-13);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule-line);
+  color: var(--ink);
+  vertical-align: middle;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 20px;
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: 20px;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.compact td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.right {
+  text-align: right !important;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+.clickable:hover {
+  background: var(--desk);
+}
+
+.table tr.clickable:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: -2px;
+  box-shadow: none;
+}
+
+.muted td,
+.muted.card {
+  color: var(--ink-3);
+}
+
+.actionsCell {
+  width: 56px;
+  text-align: right;
+}
+
+.table td.actionsCell {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 12px;
+}
+
+.refreshing .table,
+.refreshing .cards {
+  opacity: 0.6;
+}
+
+.state {
+  min-width: 0;
+}
+
+.footer {
+  border-top: 1px solid var(--rule);
+}
+
+/* Phone cards ------------------------------------------------------------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  transition: opacity var(--dur-2) var(--ease);
+}
+
+.card {
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.card.clickable:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+/* Inside a Card (framed={false}) the rows become a ruled list. */
+.listed {
+  gap: 0;
+}
+
+.listed .card {
+  border: 0;
+  border-bottom: 1px solid var(--rule-line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.listed .card:last-child {
+  border-bottom: 0;
+}
+
+.listed .card.clickable:hover {
+  background: var(--desk);
+}
+
+/* A framed table that switched to cards keeps its paper frame off: cards sit on the desk. */
+.framed.asCards {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cardTitle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  flex: 1;
+  gap: 2px;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.cardAside {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  flex: none;
+  gap: 4px;
+  justify-items: end;
+  text-align: right;
+}
+
+.cardActions {
+  flex: none;
+  margin: -8px -10px -8px -4px;
+}
+
+.cardMeta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-line);
+}
+
+.metaItem {
+  min-width: 0;
+}
+
+.metaItem dt {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}
+
+.metaItem dd {
+  min-width: 0;
+  font-size: var(--text-14);
+  overflow-wrap: anywhere;
+}

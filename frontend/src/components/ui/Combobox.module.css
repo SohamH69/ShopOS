@@ -1,0 +1,118 @@
+.root {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.popup {
+  z-index: var(--z-popover);
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow-lg);
+  animation: popup-in var(--dur-1) var(--ease) both;
+}
+
+.list {
+  flex: 1;
+  min-height: 0;
+  padding: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-size: var(--text-14);
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.active {
+  background: var(--pen-tint);
+}
+
+.actionRow {
+  color: var(--pen);
+  font-weight: 500;
+}
+
+.actionIcon {
+  display: inline-flex;
+  flex: none;
+}
+
+.actionIcon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.separator {
+  height: 1px;
+  margin: 4px 6px;
+  background: var(--rule);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.footer {
+  flex: none;
+  padding: 7px 12px;
+  border-top: 1px solid var(--rule);
+  background: var(--desk);
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}
+
+.trailing {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--ink-3);
+}
+
+.clear {
+  border-radius: var(--radius-sm);
+}
+
+.clear:hover {
+  background: var(--desk-2);
+  color: var(--ink);
+}
+
+.clear svg {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 1023px) {
+  .option {
+    min-height: 44px;
+  }
+}

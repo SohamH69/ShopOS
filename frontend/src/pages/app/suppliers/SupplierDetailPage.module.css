@@ -1,0 +1,129 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.phone {
+  white-space: nowrap;
+}
+
+/* Balance ------------------------------------------------------------------ */
+
+.balanceMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+}
+
+.label {
+  font-size: var(--text-13);
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.settled {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--leaf-text);
+}
+
+.balanceHint {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px 24px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+.fact {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.fact dt {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.fact dd {
+  font-size: var(--text-15);
+  color: var(--ink);
+}
+
+.factText {
+  font-family: var(--font-mono);
+  font-size: var(--text-14);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Details ------------------------------------------------------------------ */
+
+.details {
+  min-width: 0;
+}
+
+.multiline {
+  white-space: pre-line;
+}
+
+/* History ------------------------------------------------------------------ */
+
+.history {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.when {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.time {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.none {
+  color: var(--ink-4);
+}
+
+.skeletonStack {
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 1023px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

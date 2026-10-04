@@ -1,0 +1,301 @@
+/* What each role can do: a matrix on wide screens, one role at a time on phones. */
+
+.scroll {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.matrix {
+  width: 100%;
+  min-width: 640px;
+  font-size: var(--text-14);
+}
+
+.roleCol {
+  width: 116px;
+}
+
+.matrix thead th {
+  padding: 14px 8px 12px;
+  border-bottom: 1px solid var(--rule);
+  text-align: center;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.matrix thead th.areaHead {
+  padding-left: 20px;
+  text-align: left;
+  font-size: var(--text-13);
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.roleHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.roleName {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.roleName svg {
+  width: 13px;
+  height: 13px;
+  color: var(--ink-3);
+}
+
+.roleCount {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+
+.yours {
+  font-size: var(--text-12);
+  font-weight: 500;
+  color: var(--pen);
+}
+
+.groupRow th {
+  padding: 16px 20px 6px;
+  border-bottom: 1px solid var(--rule-line);
+  background: var(--desk);
+  font-size: var(--text-12);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  text-align: left;
+}
+
+.areaCell {
+  padding: 12px 16px 12px 20px;
+  border-bottom: 1px solid var(--rule-line);
+  font-weight: 400;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.areaLabel {
+  display: block;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.areaDescription {
+  display: block;
+  max-width: 52ch;
+  margin-top: 1px;
+  font-size: var(--text-13);
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.cell {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--rule-line);
+  text-align: center;
+  vertical-align: middle;
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+/* The owner column reads as fixed: everything ticked, nothing to change. */
+.ownerCell {
+  background: color-mix(in srgb, var(--desk) 60%, var(--paper));
+}
+
+.row:hover > th,
+.row:hover > td {
+  background: var(--desk);
+}
+
+.matrix tbody:last-of-type tr:last-child > * {
+  border-bottom: 0;
+}
+
+/* Unsaved changes are tinted until saved. */
+.row > .changed,
+.row:hover > .changed {
+  background: var(--pen-tint);
+}
+
+/* ------------------------------------------------------------ phone layout */
+
+.phone {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+
+.phoneSummary {
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.phoneGroup {
+  min-width: 0;
+}
+
+.phoneGroupLabel {
+  padding: 8px 0 4px;
+  font-size: var(--text-12);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+
+.permList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.permItem {
+  margin: 0 -16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule-line);
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+.permItem.changed {
+  background: var(--pen-tint);
+}
+
+/* ------------------------------------------------------------ notes */
+
+.lockedNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 16px 20px 0;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--desk);
+  font-size: var(--text-14);
+  color: var(--ink-2);
+}
+
+.lockedNote svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: var(--ink-3);
+}
+
+.notes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--rule);
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.notes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.notes svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+}
+
+/* ------------------------------------------------------------ save bar */
+
+.saveBar {
+  position: sticky;
+  bottom: 16px;
+  z-index: var(--z-sticky);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 0 12px 12px;
+  padding: 10px 12px 10px 16px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow-float);
+}
+
+.saveText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  font-size: var(--text-14);
+  color: var(--ink-2);
+}
+
+.saveText strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.caution {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--text-13);
+  color: var(--haldi-text);
+}
+
+.caution svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+}
+
+.saveError {
+  font-size: var(--text-13);
+  color: var(--margin-text);
+}
+
+.saveActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skeleton {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+}
+
+@media (max-width: 1023px) {
+  /* Sit above the tab bar and leave the floating New order button clear. */
+  .saveBar {
+    bottom: calc(var(--tabbar-h) + var(--safe-bottom) + 12px);
+    margin-right: 60px;
+  }
+}
+
+@media (max-width: 639px) {
+  .notes {
+    padding: 14px 16px 16px;
+  }
+
+  .lockedNote {
+    margin: 16px 16px 0;
+  }
+}

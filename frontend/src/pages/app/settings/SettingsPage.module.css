@@ -1,0 +1,466 @@
+/* Settings: a sticky section list on the left, sections stacked on the right. */
+
+.layout {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.subnav {
+  position: sticky;
+  top: calc(var(--topbar-h) + 24px);
+  min-width: 0;
+}
+
+.subnavList {
+  display: grid;
+  gap: 2px;
+}
+
+.subnavLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-2);
+  font-size: var(--text-14);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease);
+}
+
+.subnavLink svg {
+  flex: none;
+  color: var(--ink-3);
+}
+
+.subnavLink:hover {
+  background: var(--desk-2);
+  color: var(--ink);
+}
+
+.subnavLink[aria-current="true"],
+.subnavLink[aria-current="true"]:hover {
+  background: var(--pen-tint);
+  color: var(--pen);
+}
+
+.subnavLink[aria-current="true"] svg {
+  color: var(--pen);
+}
+
+.sections {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  min-width: 0;
+}
+
+/* Jump target for the section list and #links; clears the sticky top bar. */
+.anchor {
+  min-width: 0;
+  scroll-margin-top: calc(var(--topbar-h) + 16px);
+  outline: none;
+}
+
+.anchor:focus,
+.anchor:focus-visible {
+  box-shadow: none;
+}
+
+/* ------------------------------------------------------------ forms */
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 12px;
+  width: 100%;
+}
+
+.footerNote {
+  flex: 1 1 220px;
+  min-width: 0;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.formError {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--margin-tint);
+  color: var(--margin-text);
+  font-size: var(--text-14);
+  line-height: 1.45;
+}
+
+.formError svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.planRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--desk);
+  font-size: var(--text-14);
+  color: var(--ink-2);
+}
+
+.planLabel {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.planLink {
+  margin-left: auto;
+  font-weight: 500;
+}
+
+.readOnlyNote {
+  margin-top: 16px;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.segmentPair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+/* UPI field with a live QR preview beside it. */
+.upiRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.qrPreview {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.qrBox {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  padding: 6px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+}
+
+.qrBox svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.qrModules {
+  fill: var(--ink);
+}
+
+.qrCaption {
+  max-width: 132px;
+  font-size: var(--text-12);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+/* ------------------------------------------------------------ account */
+
+.subsection {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.subheading {
+  font-size: var(--text-15);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.subdescription {
+  margin-top: 2px;
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.passwordGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.passwordActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  margin-top: 16px;
+}
+
+.spaced {
+  margin-top: 16px;
+}
+
+/* ------------------------------------------------------------ install */
+
+.install {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+
+.installText {
+  display: flex;
+  flex: 1 1 320px;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.installIcon {
+  flex: none;
+  margin-top: 1px;
+  color: var(--ink-3);
+}
+
+.installIconDone {
+  color: var(--leaf);
+}
+
+.installTitle {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.installHint {
+  margin-top: 2px;
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+.installHint svg {
+  display: inline-block;
+  margin: 0 2px;
+  vertical-align: -3px;
+}
+
+.installActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+/* ------------------------------------------------------------ sign out */
+
+.signOut {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.signOutText {
+  flex: 1 1 280px;
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+.signOutText strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: var(--text-15);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.skeleton {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+@media (max-width: 899px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  /* The section list becomes a row of chips that scrolls sideways, edge to edge. */
+  .subnav {
+    position: static;
+    margin: 0 calc(var(--page-pad) * -1);
+    padding: 0 var(--page-pad) 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .subnav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .subnavList {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+  }
+
+  .subnavLink {
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+  }
+
+  .subnavLink[aria-current="true"],
+  .subnavLink[aria-current="true"]:hover {
+    border-color: var(--pen);
+  }
+
+  .passwordGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .formGrid,
+  .skeleton {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .upiRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .qrPreview {
+    margin-top: 0;
+  }
+
+  .subnavLink {
+    height: 40px;
+  }
+}
+
+/* ------------------------------------------------------------ import & export */
+
+.dataBlock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.dataHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pen);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.importInputs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.fileName {
+  font-size: var(--text-14);
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+.csvText {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+}
+
+.importResult {
+  padding: 12px 14px;
+  border: 1px solid var(--leaf-tint);
+  border-radius: var(--radius);
+  background: var(--leaf-tint);
+  font-size: var(--text-14);
+  color: var(--ink);
+}
+
+.importErrors {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding: 8px 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--leaf) 25%, transparent);
+  list-style: none;
+  color: var(--margin-text);
+}
+
+.exportRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}

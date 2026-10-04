@@ -1,0 +1,55 @@
+.skeleton {
+  display: block;
+  background: var(--desk-2);
+  border-radius: var(--radius-sm);
+  animation: pulse 1.6s var(--ease) infinite;
+}
+
+.text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.text .skeleton:last-child:not(:first-child) {
+  width: 62%;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.spinner {
+  display: inline-block;
+  vertical-align: middle;
+  color: currentColor;
+  animation: spin 0.7s linear infinite;
+}
+
+.track {
+  opacity: 0.2;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+
+  /* A spinner that doesn't move still says "working"; slow it down instead of freezing it. */
+  .spinner {
+    animation-duration: 1.6s !important;
+    animation-iteration-count: infinite !important;
+  }
+}

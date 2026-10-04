@@ -1,0 +1,86 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+/* The period scopes everything below it: the totals, the breakdown and the list. */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr);
+  align-items: start;
+  gap: 16px;
+}
+
+.breakdown {
+  min-width: 0;
+}
+
+.dimmed {
+  opacity: 0.6;
+  transition: opacity var(--dur-2) var(--ease);
+}
+
+.categorySelect {
+  width: 170px;
+}
+
+/* Cells -------------------------------------------------------------------- */
+
+.date {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.note {
+  display: block;
+  max-width: 360px;
+  overflow: hidden;
+  color: var(--ink-2);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.none {
+  color: var(--ink-4);
+}
+
+.cardTitle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+}
+
+.cardNote {
+  font-size: var(--text-13);
+  font-weight: 400;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .categorySelect {
+    width: 150px;
+  }
+}

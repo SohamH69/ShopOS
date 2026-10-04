@@ -1,0 +1,19 @@
+{
+  "name": "shopos",
+  "private": true,
+  "scripts": {
+    "setup": "npm --prefix frontend install && python -m pip install -r backend/requirements.txt",
+    "install:all": "npm --prefix frontend install",
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "npm --prefix frontend run dev",
+    "dev:api": "python -m uvicorn main:app --reload --port 8000 --app-dir backend",
+    "backend": "python -m uvicorn main:app --reload --port 8000 --app-dir backend",
+    "build": "npm --prefix frontend run build",
+    "start": "npm run build && python -m uvicorn main:app --host 0.0.0.0 --port 8000 --app-dir backend",
+    "serve": "python -m uvicorn main:app --host 0.0.0.0 --port 8000 --app-dir backend",
+    "test": "npm run test:api && npm run test:web",
+    "test:api": "cd backend && python -m pytest -q",
+    "test:web": "npm --prefix frontend test",
+    "seed:reset": "cd backend && python -m app.seed --reset"
+  }
+}

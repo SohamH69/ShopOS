@@ -1,0 +1,127 @@
+/*
+ * ShopOS design tokens — "the khata, digitised".
+ * White paper, pale-blue ruling, a red margin line, ballpoint-blue ink and violet stamp ink.
+ * Light theme only. Every colour, size and duration in the app should come from here.
+ */
+:root {
+  color-scheme: light;
+
+  /* Surfaces: the app background is --desk, everything you read or touch sits on --paper. */
+  --paper: #ffffff;
+  --desk: #f4f6fa;
+  --desk-2: #eceff5;
+
+  /* Ink */
+  --ink: #161a23;
+  --ink-2: #4a5162;
+  --ink-3: #737b8c;
+  --ink-4: #a6adbb;
+
+  /* Rules */
+  --rule: #dfe5ef;
+  --rule-strong: #c9d2e1;
+  --rule-line: #e6ebf5; /* ledger ruling */
+
+  /* Pen: primary actions, links, focus */
+  --pen: #2b45b5;
+  --pen-hover: #22389a;
+  --pen-press: #1c2f82;
+  --pen-tint: #eef1fc;
+  --pen-tint-2: #dfe5fa;
+
+  /* Margin: dues, outstanding, errors, destructive, the ledger margin line */
+  --margin: #d63b3b;
+  --margin-text: #b42828;
+  --margin-tint: #fdeeee;
+
+  /* Stamp: PAID / settled — the signature only */
+  --stamp: #6e3fb0;
+  --stamp-tint: #f3eefb;
+
+  /* Haldi: preparing, partial, warnings */
+  --haldi: #e8a317;
+  --haldi-text: #8a5b00;
+  --haldi-tint: #fdf5e1;
+
+  /* Leaf: completed, received, success */
+  --leaf: #1f8a5b;
+  --leaf-text: #17724a;
+  --leaf-tint: #e7f5ee;
+
+  --focus-ring: 0 0 0 3px rgba(43, 69, 181, 0.28);
+  --focus-ring-danger: 0 0 0 3px rgba(214, 59, 59, 0.24);
+
+  /* Type */
+  --font-display: "Anek Latin Variable", "Mukta", system-ui, sans-serif;
+  --font-body: "Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Spline Sans Mono Variable", ui-monospace, Consolas, monospace;
+  --display-stretch: 78%; /* the display face is always used condensed */
+
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-17: 17px;
+  --text-20: 20px;
+  --text-24: 24px;
+  --text-32: 32px;
+  --text-44: 44px;
+  --text-hero: clamp(44px, 7.2vw, 92px);
+
+  /* Space: 4px grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Shape */
+  --radius-sm: 6px; /* badges, small inputs */
+  --radius: 10px; /* inputs, buttons, cards */
+  --radius-lg: 14px; /* sheets, modals */
+  --radius-pill: 999px;
+
+  /* Shadows are rare: cards are paper + a 1px rule, never a shadow. */
+  --shadow-sm: 0 1px 2px rgba(22, 26, 35, 0.06);
+  --shadow-lg: 0 16px 48px rgba(22, 26, 35, 0.16);
+  --shadow-float: 0 6px 20px rgba(22, 26, 35, 0.18);
+
+  /* Controls */
+  --control-sm: 36px;
+  --control-md: 40px;
+  --control-lg: 48px;
+
+  /* Layout */
+  --page-pad: 32px;
+  --content-max: 1240px;
+  --sidebar-w: 240px;
+  --topbar-h: 56px;
+  --tabbar-h: 60px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-1: 120ms;
+  --dur-2: 160ms;
+  --dur-3: 200ms;
+
+  /* Layers */
+  --z-sticky: 10;
+  --z-nav: 20;
+  --z-fab: 30;
+  --z-overlay: 100;
+  --z-popover: 200;
+  --z-toast: 300;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --page-pad: 16px;
+  }
+}

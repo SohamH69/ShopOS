@@ -1,0 +1,21 @@
+.order {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.time {
+  font-size: var(--text-13);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.items {
+  display: block;
+  max-width: 300px;
+  overflow: hidden;
+  color: var(--ink-2);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

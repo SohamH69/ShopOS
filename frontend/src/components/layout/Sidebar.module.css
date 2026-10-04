@@ -1,0 +1,153 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-w);
+  height: 100vh;
+  height: 100dvh;
+  border-right: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.brand {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: var(--topbar-h);
+  padding: 0 20px;
+}
+
+.brandLink {
+  display: inline-flex;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.nav {
+  flex: 1;
+  padding: 10px 12px 16px;
+  overflow-y: auto;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+}
+
+.section {
+  margin: 20px 10px 6px;
+  font-size: var(--text-12);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: var(--ink-2);
+  font-size: var(--text-15);
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease);
+}
+
+.link svg {
+  width: 18px;
+  height: 18px;
+  color: var(--ink-3);
+  transition: color var(--dur-1) var(--ease);
+}
+
+.link:hover {
+  background: var(--desk);
+  color: var(--ink);
+}
+
+.link:hover svg {
+  color: var(--ink-2);
+}
+
+.active,
+.active:hover {
+  background: var(--pen-tint);
+  color: var(--pen);
+}
+
+.active svg,
+.active:hover svg {
+  color: var(--pen);
+}
+
+.linkLabel {
+  flex: 1;
+  min-width: 0;
+  padding-top: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.active .linkLabel {
+  font-weight: 600;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--desk-2);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.active .count {
+  background: var(--paper);
+  color: var(--pen);
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  flex: none;
+  gap: 8px;
+  padding: 14px 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.shop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  min-width: 0;
+  padding: 0 10px;
+}
+
+.shopName {
+  overflow: hidden;
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.plan {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}

@@ -1,0 +1,210 @@
+/* Avatar ------------------------------------------------------------------ */
+
+.avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size, 32px);
+  height: var(--avatar-size, 32px);
+  border-radius: 50%;
+  font-size: calc(var(--avatar-size, 32px) * 0.4);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  user-select: none;
+}
+
+.avatar_sm {
+  --avatar-size: 24px;
+}
+
+.avatar_md {
+  --avatar-size: 32px;
+}
+
+.avatar_lg {
+  --avatar-size: 40px;
+}
+
+.avatarTone0 {
+  background: var(--pen-tint);
+  color: var(--pen);
+}
+
+.avatarTone1 {
+  background: var(--leaf-tint);
+  color: var(--leaf-text);
+}
+
+.avatarTone2 {
+  background: var(--haldi-tint);
+  color: var(--haldi-text);
+}
+
+.avatarTone3 {
+  background: var(--desk-2);
+  color: var(--ink-2);
+}
+
+/* Money ------------------------------------------------------------------- */
+
+.money {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.money_sm {
+  font-size: var(--text-13);
+}
+
+.money_lg {
+  font-size: var(--text-17);
+}
+
+.money_muted {
+  color: var(--ink-3);
+}
+
+.money_margin {
+  color: var(--margin-text);
+}
+
+.money_leaf {
+  color: var(--leaf-text);
+}
+
+.money_pen {
+  color: var(--pen);
+}
+
+/* Proportional display figures for headline amounts. */
+.money_display {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  font-variant-numeric: normal;
+  line-height: 1.05;
+}
+
+/* Kbd --------------------------------------------------------------------- */
+
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--paper);
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Chip -------------------------------------------------------------------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: var(--text-14);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease);
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--ink-4);
+  color: var(--ink);
+}
+
+.chip svg {
+  width: 15px;
+  height: 15px;
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--pen);
+  background: var(--pen-tint);
+  color: var(--pen);
+}
+
+.chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chipLabel {
+  padding-top: 1px;
+}
+
+@media (max-width: 1023px) {
+  .chip {
+    height: 36px;
+  }
+}
+
+/* LoadMore ---------------------------------------------------------------- */
+
+.loadMore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 0 4px;
+}
+
+.loadMoreText {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+/* DescriptionList --------------------------------------------------------- */
+
+.dl {
+  display: grid;
+  grid-template-columns: minmax(96px, max-content) minmax(0, 1fr);
+  gap: 10px 20px;
+  font-size: var(--text-14);
+  line-height: 1.45;
+}
+
+.dt {
+  color: var(--ink-3);
+}
+
+.dd {
+  min-width: 0;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.dlStacked {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+}
+
+.dlStacked .dd + .dt {
+  margin-top: 10px;
+}

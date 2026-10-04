@@ -1,0 +1,158 @@
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.sku {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.archived {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--desk-2);
+  color: var(--ink-2);
+  font-size: var(--text-14);
+  line-height: 1.45;
+}
+
+/* Stock level ------------------------------------------------------------- */
+
+.stock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+}
+
+.stockHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.label {
+  font-size: var(--text-13);
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.stockValue {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  font-stretch: var(--display-stretch);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.value_low {
+  color: var(--haldi-text);
+}
+
+.value_out {
+  color: var(--margin-text);
+}
+
+.meterRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.reserved {
+  font-size: var(--text-14);
+  color: var(--ink-2);
+}
+
+.short {
+  color: var(--haldi-text);
+  font-weight: 500;
+}
+
+/* Prices: one paper strip divided by rules ------------------------------- */
+
+.prices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--rule);
+}
+
+.price {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 2px;
+  min-width: 0;
+  padding: 12px 14px;
+  background: var(--paper);
+}
+
+.price dt {
+  font-size: var(--text-13);
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.price dd {
+  min-width: 0;
+}
+
+.priceHint {
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}
+
+.margin {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.marginLarge {
+  font-size: var(--text-17);
+}
+
+.loss {
+  color: var(--margin-text);
+}
+
+.quiet {
+  color: var(--ink-3);
+}
+
+/* Stock history ----------------------------------------------------------- */
+
+.history {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+}
+
+.sectionTitle {
+  font-size: var(--text-15);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (max-width: 639px) {
+  .price {
+    padding: 10px 12px;
+  }
+}

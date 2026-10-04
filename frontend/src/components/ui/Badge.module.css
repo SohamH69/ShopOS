@@ -1,0 +1,137 @@
+/* Badge ------------------------------------------------------------------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-13);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge svg {
+  width: 13px;
+  height: 13px;
+}
+
+.sm {
+  height: 20px;
+  padding: 0 6px;
+  font-size: var(--text-12);
+}
+
+.neutral {
+  background: var(--desk-2);
+  color: var(--ink-2);
+}
+
+.pen {
+  background: var(--pen-tint);
+  color: var(--pen);
+}
+
+.margin {
+  background: var(--margin-tint);
+  color: var(--margin-text);
+}
+
+.haldi {
+  background: var(--haldi-tint);
+  color: var(--haldi-text);
+}
+
+.leaf {
+  background: var(--leaf-tint);
+  color: var(--leaf-text);
+}
+
+.stamp {
+  background: var(--stamp-tint);
+  color: var(--stamp);
+}
+
+/* Order status: a dot and a word ----------------------------------------- */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ink);
+  font-size: var(--text-14);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+
+.status_preparing .dot {
+  background: var(--haldi);
+}
+
+.status_ready .dot {
+  background: var(--pen);
+}
+
+.status_collected .dot,
+.status_delivered .dot {
+  background: var(--leaf);
+}
+
+.status_cancelled {
+  color: var(--ink-3);
+}
+
+.status_cancelled .dot {
+  background: var(--ink-4);
+}
+
+.status_cancelled .statusText {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+/* Payment status: a small stamped mark ------------------------------------- */
+
+.payment {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.payment_unpaid {
+  background: var(--margin-tint);
+  color: var(--margin-text);
+}
+
+.payment_partial {
+  background: var(--haldi-tint);
+  color: var(--haldi-text);
+}
+
+.payment_paid {
+  background: var(--stamp-tint);
+  color: var(--stamp);
+}

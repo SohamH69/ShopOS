@@ -1,0 +1,304 @@
+/* New order sheet: four ruled sections, like the lines of an order slip, and a sticky total. */
+
+.drawerBody {
+  padding-top: 4px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+  padding: 20px 0;
+}
+
+.section + .section,
+.section + .disclosureRow {
+  border-top: 1px solid var(--rule-line);
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-15);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.sectionCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--desk-2);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.notice {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.done {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  font-size: var(--text-14);
+  font-weight: 500;
+  color: var(--leaf-text);
+}
+
+.done svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Walk-in, chosen explicitly */
+
+.walkIn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--control-md);
+  padding: 8px 8px 8px 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.walkInIcon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--desk-2);
+  color: var(--ink-3);
+}
+
+.walkInIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.walkInText {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  flex: 1;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.walkInTitle {
+  font-weight: 600;
+}
+
+.walkInHint {
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.itemsLoading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+/* How */
+
+.twoUp {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+/* Payment */
+
+.paidRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-width: 0;
+}
+
+.paidInput {
+  flex: 0 1 200px;
+  min-width: 140px;
+}
+
+.paidChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* "Add discount or note" */
+
+.disclosureRow {
+  padding: 16px 0 4px;
+}
+
+.disclosure {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 2px 8px 2px 4px;
+  border-radius: var(--radius-sm);
+  color: var(--pen);
+  font-size: var(--text-14);
+  font-weight: 500;
+}
+
+.disclosure:hover {
+  background: var(--pen-tint);
+  color: var(--pen-hover);
+}
+
+.disclosure svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Sticky footer */
+
+.footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  min-width: 0;
+}
+
+.totalLine {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.totalLabel {
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.totalLine .totalAmount {
+  font-size: var(--text-32);
+  color: var(--ink);
+}
+
+.subline {
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.khata {
+  color: var(--margin-text);
+}
+
+.footerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shortcut {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.footerError {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--margin-text);
+}
+
+.footerError svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+}
+
+@media (pointer: coarse) {
+  .shortcut {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .twoUp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2px 12px;
+  }
+
+  .totalLine .totalAmount {
+    font-size: var(--text-24);
+  }
+
+  .footerActions {
+    width: 100%;
+  }
+
+  .submit {
+    flex: 1;
+  }
+
+  .shortcut {
+    display: none;
+  }
+
+  .footerError {
+    order: -1;
+  }
+}

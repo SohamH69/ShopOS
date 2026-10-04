@@ -1,0 +1,143 @@
+/* MoneyInput */
+
+.amount {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.rupee {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  color: var(--ink-3);
+}
+
+/* QuantityInput */
+
+.qty {
+  display: inline-flex;
+  align-items: stretch;
+  justify-self: start;
+  align-self: start;
+  max-width: 100%;
+  height: var(--control-md);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  transition:
+    border-color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.qty:hover {
+  border-color: var(--ink-4);
+}
+
+.qty:focus-within {
+  border-color: var(--pen);
+  box-shadow: var(--focus-ring);
+}
+
+.qty[data-invalid="true"] {
+  border-color: var(--margin);
+}
+
+.qty[data-invalid="true"]:focus-within {
+  box-shadow: var(--focus-ring-danger);
+}
+
+.qty[data-disabled="true"] {
+  border-color: var(--rule);
+  background: var(--desk);
+  color: var(--ink-3);
+}
+
+.sm {
+  height: var(--control-sm);
+  border-radius: var(--radius-sm);
+}
+
+.step {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  color: var(--ink-2);
+  border-radius: inherit;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease);
+}
+
+.step:hover:not(:disabled) {
+  background: var(--desk);
+  color: var(--ink);
+}
+
+.step:disabled {
+  color: var(--ink-4);
+  cursor: not-allowed;
+}
+
+.step svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sm .step {
+  width: 30px;
+}
+
+.value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 0 2px;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  cursor: text;
+}
+
+.qtyInput {
+  width: 6ch;
+  min-width: 3ch;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-mono);
+  font-size: var(--text-15);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.qtyInput:focus,
+.qtyInput:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.unit {
+  padding-right: 6px;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.sm .qtyInput {
+  font-size: var(--text-14);
+}
+
+@media (max-width: 767px) {
+  .qtyInput {
+    font-size: 16px;
+  }
+
+  .step {
+    width: 40px;
+  }
+}

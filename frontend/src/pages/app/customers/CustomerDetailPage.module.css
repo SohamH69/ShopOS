@@ -1,0 +1,61 @@
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.records {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  min-width: 0;
+}
+
+.panel {
+  min-width: 0;
+}
+
+.contact {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  min-width: 0;
+}
+
+.phone {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.dot {
+  color: var(--ink-4);
+}
+
+.address {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.skeletonHeader {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.skeletonCard {
+  display: grid;
+  gap: 12px;
+  padding: 22px 24px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+@media (max-width: 639px) {
+  .stack {
+    gap: 20px;
+  }
+}
