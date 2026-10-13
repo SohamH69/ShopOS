@@ -1,6 +1,4 @@
-import { Plus } from "lucide-react";
-import { Button, Card, ErrorState, PageHeader, StatStrip, Trend, type StatItem } from "../../../components/ui";
-import { useNewOrder } from "../../../features/new-order/NewOrderProvider";
+import { Card, ErrorState, PageHeader, StatStrip, Trend, type StatItem } from "../../../components/ui";
 import { useAuth } from "../../../lib/auth";
 import { formatCount, formatDateLong, formatMoney, pluralize, todayISO } from "../../../lib/format";
 import { useDocumentTitle } from "../../../lib/hooks";
@@ -65,7 +63,6 @@ function statItems(dashboard: Dashboard, canOpenCustomers: boolean): StatItem[] 
 export default function DashboardPage() {
   useDocumentTitle("Today");
   const { shop, can } = useAuth();
-  const { openNewOrder } = useNewOrder();
   const query = useDashboard({ refetchInterval: REFRESH_MS });
   const now = useNow();
   const dashboard = query.data;
@@ -77,13 +74,6 @@ export default function DashboardPage() {
       <PageHeader
         title="Today"
         description={description}
-        actions={
-          can("orders") ? (
-            <Button icon={<Plus aria-hidden="true" />} onClick={() => openNewOrder()} aria-keyshortcuts="N">
-              New order
-            </Button>
-          ) : null
-        }
       />
 
       {query.isError && !dashboard ? (

@@ -51,7 +51,7 @@
   padding: 22px 24px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 @media (max-width: 639px) {

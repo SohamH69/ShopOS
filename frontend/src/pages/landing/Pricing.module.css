@@ -12,13 +12,13 @@ ul.plans {
   padding: var(--space-6);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 /* The plan most shops pick: a pen outline two pixels deep (no layout shift). */
 .featured {
-  border-color: var(--pen);
-  box-shadow: 0 0 0 1px var(--pen);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 1px var(--brand);
 }
 
 .planHead {
@@ -43,11 +43,11 @@ ul.plans {
   height: 24px;
   padding: 0 var(--space-2);
   border-radius: var(--radius-sm);
-  background: var(--pen-tint);
+  background: var(--brand-tint);
   font-size: var(--text-12);
   font-weight: 600;
   line-height: 1;
-  color: var(--pen);
+  color: var(--brand);
   white-space: nowrap;
 }
 
@@ -67,7 +67,6 @@ ul.plans {
 .amount {
   font-family: var(--font-display);
   font-size: var(--text-44);
-  font-stretch: var(--display-stretch);
   font-weight: 720;
   line-height: 1;
   letter-spacing: -0.01em;
@@ -118,7 +117,7 @@ ul.plans {
 .featureList svg {
   flex: none;
   margin-top: 2px;
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .cta {

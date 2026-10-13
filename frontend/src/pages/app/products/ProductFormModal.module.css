@@ -9,11 +9,11 @@
 }
 
 .marginGood {
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .marginBad {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 @media (max-width: 479px) {

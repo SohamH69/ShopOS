@@ -58,7 +58,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--leaf);
+  background: var(--success);
 }
 
 .statusOff {
@@ -104,8 +104,8 @@
   gap: 8px;
   padding: 10px 12px;
   border-radius: var(--radius);
-  background: var(--margin-tint);
-  color: var(--margin-text);
+  background: var(--danger-tint);
+  color: var(--danger-text);
   font-size: var(--text-14);
   line-height: 1.45;
 }
@@ -126,14 +126,14 @@
   padding: 0;
   border: 0;
   background: none;
-  color: var(--pen);
+  color: var(--brand);
   font-size: var(--text-13);
   font-weight: 500;
   border-radius: var(--radius-sm);
 }
 
 .linkButton:hover {
-  color: var(--pen-hover);
+  color: var(--brand-hover);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -169,7 +169,7 @@
   padding: 12px 14px;
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
   cursor: pointer;
   transition:
     border-color var(--dur-1) var(--ease),
@@ -181,8 +181,8 @@
 }
 
 .roleOption[data-checked="true"] {
-  border-color: var(--pen);
-  background: var(--pen-tint);
+  border-color: var(--brand);
+  background: var(--brand-tint);
 }
 
 .roleRadio {
@@ -190,7 +190,7 @@
   width: 18px;
   height: 18px;
   margin: 2px 0 0;
-  accent-color: var(--pen);
+  accent-color: var(--brand);
   cursor: pointer;
 }
 
@@ -228,7 +228,7 @@
   padding: 2px 16px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .loginRow {

@@ -5,7 +5,7 @@ import { cx } from "../../lib/cx";
 import styles from "./PageHeader.module.css";
 
 export interface PageHeaderProps {
-  /** Page title, set in the condensed display face. */
+  /** Page title, set in the display face. */
   title: ReactNode;
   description?: ReactNode;
   /** Buttons on the right (they wrap under the title on phones). */

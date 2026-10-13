@@ -94,7 +94,7 @@ export function AccountSection({ id }: AccountSectionProps) {
           items={[
             { key: "name", label: "Name", value: user.name },
             { key: "role", label: "Role", value: <Badge tone={user.role === "owner" ? "pen" : "neutral"}>{ROLE_LABEL[user.role]}</Badge> },
-            { key: "login", label: "Sign in with", value: signInWith ? <span className="mono">{signInWith}</span> : "—" },
+            { key: "login", label: "Sign in with", value: signInWith ? <span className="mono">{signInWith}</span> : "–" },
           ]}
         />
         <div className={styles.subsection}>

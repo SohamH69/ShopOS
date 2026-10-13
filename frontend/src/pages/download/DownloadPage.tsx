@@ -1,6 +1,7 @@
 import { ArrowLeft, AppWindow, House, WifiOff, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import GetAppSection from "../../features/get-app/GetAppSection";
+import { cx } from "../../lib/cx";
 import { useDocumentTitle } from "../../lib/hooks";
 import layout from "../landing/Landing.module.css";
 import { SiteHeader } from "../landing/SiteHeader";
@@ -40,12 +41,15 @@ export default function DownloadPage() {
     <div className={layout.page}>
       <SiteHeader variant="minimal" />
       <main className={styles.main}>
-        <div className={layout.container}>
-          <header className={styles.header}>
-            <p className={layout.eyebrow}>Download</p>
-            <h1 className={styles.title}>Get the ShopOS app</h1>
-          </header>
-        </div>
+        <header className={cx(styles.header, layout.night)}>
+          <span className={layout.awning} aria-hidden="true" />
+          <div className={layout.container}>
+            <p className={styles.eyebrow}>Download</p>
+            <h1 className={styles.title}>
+              Get the ShopOS <em>app</em>
+            </h1>
+          </div>
+        </header>
 
         <div className={styles.getApp}>
           <div className={layout.container}>
@@ -61,7 +65,9 @@ export default function DownloadPage() {
             <ul className={styles.benefitList}>
               {APP_BENEFITS.map(({ key, icon: Icon, title, line }) => (
                 <li key={key} className={styles.benefit}>
-                  <Icon className={styles.benefitIcon} size={20} aria-hidden="true" />
+                  <span className={styles.benefitIcon} aria-hidden="true">
+                    <Icon size={18} />
+                  </span>
                   <div>
                     <p className={styles.benefitTitle}>{title}</p>
                     <p className={styles.benefitLine}>{line}</p>

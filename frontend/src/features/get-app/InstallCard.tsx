@@ -18,7 +18,7 @@ export function InstallCard() {
           Install the app
         </h3>
         <p className={styles.cardSub}>
-          Works on Android, iPhone, Windows and Mac. Installs in seconds from your browser — no app store needed.
+          Works on Android, iPhone, Windows and Mac. Installs in seconds from your browser. No app store needed.
         </p>
       </header>
       <div className={styles.installLayout}>

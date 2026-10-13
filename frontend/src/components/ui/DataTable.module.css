@@ -6,7 +6,7 @@
   overflow: hidden;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .scroll {
@@ -70,11 +70,11 @@
 }
 
 .clickable:hover {
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .table tr.clickable:focus-visible {
-  outline: 2px solid var(--pen);
+  outline: 2px solid var(--brand);
   outline-offset: -2px;
   box-shadow: none;
 }
@@ -122,7 +122,7 @@
   padding: 14px 16px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .card.clickable:focus-visible {
@@ -146,10 +146,10 @@
 }
 
 .listed .card.clickable:hover {
-  background: var(--desk);
+  background: var(--canvas);
 }
 
-/* A framed table that switched to cards keeps its paper frame off: cards sit on the desk. */
+/* A framed table that switched to cards drops its frame: the cards sit on the canvas. */
 .framed.asCards {
   overflow: visible;
   border: 0;

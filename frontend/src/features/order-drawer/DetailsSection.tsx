@@ -9,7 +9,9 @@ import type { Channel, Fulfillment, Order, OrderUpdate } from "../../lib/types";
 import { DueTimeField } from "../new-order/DueTimeField";
 import styles from "./OrderDrawer.module.css";
 
-const CHANNEL_OPTIONS = toOptions(CHANNEL_LABEL);
+// "Online" (sent from the customer's khata link) is shown only on orders that came that way.
+const CHANNEL_OPTIONS = toOptions(CHANNEL_LABEL, ["walk_in", "phone", "whatsapp"]);
+const ONLINE_CHANNEL_OPTIONS = toOptions(CHANNEL_LABEL);
 const FULFILLMENT_OPTIONS = toOptions(FULFILLMENT_LABEL);
 
 function isItem(item: DescriptionItem | null): item is DescriptionItem {
@@ -140,7 +142,13 @@ function DetailsEditor({ order, onDone }: { order: Order; onDone: () => void }) 
     >
       <div className={styles.editorTwoUp}>
         <Field label="Order via">
-          <SegmentedControl options={CHANNEL_OPTIONS} value={channel} onChange={setChannel} size="sm" block />
+          <SegmentedControl
+            options={order.channel === "online" ? ONLINE_CHANNEL_OPTIONS : CHANNEL_OPTIONS}
+            value={channel}
+            onChange={setChannel}
+            size="sm"
+            block
+          />
         </Field>
         {open && (
           <Field label="Pickup or delivery">

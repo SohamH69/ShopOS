@@ -19,6 +19,7 @@ from app.security import (
     login_limiter,
     verify_password,
 )
+from app.services import shop as shop_service
 from app.services.common import (
     clean_line,
     normalize_email,
@@ -29,6 +30,7 @@ from app.services.common import (
 from app.timeutil import now_utc
 
 INVALID_LOGIN = "Phone/email or password is incorrect."
+SHOP_SUSPENDED = "This shop has been suspended by ShopOS. Contact ShopOS support to reopen it."
 ACCOUNT_TURNED_OFF = "This account is turned off. Ask the shop owner."
 TOO_MANY_ATTEMPTS = "Too many failed sign-in attempts. Wait 5 minutes and try again."
 
@@ -78,6 +80,7 @@ def signup(db: Session, data: schemas.SignupRequest, *, at: datetime | None = No
     )
 
     shop = Shop(
+        code=shop_service.new_shop_code(db),
         name=shop_name,
         owner_name=owner_name,
         phone=phone,
@@ -132,6 +135,8 @@ def login(db: Session, identifier: str, password: str) -> User:
         raise Unauthorized(INVALID_LOGIN)
     if not user.is_active:
         raise Forbidden(ACCOUNT_TURNED_OFF)
+    if user.shop.is_suspended:
+        raise Forbidden(SHOP_SUSPENDED)
     login_limiter.reset(key)
     user.last_login_at = now_utc()
     return user
@@ -144,6 +149,9 @@ def demo_owner(db: Session) -> User:
         from app.seed import seed_demo_shop  # local import: the seed is built on these services
 
         shop = seed_demo_shop(db)
+    if shop.is_suspended:
+        raise Forbidden(SHOP_SUSPENDED)
+    shop_service.apply_demo_setup(shop)
     owner = db.scalar(
         select(User).where(User.shop_id == shop.id, User.role == "owner").order_by(User.id).limit(1)
     )

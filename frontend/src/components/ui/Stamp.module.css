@@ -1,6 +1,6 @@
 /*
- * The PAID stamp — the one signature flourish in ShopOS.
- * Violet stamp-pad ink, a double rule, condensed heavy type, pressed at a slight angle.
+ * The PAID stamp: the one signature flourish in ShopOS.
+ * Violet stamp-pad ink, a double rule, heavy display type, pressed at a slight angle.
  * The resting state below is the final state, so reduced motion simply shows it.
  */
 
@@ -9,7 +9,7 @@
   position: relative;
   display: inline-flex;
   vertical-align: middle;
-  color: var(--stamp);
+  color: var(--paid);
   font-size: var(--stamp-size);
   opacity: 0.9;
   transform: rotate(-8deg);
@@ -62,9 +62,7 @@
   padding-left: 0.08em; /* balances the trailing letter-spacing */
   font-family: var(--font-display);
   font-size: 1em;
-  font-weight: 780;
-  font-stretch: 75%;
-  font-variation-settings: "wdth" 75;
+  font-weight: 800;
   letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;

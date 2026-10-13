@@ -1,0 +1,77 @@
+/* The closing signboard: the same night board and awning as the hero, the invitation centred. */
+.band {
+  position: relative;
+  padding: 120px 0 112px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* The same low marigold lamp as the hero, from below this time. */
+.band::after {
+  content: "";
+  position: absolute;
+  right: 15%;
+  bottom: -40%;
+  left: 15%;
+  height: 80%;
+  background: radial-gradient(closest-side, rgba(245, 165, 36, 0.14), transparent);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+}
+
+.title {
+  max-width: 16em;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.4vw, 68px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  color: #ffffff;
+}
+
+.title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.lede {
+  max-width: 34em;
+  margin-top: var(--space-5);
+  font-size: var(--text-20);
+  line-height: 1.5;
+  color: var(--night-ink-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-10);
+}
+
+@media (max-width: 639px) {
+  .band {
+    padding: 88px 0 72px;
+  }
+
+  .lede {
+    font-size: var(--text-17);
+  }
+
+  .actions {
+    width: 100%;
+    margin-top: var(--space-8);
+  }
+
+  .actions > * {
+    flex: 1 1 auto;
+  }
+}

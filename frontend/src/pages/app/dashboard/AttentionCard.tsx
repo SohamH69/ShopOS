@@ -11,6 +11,7 @@ import styles from "./AttentionCard.module.css";
 
 /** The module each item links into. Items the user can't open are listed without a link. */
 const TARGET_PERMISSION: Readonly<Record<AttentionKey, Permission>> = {
+  online_orders: "orders",
   pickups: "orders",
   ready_unpaid: "orders",
   deliveries: "orders",

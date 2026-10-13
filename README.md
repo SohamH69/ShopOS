@@ -1,6 +1,6 @@
 # ShopOS
 
-Shop management for local shops: orders, customer khata, payments, pickups and deliveries, stock, suppliers, expenses, reports and staff — in one place. Built from `ShopOS Business Plan.docx`.
+Shop management for local shops: orders, customer khata, payments, pickups and deliveries, stock, suppliers, expenses, reports and staff, all in one place. Built from `ShopOS Business Plan.docx`.
 
 - **Backend:** Python FastAPI + SQLAlchemy + SQLite (`backend/`)
 - **Frontend:** React + TypeScript + Vite (`frontend/`), installable as an app (PWA)
@@ -34,7 +34,7 @@ Other devices on your network can then open `http://<this-computer's-IP>:8000`.
 
 ## Get the app (install)
 
-ShopOS installs straight from the browser — no app store:
+ShopOS installs straight from the browser, with no app store:
 
 - **Android:** Chrome menu → *Install app*
 - **iPhone / iPad:** Safari → Share → *Add to Home Screen*
@@ -57,11 +57,14 @@ The website's `/download` page and the **Get the app** section show the right st
 
 - **Today** dashboard: sales, orders, payments received, money owed to you, a *Needs attention* list, pending pickups, the week's sales, low stock
 - **Orders:** walk-in, phone and WhatsApp orders; order status and payment status tracked separately; part payments; repeat orders; printable receipts with a UPI QR for dues
-- **Pickups & deliveries:** Ready / Preparing / New board — *Collect ₹X* → *Mark collected* in two clicks
+- **Pickups & deliveries:** Ready / Preparing / New board: *Collect ₹X* → *Mark collected* in two clicks
 - **Customers & khata:** credit ledger with running balance, payments that clear the oldest orders first, payment promises, WhatsApp reminders
 - **Products:** stock drops automatically when an order is completed; stock adjustments with history; low-stock alerts
 - **Suppliers, expenses, payments, reports** (daily/weekly/monthly sales, top customers, fast and slow movers, profit)
 - **Staff** with owner / manager / employee / accountant roles and editable permissions
+- **Shop setup:** every shop gets a public shop ID (like `SO-7K2Q9M`) and adds a photo of the shop front and its map location before the app opens
+- **Customer side:** each customer gets a private khata link the shop shares on WhatsApp: their balance, khata and orders, a UPI Pay button, and the shop's products to send an order (it arrives as an Online order)
+- **Admin for developers** at `/admin`: every shop with its photo and location, platform numbers, suspend/reactivate a shop, change its plan. Create an admin with `python -m app.admin_cli create --email you@example.com --name "Your Name"` (from `backend/`)
 - **Settings:** shop profile, UPI ID, password, install the app, CSV import and export
 
 More backend detail (API, env vars, tests) is in `backend/README.md`.

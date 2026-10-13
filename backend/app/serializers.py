@@ -22,12 +22,14 @@ from app.domain import (
     supplier_outstanding,
 )
 from app.money import multiply_paise, optional_rupees, round_qty, to_rupees
+from app.services import media
 from app.timeutil import now_utc
 
 
 def shop_out(shop: models.Shop) -> schemas.Shop:
     return schemas.Shop(
         id=shop.id,
+        code=shop.code or "",
         name=shop.name,
         owner_name=shop.owner_name,
         phone=shop.phone,
@@ -37,6 +39,12 @@ def shop_out(shop: models.Shop) -> schemas.Shop:
         segment=shop.segment,
         plan=shop.plan,  # type: ignore[arg-type]  # stored values are always a valid Plan
         upi_id=shop.upi_id,
+        photo_url=media.photo_url(shop.photo_file),
+        latitude=shop.latitude,
+        longitude=shop.longitude,
+        setup_complete=shop.setup_complete,
+        portal_catalog=shop.portal_catalog,
+        portal_orders=shop.portal_orders,
         created_at=shop.created_at,
     )
 

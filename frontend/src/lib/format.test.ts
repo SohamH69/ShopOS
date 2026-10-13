@@ -55,8 +55,8 @@ describe("formatMoney", () => {
 
   it("uses a true minus sign and a dash for missing values", () => {
     expect(formatMoney(-500)).toBe(`${MINUS}₹500`);
-    expect(formatMoney(null)).toBe("—");
-    expect(formatMoney(undefined)).toBe("—");
+    expect(formatMoney(null)).toBe("–");
+    expect(formatMoney(undefined)).toBe("–");
   });
 });
 
@@ -128,8 +128,8 @@ describe("dates in IST", () => {
     expect(formatDate("2026-10-04T09:30:00+00:00", { now: NOW })).toBe("4 Oct");
     expect(formatDate("2025-08-20T09:30:00+00:00", { now: NOW })).toBe("20 Aug 2025");
     expect(formatDate("2026-10-04", { now: NOW, year: "always" })).toBe("4 Oct 2026");
-    expect(formatDate(null)).toBe("—");
-    expect(formatDate("not a date")).toBe("—");
+    expect(formatDate(null)).toBe("–");
+    expect(formatDate("not a date")).toBe("–");
   });
 
   it("uses the IST calendar day, not UTC", () => {
@@ -210,7 +210,7 @@ describe("people and orders", () => {
 
   it("formats order numbers, counts and names", () => {
     expect(orderNo(1045)).toBe("#1045");
-    expect(orderNo(null)).toBe("—");
+    expect(orderNo(null)).toBe("–");
     expect(pluralize(1, "order")).toBe("1 order");
     expect(pluralize(3, "order")).toBe("3 orders");
     expect(pluralize(2, "box", "boxes")).toBe("2 boxes");

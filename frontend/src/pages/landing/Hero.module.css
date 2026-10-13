@@ -1,10 +1,26 @@
 .hero {
-  padding: 72px 0 96px;
+  position: relative;
+  padding: 88px 0 104px;
+  overflow: hidden;
+}
+
+/* A low marigold glow behind the slip, like a shop lamp on the board. */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  right: -10%;
+  width: 60%;
+  height: 90%;
+  background: radial-gradient(closest-side, rgba(245, 165, 36, 0.16), transparent);
+  pointer-events: none;
 }
 
 .grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 56px;
   align-items: center;
 }
@@ -13,44 +29,86 @@
   min-width: 0;
 }
 
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: var(--text-15);
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--ink-2);
+/* On load the copy rises line by line, then the slip settles onto the board. */
+.copy > * {
+  animation: rise 620ms var(--ease) both;
 }
 
-/* A short stroke of pen ink before the line. */
+.copy > :nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.copy > :nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.copy > :nth-child(n + 4) {
+  animation-delay: 220ms;
+}
+
+.grid > :last-child {
+  animation: rise 760ms 200ms var(--ease) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 14px 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: var(--text-14);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--night-ink);
+}
+
 .eyebrow::before {
   content: "";
   flex: none;
-  width: 24px;
-  height: 2px;
-  border-radius: 1px;
-  background: var(--pen);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(245, 165, 36, 0.2);
 }
 
 .title {
-  margin-top: var(--space-5);
+  margin-top: var(--space-6);
   font-family: var(--font-display);
   font-size: var(--text-hero);
-  font-stretch: var(--display-stretch);
-  font-weight: 760;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: #ffffff;
   text-wrap: balance;
+}
+
+/* The promise, painted in marigold. */
+.title em {
+  font-style: normal;
+  color: var(--accent);
 }
 
 .sub {
   margin-top: var(--space-6);
-  max-width: 31em;
+  max-width: 32em;
   font-size: var(--text-20);
   line-height: 1.5;
-  color: var(--ink-2);
+  color: var(--night-ink-2);
 }
 
 .actions {
@@ -66,14 +124,14 @@
   gap: 6px;
   margin-top: var(--space-3);
   font-size: var(--text-15);
-  color: var(--ink-3);
+  color: var(--night-ink-2);
 }
 
 .demoLink {
   min-height: 40px;
   border-radius: var(--radius-sm);
-  font-weight: 500;
-  color: var(--pen);
+  font-weight: 600;
+  color: var(--accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -81,12 +139,41 @@
 }
 
 .demoLink:hover:not(:disabled) {
-  color: var(--pen-hover);
+  color: #ffffff;
+}
+
+.demoLink:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.45);
 }
 
 .demoLink:disabled {
-  color: var(--ink-3);
+  color: var(--night-ink-2);
   cursor: progress;
+}
+
+ul.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-10);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-14);
+  font-weight: 500;
+  color: var(--night-ink);
+}
+
+.facts svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  stroke-width: 2.4;
 }
 
 @media (max-width: 1023px) {
@@ -98,15 +185,22 @@
   .copy {
     max-width: 680px;
   }
+
+  .hero::after {
+    top: 45%;
+    right: -20%;
+    width: 100%;
+    height: 60%;
+  }
 }
 
 @media (max-width: 639px) {
   .hero {
-    padding: 40px 0 64px;
+    padding: 56px 0 64px;
   }
 
   .title {
-    margin-top: var(--space-4);
+    margin-top: var(--space-5);
   }
 
   .sub {
@@ -120,5 +214,10 @@
 
   .actions > * {
     flex: 1 1 auto;
+  }
+
+  ul.facts {
+    flex-direction: column;
+    margin-top: var(--space-8);
   }
 }

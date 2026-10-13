@@ -65,24 +65,24 @@
 }
 
 .stockLow {
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .stockOut {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .metaButton {
   padding: 2px 0;
   border-radius: 4px;
-  color: var(--pen);
+  color: var(--brand);
   font-size: var(--text-13);
   font-weight: 500;
   line-height: 1.4;
 }
 
 .metaButton:hover {
-  color: var(--pen-hover);
+  color: var(--brand-hover);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -137,7 +137,7 @@
 .issue {
   font-size: var(--text-13);
   line-height: 1.45;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .right {
@@ -155,7 +155,7 @@
 
 @keyframes line-flash-a {
   from {
-    background-color: var(--pen-tint);
+    background-color: var(--brand-tint);
   }
   to {
     background-color: transparent;
@@ -164,7 +164,7 @@
 
 @keyframes line-flash-b {
   from {
-    background-color: var(--pen-tint);
+    background-color: var(--brand-tint);
   }
   to {
     background-color: transparent;
@@ -187,14 +187,14 @@
   min-height: 32px;
   padding: 2px 6px 2px 2px;
   border-radius: var(--radius-sm);
-  color: var(--pen);
+  color: var(--brand);
   font-size: var(--text-14);
   font-weight: 500;
 }
 
 .customButton:hover {
-  color: var(--pen-hover);
-  background: var(--pen-tint);
+  color: var(--brand-hover);
+  background: var(--brand-tint);
 }
 
 .customButton svg {

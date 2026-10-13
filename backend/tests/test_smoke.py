@@ -21,8 +21,9 @@ from conftest import TEST_PASSWORD, ShopAccount, StaffAccount, auth_headers, cou
 # Expected keys, hand-copied from frontend/src/lib/types.ts
 # ---------------------------------------------------------------------------
 
-SHOP = {"id", "name", "owner_name", "phone", "email", "address", "city", "segment", "plan",
-        "upi_id", "created_at"}
+SHOP = {"id", "code", "name", "owner_name", "phone", "email", "address", "city", "segment", "plan",
+        "upi_id", "photo_url", "latitude", "longitude", "setup_complete", "portal_catalog",
+        "portal_orders", "created_at"}
 USER = {"id", "name", "email", "phone", "role", "is_active", "last_login_at", "created_at"}
 SESSION = {"user", "shop", "permissions"}
 AUTH_RESPONSE = SESSION | {"token"}

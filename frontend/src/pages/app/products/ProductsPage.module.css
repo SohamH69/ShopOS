@@ -104,7 +104,7 @@
 }
 
 .loss {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .none {
@@ -120,12 +120,12 @@
 
 .noteLow {
   font-weight: 600;
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .noteOut {
   font-weight: 600;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 /* Phone cards: the stock figure sits top-right. */

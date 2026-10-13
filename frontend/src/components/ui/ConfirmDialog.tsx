@@ -14,7 +14,7 @@ export interface ConfirmDialogProps {
   description?: ReactNode;
   /** Says exactly what happens: "Void payment", "Cancel order". */
   confirmLabel: string;
-  /** Default "Keep it" — never ambiguous next to a "Cancel order" button. */
+  /** Default "Keep it", never ambiguous next to a "Cancel order" button. */
   cancelLabel?: string;
   /** "danger" (default) or "primary". */
   tone?: "danger" | "primary";

@@ -63,7 +63,7 @@ def _group_indian(integer_digits: str) -> str:
 
 
 def format_inr(paise: int) -> str:
-    """'₹18,450', '₹92.50', '₹1,23,456' — decimals only when non-zero (matches the UI)."""
+    """'₹18,450', '₹92.50', '₹1,23,456'. Decimals only when non-zero (matches the UI)."""
     sign = "-" if paise < 0 else ""
     rupees, remainder = divmod(abs(int(paise)), 100)
     text = _group_indian(str(rupees))

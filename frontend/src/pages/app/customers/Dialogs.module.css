@@ -37,8 +37,8 @@
   gap: 8px;
   padding: 10px 12px;
   border-radius: var(--radius-sm);
-  background: var(--margin-tint);
-  color: var(--margin-text);
+  background: var(--danger-tint);
+  color: var(--danger-text);
   font-size: var(--text-14);
   line-height: 1.45;
 }

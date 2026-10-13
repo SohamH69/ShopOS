@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import GetAppSection from "../../features/get-app/GetAppSection";
-import { cx } from "../../lib/cx";
 import { useDocumentTitle } from "../../lib/hooks";
+import { ClosingCta } from "./ClosingCta";
 import { Faq } from "./Faq";
 import { NeedsAttention, WhatsInside } from "./Features";
 import { Hero } from "./Hero";
@@ -28,9 +28,9 @@ function useScrollToHashOnLoad() {
   }, []);
 }
 
-/** The public site's single job: get a shopkeeper started — install, open in the browser, or try the demo. */
+/** The public site's single job: get a shopkeeper started: install, open in the browser, or try the demo. */
 export default function LandingPage() {
-  useDocumentTitle("ShopOS — run your shop from one place", { exact: true });
+  useDocumentTitle("ShopOS: run your shop from one place", { exact: true });
   useScrollToHashOnLoad();
 
   return (
@@ -46,12 +46,13 @@ export default function LandingPage() {
         <WhatsInside />
         <KhataSection />
         {/* <Pricing /> */}
-        <div className={cx(layout.band, layout.desk)}>
+        <div className={layout.band}>
           <div className={layout.container}>
             <GetAppSection />
           </div>
         </div>
         <Faq />
+        <ClosingCta />
       </main>
       <SiteFooter />
     </div>

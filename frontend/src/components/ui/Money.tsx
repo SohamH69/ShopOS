@@ -21,10 +21,10 @@ export interface MoneyProps {
 
 const MINUS = "−";
 
-/** An amount in rupees, mono with tabular figures: "₹18,450", "₹92.50". Null shows "—". */
+/** An amount in rupees, mono with tabular figures: "₹18,450", "₹92.50". Null shows "–". */
 export function Money({ value, tone = "default", exact = false, sign = "auto", size = "md", display = false, className }: MoneyProps) {
   if (value === null || value === undefined) {
-    return <span className={cx(styles.money, styles.money_muted, className)}>—</span>;
+    return <span className={cx(styles.money, styles.money_muted, className)}>–</span>;
   }
   const paise = toPaise(value);
   const absolute = Math.abs(paise) / 100;

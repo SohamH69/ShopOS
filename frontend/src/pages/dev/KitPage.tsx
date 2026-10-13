@@ -92,29 +92,34 @@ const SECTIONS = [
 ] as const;
 
 const SWATCHES: readonly [string, string][] = [
-  ["--paper", "#ffffff"],
-  ["--desk", "#f4f6fa"],
-  ["--desk-2", "#eceff5"],
-  ["--ink", "#161a23"],
-  ["--ink-2", "#4a5162"],
-  ["--ink-3", "#737b8c"],
-  ["--ink-4", "#a6adbb"],
-  ["--rule", "#dfe5ef"],
-  ["--rule-strong", "#c9d2e1"],
-  ["--pen", "#2b45b5"],
-  ["--pen-tint", "#eef1fc"],
-  ["--pen-tint-2", "#dfe5fa"],
-  ["--margin", "#d63b3b"],
-  ["--margin-text", "#b42828"],
-  ["--margin-tint", "#fdeeee"],
-  ["--stamp", "#6e3fb0"],
-  ["--stamp-tint", "#f3eefb"],
-  ["--haldi", "#e8a317"],
-  ["--haldi-text", "#8a5b00"],
-  ["--haldi-tint", "#fdf5e1"],
-  ["--leaf", "#1f8a5b"],
-  ["--leaf-text", "#17724a"],
-  ["--leaf-tint", "#e7f5ee"],
+  ["--surface", "#ffffff"],
+  ["--canvas", "#f2f5f4"],
+  ["--canvas-2", "#e8eeec"],
+  ["--night", "#0f2727"],
+  ["--ink", "#112a2a"],
+  ["--ink-2", "#435a5a"],
+  ["--ink-3", "#6b7f7f"],
+  ["--ink-4", "#a2b1b0"],
+  ["--rule", "#e1e8e6"],
+  ["--rule-strong", "#cbd6d4"],
+  ["--brand", "#0b6b68"],
+  ["--brand-tint", "#e2f2f0"],
+  ["--brand-tint-2", "#c6e5e1"],
+  ["--accent", "#f5a524"],
+  ["--accent-tint", "#fff4dd"],
+  ["--danger", "#d43d2f"],
+  ["--danger-text", "#b02c20"],
+  ["--danger-tint", "#fdeeec"],
+  ["--paid", "#6d45bf"],
+  ["--paid-tint", "#f2edfb"],
+  ["--warn", "#e08900"],
+  ["--warn-text", "#8a5200"],
+  ["--warn-tint", "#fef3df"],
+  ["--info", "#3657d6"],
+  ["--info-tint", "#ecf0fd"],
+  ["--success", "#1f8a4f"],
+  ["--success-text", "#17703f"],
+  ["--success-tint", "#e5f4ea"],
 ];
 
 const ORDER_STATUSES: OrderStatus[] = ["new", "preparing", "ready", "collected", "delivered", "cancelled"];
@@ -145,7 +150,7 @@ function Row({ label, children, top = false }: { label?: string; children: React
 
 function TokensSection() {
   return (
-    <Section id="tokens" title="Colour & type" note="White paper, pale-blue ruling, ballpoint pen, a red margin and violet stamp ink.">
+    <Section id="tokens" title="Colour & type" note="Dukaan: peacock teal does the work, marigold is the shop's own colour, the night board carries the shop's name.">
       <div className={styles.swatches}>
         {SWATCHES.map(([name, value]) => (
           <div key={name} className={styles.swatch}>
@@ -155,13 +160,13 @@ function TokensSection() {
           </div>
         ))}
       </div>
-      <Card title="Type" description="Anek Latin condensed for titles and big numbers, Mukta for everything you read, Spline Sans Mono for figures.">
+      <Card title="Type" description="Baloo 2 for titles and big numbers, Figtree for everything you read, with tabular figures for amounts.">
         <div className={styles.typeSample}>
           <span className={styles.displayXL}>Never lose track of an order again.</span>
           <span className={styles.displayL}>₹18,450 · Today</span>
-          <span className={styles.bodyL}>Body 17 — Rahul's order is ready for pickup.</span>
-          <span>Body 15 — Collect ₹850 and mark the order collected.</span>
-          <span className="muted">Body 13 muted — Last order 2h ago · Pune</span>
+          <span className={styles.bodyL}>Body 17: Rahul's order is ready for pickup.</span>
+          <span>Body 15: Collect ₹850 and mark the order collected.</span>
+          <span className="muted">Body 13 muted: Last order 2h ago · Pune</span>
           <span className={styles.monoSample}>#1045 · ₹1,23,456.50 · 6:30 pm · SKU-1004</span>
           <Row label="Logo">
             <Logo size={24} />
@@ -665,7 +670,7 @@ function LayoutSection() {
 
 function StatsSection() {
   return (
-    <Section id="stats" title="Stats" note="One card divided by rules — never a row of boxed cards.">
+    <Section id="stats" title="Stats" note="One card divided by rules, never a row of boxed cards.">
       <StatStrip
         items={[
           { label: "Sales today", value: formatMoney(18450), hint: <Trend current={18450} previous={16470} comparison="yesterday" /> },
@@ -713,7 +718,7 @@ const ORDER_COLUMNS: DataColumn<Order>[] = [
     key: "due",
     header: "Due",
     align: "right",
-    cell: (row) => (row.outstanding > 0 ? <Money value={row.outstanding} tone="margin" /> : <span className="muted">—</span>),
+    cell: (row) => (row.outstanding > 0 ? <Money value={row.outstanding} tone="margin" /> : <span className="muted">–</span>),
   },
 ];
 

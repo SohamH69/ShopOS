@@ -46,8 +46,9 @@ ul.points {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--paper);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .ledger::before {
@@ -57,7 +58,7 @@ ul.points {
   bottom: 0;
   left: 44px;
   width: 1px;
-  background: var(--margin);
+  background: var(--danger);
   pointer-events: none;
 }
 
@@ -100,10 +101,9 @@ ul.points {
 .headAmount {
   font-family: var(--font-display);
   font-size: var(--text-32);
-  font-stretch: var(--display-stretch);
   font-weight: 720;
   line-height: 1;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .table {
@@ -170,7 +170,7 @@ ul.points {
 }
 
 .payment {
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .balance {
@@ -181,7 +181,7 @@ ul.points {
 .table tfoot td {
   height: 52px;
   border-bottom: 0;
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .table tfoot th {
@@ -192,7 +192,7 @@ ul.points {
 
 .outstanding {
   font-weight: 600;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 /* The reminder: a light message bubble, no app chrome or logos. */
@@ -211,7 +211,7 @@ ul.points {
 .bubble {
   padding: var(--space-3) var(--space-4) var(--space-2);
   border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
-  background: var(--leaf-tint);
+  background: var(--success-tint);
   font-size: var(--text-15);
   line-height: 1.5;
   color: var(--ink);

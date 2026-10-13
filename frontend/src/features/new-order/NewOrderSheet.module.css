@@ -40,7 +40,7 @@
   height: 20px;
   padding: 0 6px;
   border-radius: var(--radius-pill);
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink-2);
   font-family: var(--font-mono);
   font-size: var(--text-12);
@@ -67,7 +67,7 @@
   min-height: 32px;
   font-size: var(--text-14);
   font-weight: 500;
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .done svg {
@@ -85,7 +85,7 @@
   padding: 8px 8px 8px 12px;
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .walkInIcon {
@@ -96,7 +96,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink-3);
 }
 
@@ -170,14 +170,14 @@
   min-height: 32px;
   padding: 2px 8px 2px 4px;
   border-radius: var(--radius-sm);
-  color: var(--pen);
+  color: var(--brand);
   font-size: var(--text-14);
   font-weight: 500;
 }
 
 .disclosure:hover {
-  background: var(--pen-tint);
-  color: var(--pen-hover);
+  background: var(--brand-tint);
+  color: var(--brand-hover);
 }
 
 .disclosure svg {
@@ -227,7 +227,7 @@
 }
 
 .khata {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .footerActions {
@@ -248,7 +248,7 @@
   gap: 6px;
   font-size: var(--text-13);
   line-height: 1.45;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .footerError svg {

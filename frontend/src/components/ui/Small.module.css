@@ -8,8 +8,8 @@
   width: var(--avatar-size, 32px);
   height: var(--avatar-size, 32px);
   border-radius: 50%;
-  font-size: calc(var(--avatar-size, 32px) * 0.4);
-  font-weight: 600;
+  font-size: calc(var(--avatar-size, 32px) * 0.38);
+  font-weight: 700;
   line-height: 1;
   letter-spacing: 0.01em;
   user-select: none;
@@ -28,23 +28,23 @@
 }
 
 .avatarTone0 {
-  background: var(--pen-tint);
-  color: var(--pen);
+  background: var(--brand-tint);
+  color: var(--brand);
 }
 
 .avatarTone1 {
-  background: var(--leaf-tint);
-  color: var(--leaf-text);
+  background: var(--accent-tint);
+  color: var(--warn-text);
 }
 
 .avatarTone2 {
-  background: var(--haldi-tint);
-  color: var(--haldi-text);
+  background: var(--info-tint);
+  color: var(--info-text);
 }
 
 .avatarTone3 {
-  background: var(--desk-2);
-  color: var(--ink-2);
+  background: var(--paid-tint);
+  color: var(--paid);
 }
 
 /* Money ------------------------------------------------------------------- */
@@ -70,22 +70,21 @@
 }
 
 .money_margin {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .money_leaf {
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .money_pen {
-  color: var(--pen);
+  color: var(--brand);
 }
 
 /* Proportional display figures for headline amounts. */
 .money_display {
   font-family: var(--font-display);
   font-size: var(--text-32);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
   font-variant-numeric: normal;
   line-height: 1.05;
@@ -103,7 +102,7 @@
   border: 1px solid var(--rule-strong);
   border-bottom-width: 2px;
   border-radius: 5px;
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink-3);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -122,7 +121,7 @@
   padding: 0 12px;
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius-pill);
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink-2);
   font-size: var(--text-14);
   font-weight: 500;
@@ -145,18 +144,14 @@
 }
 
 .chip[aria-pressed="true"] {
-  border-color: var(--pen);
-  background: var(--pen-tint);
-  color: var(--pen);
+  border-color: var(--brand);
+  background: var(--brand);
+  color: #ffffff;
 }
 
 .chip:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.chipLabel {
-  padding-top: 1px;
 }
 
 @media (max-width: 1023px) {

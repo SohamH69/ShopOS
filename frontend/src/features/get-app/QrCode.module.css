@@ -6,7 +6,7 @@
 }
 
 .paper {
-  fill: var(--paper);
+  fill: var(--surface);
 }
 
 .ink {

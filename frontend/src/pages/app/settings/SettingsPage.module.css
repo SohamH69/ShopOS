@@ -41,18 +41,18 @@
 }
 
 .subnavLink:hover {
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink);
 }
 
 .subnavLink[aria-current="true"],
 .subnavLink[aria-current="true"]:hover {
-  background: var(--pen-tint);
-  color: var(--pen);
+  background: var(--brand-tint);
+  color: var(--brand);
 }
 
 .subnavLink[aria-current="true"] svg {
-  color: var(--pen);
+  color: var(--brand);
 }
 
 .sections {
@@ -109,8 +109,8 @@
   gap: 8px;
   padding: 10px 12px;
   border-radius: var(--radius);
-  background: var(--margin-tint);
-  color: var(--margin-text);
+  background: var(--danger-tint);
+  color: var(--danger-text);
   font-size: var(--text-14);
   line-height: 1.45;
 }
@@ -130,7 +130,7 @@
   padding: 12px 14px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--desk);
+  background: var(--canvas);
   font-size: var(--text-14);
   color: var(--ink-2);
 }
@@ -179,7 +179,7 @@
   padding: 6px;
   border: 1px solid var(--rule);
   border-radius: var(--radius-sm);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .qrBox svg {
@@ -265,7 +265,7 @@
 }
 
 .installIconDone {
-  color: var(--leaf);
+  color: var(--success);
 }
 
 .installTitle {
@@ -354,12 +354,12 @@
     padding: 0 12px;
     border: 1px solid var(--rule-strong);
     border-radius: var(--radius-pill);
-    background: var(--paper);
+    background: var(--surface);
   }
 
   .subnavLink[aria-current="true"],
   .subnavLink[aria-current="true"]:hover {
-    border-color: var(--pen);
+    border-color: var(--brand);
   }
 
   .passwordGrid {
@@ -413,7 +413,7 @@
   padding: 0;
   border: 0;
   background: none;
-  color: var(--pen);
+  color: var(--brand);
   font: inherit;
   font-weight: 500;
   cursor: pointer;
@@ -441,9 +441,9 @@
 
 .importResult {
   padding: 12px 14px;
-  border: 1px solid var(--leaf-tint);
+  border: 1px solid var(--success-tint);
   border-radius: var(--radius);
-  background: var(--leaf-tint);
+  background: var(--success-tint);
   font-size: var(--text-14);
   color: var(--ink);
 }
@@ -453,9 +453,9 @@
   gap: 4px;
   margin: 8px 0 0;
   padding: 8px 0 0;
-  border-top: 1px solid color-mix(in srgb, var(--leaf) 25%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--success) 25%, transparent);
   list-style: none;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .exportRow {
@@ -463,4 +463,66 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
+}
+
+/* Shop ID ---------------------------------------------------------------------------------- */
+
+.shopIdRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.shopId {
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--canvas-2);
+  font-size: var(--text-14);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+/* Photo & location ------------------------------------------------------------------------- */
+
+.presence {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+.presenceColumn {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+}
+
+.subheading {
+  font-size: var(--text-15);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.presencePhoto {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+/* Customer links ----------------------------------------------------------------------------- */
+
+.switches {
+  display: grid;
+  gap: 16px;
+}
+
+@media (max-width: 899px) {
+  .presence {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

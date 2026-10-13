@@ -7,8 +7,8 @@
   margin-left: 8px;
   padding: 0 6px;
   border-radius: var(--radius-pill);
-  background: var(--pen-tint);
-  color: var(--pen);
+  background: var(--brand-tint);
+  color: var(--brand);
   font-family: var(--font-mono);
   font-size: var(--text-12);
   font-weight: 500;
@@ -46,7 +46,7 @@
 }
 
 .clickable:hover {
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .clickable:focus-visible {
@@ -104,7 +104,7 @@
 }
 
 .overdue {
-  color: var(--margin-text);
+  color: var(--danger-text);
   font-weight: 600;
 }
 

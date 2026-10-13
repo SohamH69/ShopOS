@@ -1,0 +1,202 @@
+/* A night signboard band with the logo and the Admin tag; the sign-in card rises over its edge. */
+.page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--canvas);
+}
+
+.band {
+  position: relative;
+  overflow: hidden;
+  padding: 52px var(--page-pad) 132px;
+  background: var(--night);
+  color: var(--night-ink);
+}
+
+/* The marigold lamp glow from the landing hero. */
+.band::after {
+  content: "";
+  position: absolute;
+  right: -10%;
+  bottom: -60%;
+  width: 70%;
+  height: 140%;
+  background: radial-gradient(closest-side, rgba(245, 165, 36, 0.12), transparent);
+  pointer-events: none;
+}
+
+.awning {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 18px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 100% 8px no-repeat,
+    radial-gradient(circle 10px at 50% 8px, var(--accent) 0 9.5px, transparent 10px) 0 0 / 20px 18px repeat-x;
+}
+
+.bandInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.logo:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.45);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--text-13);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: var(--space-5);
+  margin-top: -96px;
+  padding: 0 var(--page-pad) calc(var(--space-12) + var(--safe-bottom));
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--space-8);
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card), var(--shadow-float);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.description {
+  margin-top: var(--space-2);
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--danger-tint);
+  font-size: var(--text-14);
+  line-height: 1.5;
+  color: var(--danger-text);
+}
+
+.alert svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+.alertInfo {
+  background: var(--brand-tint);
+  color: var(--ink-2);
+}
+
+.alertInfo svg {
+  color: var(--brand);
+}
+
+.devNote {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  max-width: 420px;
+  padding: var(--space-4) var(--space-5);
+  border: 1px dashed var(--rule-strong);
+  border-radius: var(--radius);
+  font-size: var(--text-13);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+.devNoteHead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+.command {
+  display: block;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--canvas-2);
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.back {
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.back a {
+  font-weight: 600;
+}
+
+@media (max-width: 639px) {
+  .band {
+    padding: 40px var(--page-pad) 108px;
+  }
+
+  .main {
+    margin-top: -72px;
+  }
+
+  .card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}

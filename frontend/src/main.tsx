@@ -1,10 +1,7 @@
-// Fonts: Anek Latin (condensed display, variable width), Mukta (UI text), Spline Sans Mono (numbers).
-import "@fontsource-variable/anek-latin/wdth.css";
-import "@fontsource/mukta/400.css";
-import "@fontsource/mukta/500.css";
-import "@fontsource/mukta/600.css";
-import "@fontsource/mukta/700.css";
-import "@fontsource-variable/spline-sans-mono/index.css";
+// Fonts: Baloo 2 (display: titles and big numbers) and Figtree (everything you read, with tabular figures).
+// The full index.css files carry the extended subsets, which is where the ₹ sign lives.
+import "@fontsource-variable/baloo-2/index.css";
+import "@fontsource-variable/figtree/index.css";
 import "./styles/tokens.css";
 import "./styles/base.css";
 

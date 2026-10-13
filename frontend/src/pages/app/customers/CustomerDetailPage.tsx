@@ -1,4 +1,4 @@
-import { Archive, IndianRupee, MessageCircle, Pencil, Plus } from "lucide-react";
+import { Archive, Copy, IndianRupee, Link2, MessageCircle, Pencil, Plus, RotateCcw } from "lucide-react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -20,17 +20,19 @@ import { useNewOrder } from "../../../features/new-order/NewOrderProvider";
 import { useOrderDrawer } from "../../../features/order-drawer/OrderDrawerProvider";
 import { errorMessage, isApiError } from "../../../lib/api";
 import { useAuth } from "../../../lib/auth";
-import { formatPhone, telHref } from "../../../lib/format";
-import { useDocumentTitle, useSearchParam } from "../../../lib/hooks";
+import { formatPhone, formatRelative, telHref } from "../../../lib/format";
+import { useCopyToClipboard, useDocumentTitle, useSearchParam } from "../../../lib/hooks";
 import {
   useArchiveCustomer,
   useCustomer,
   useCustomerLedger,
   useCustomerOrders,
   useCustomerPayments,
+  usePortalLink,
+  useResetPortalLink,
 } from "../../../lib/queries";
 import type { Customer, CustomerPaymentResult } from "../../../lib/types";
-import { hasWhatsAppNumber, paymentReminderMessage, waLink } from "../../../lib/whatsapp";
+import { hasWhatsAppNumber, khataLinkMessage, paymentReminderMessage, waLink } from "../../../lib/whatsapp";
 import { BalanceCard } from "./BalanceCard";
 import styles from "./CustomerDetailPage.module.css";
 import { CustomerFormModal } from "./CustomerFormModal";
@@ -142,6 +144,12 @@ function CustomerKhata({ customer }: { customer: Customer }) {
   const ordersQuery = useCustomerOrders(customer.id);
   const paymentsQuery = useCustomerPayments(customer.id);
   const archive = useArchiveCustomer();
+  const portalLink = usePortalLink(customer.id);
+  const resetLink = useResetPortalLink();
+  const { copy } = useCopyToClipboard();
+  const [resetOpen, setResetOpen] = useState(false);
+  const khataUrl = portalLink.data ? `${window.location.origin}${portalLink.data.path}` : undefined;
+  const lastSeen = portalLink.data?.last_seen_at;
 
   const [tabParam, setTabParam] = useSearchParam("tab", "khata");
   const tab = parseTab(tabParam);
@@ -166,11 +174,36 @@ function CustomerKhata({ customer }: { customer: Customer }) {
     {
       label: "Send payment reminder",
       icon: <MessageCircle />,
-      href: shop && !reminderBlocked ? waLink(customer.phone, paymentReminderMessage(customer, shop)) : undefined,
+      href: shop && !reminderBlocked ? waLink(customer.phone, paymentReminderMessage(customer, shop, khataUrl)) : undefined,
       newTab: true,
       disabled: reminderBlocked !== null || !shop,
       hint: reminderBlocked ?? "Opens WhatsApp with the message ready",
     },
+    { type: "separator" },
+    { type: "label", label: lastSeen ? `Khata link opened ${formatRelative(lastSeen)}` : "Khata link not opened yet" },
+    {
+      label: "Share khata link",
+      icon: <Link2 />,
+      href:
+        shop && khataUrl && hasWhatsAppNumber(customer.phone)
+          ? waLink(customer.phone, khataLinkMessage(customer.name, shop, khataUrl))
+          : undefined,
+      newTab: true,
+      disabled: !khataUrl || !hasWhatsAppNumber(customer.phone),
+      hint: !hasWhatsAppNumber(customer.phone) ? "No WhatsApp number saved" : "Their dues, orders and a UPI Pay button",
+    },
+    {
+      label: "Copy khata link",
+      icon: <Copy />,
+      disabled: !khataUrl,
+      onSelect: () => {
+        if (!khataUrl) return;
+        void copy(khataUrl).then((ok) =>
+          ok ? toast.success("Khata link copied") : toast.error("Couldn't copy the link"),
+        );
+      },
+    },
+    { label: "Reset khata link", icon: <RotateCcw />, onSelect: () => setResetOpen(true) },
     { type: "separator" },
     {
       label: "Archive customer",
@@ -294,6 +327,23 @@ function CustomerKhata({ customer }: { customer: Customer }) {
       />
       <PromiseModal open={promiseOpen} onClose={() => setPromiseOpen(false)} customer={customer} />
       <CustomerFormModal open={editOpen} onClose={() => setEditOpen(false)} customer={customer} />
+      <ConfirmDialog
+        open={resetOpen}
+        onClose={() => setResetOpen(false)}
+        title="Reset the khata link?"
+        description={`Links you sent ${customer.name} before stop working. Share the new link with them.`}
+        confirmLabel="Reset link"
+        loading={resetLink.isPending}
+        error={resetLink.isError ? errorMessage(resetLink.error) : undefined}
+        onConfirm={() =>
+          resetLink.mutate(customer.id, {
+            onSuccess: () => {
+              setResetOpen(false);
+              toast.success("New khata link ready", { description: "Share it from this page's menu." });
+            },
+          })
+        }
+      />
       <ConfirmDialog
         open={archiveOpen}
         onClose={() => setArchiveOpen(false)}

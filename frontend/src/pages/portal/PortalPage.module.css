@@ -1,0 +1,288 @@
+/*
+ * The customer's khata page: one centred column on the canvas under the shop's signboard.
+ * The balance card overlaps the board, the tabs stick to the top while scrolling, and a
+ * floating bar carries the cart total while there is something in it.
+ */
+
+.page {
+  --portal-max: 600px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--canvas);
+}
+
+.withCartBar {
+  padding-bottom: calc(92px + var(--safe-bottom));
+}
+
+.main {
+  --stack: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: var(--portal-max);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Spacing by margins rather than grid gap, so the zero-height tabs anchor adds no space of its own. */
+.main > * + * {
+  margin-top: var(--stack);
+}
+
+/* The balance card sits half on the signboard. */
+.overlap {
+  position: relative;
+  z-index: 3;
+  margin-top: -48px;
+  min-width: 0;
+}
+
+/* Order sent ----------------------------------------------------------------- */
+
+.placed {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  padding: 14px 10px 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--success) 28%, transparent);
+  border-radius: 16px;
+  background: var(--success-tint);
+  scroll-margin-top: 16px;
+  animation: placedIn var(--dur-3) var(--ease) both;
+}
+
+@keyframes placedIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.placedIcon {
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  color: var(--success);
+}
+
+.placedBody {
+  min-width: 0;
+}
+
+.placedTitle {
+  font-size: var(--text-15);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.placedText {
+  margin-top: 2px;
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.placedActions {
+  margin-top: 10px;
+}
+
+.placedClose.placedClose {
+  margin: -6px 0 0;
+  color: var(--ink-2);
+}
+
+/* Tabs -------------------------------------------------------------------------- */
+
+/* Zero height, exactly where the tabs start: the tabs bar itself can't tell, it sticks. */
+.tabsAnchor {
+  height: 0;
+}
+
+.main > .tabsAnchor + .tabsBar {
+  margin-top: 0;
+}
+
+.tabsBar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  margin: 0 -16px;
+  padding: 0 16px;
+  background: var(--canvas);
+}
+
+.tabs.tabs {
+  gap: 0;
+}
+
+.tabs > button {
+  flex: 1 1 0;
+  justify-content: center;
+  height: 50px;
+  font-size: var(--text-15);
+  font-weight: 600;
+}
+
+.tabs > button svg {
+  color: var(--ink-4);
+  transition: color var(--dur-1) var(--ease);
+}
+
+.tabs > button[aria-selected="true"] svg {
+  color: var(--brand);
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  scroll-margin-top: 56px;
+}
+
+/* Footer ------------------------------------------------------------------------ */
+
+.footer {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: var(--portal-max);
+  margin: 0 auto;
+  padding: 28px 16px calc(32px + var(--safe-bottom));
+  font-size: var(--text-13);
+  line-height: 1.4;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+.private {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.private svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+}
+
+.madeWith {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* The cart bar ---------------------------------------------------------------------- */
+
+.cartBar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-fab);
+  padding: 0 12px calc(12px + var(--safe-bottom));
+  pointer-events: none;
+}
+
+.cartInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: calc(var(--portal-max) - 8px);
+  margin: 0 auto;
+  padding: 10px 10px 10px 18px;
+  border-radius: 18px;
+  background: var(--night);
+  color: var(--night-ink);
+  box-shadow: var(--shadow-float);
+  pointer-events: auto;
+  animation: barIn var(--dur-3) var(--ease) both;
+}
+
+@keyframes barIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cartSummary {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cartCount {
+  font-size: var(--text-12);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--night-ink-2);
+}
+
+.cartTotal.cartTotal {
+  font-family: var(--font-display);
+  font-size: var(--text-24);
+  font-weight: 800;
+  font-variant-numeric: normal;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--night-ink);
+}
+
+/* On the night bar: the marigold of the board, like the signboard's own button. */
+.cartButton.cartButton {
+  flex: none;
+  border-color: transparent;
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 8px 20px -10px rgba(245, 165, 36, 0.7);
+}
+
+.cartButton.cartButton:hover:not(:disabled) {
+  background: var(--accent-hover);
+  color: var(--accent-ink);
+}
+
+.cartButton.cartButton:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.5);
+}
+
+@media (min-width: 640px) {
+  .page {
+    --portal-max: 640px;
+  }
+
+  .main {
+    --stack: 20px;
+    padding: 0 24px;
+  }
+
+  .tabsBar {
+    margin: 0 -24px;
+    padding: 0 24px;
+  }
+
+  .cartBar {
+    padding-bottom: calc(20px + var(--safe-bottom));
+  }
+}

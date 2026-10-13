@@ -117,13 +117,13 @@ export default function ExpensesPage() {
     {
       key: "total",
       label: info.totalLabel,
-      value: summary ? formatMoney(summary.total) : "—",
+      value: summary ? formatMoney(summary.total) : "–",
       hint: summary ? (entries > 0 ? pluralize(entries, "expense") : "Nothing recorded") : undefined,
     },
     {
       key: "top",
       label: "Largest category",
-      value: top ? EXPENSE_CATEGORY_LABEL[top.category] : "—",
+      value: top ? EXPENSE_CATEGORY_LABEL[top.category] : "–",
       hint:
         top && summary
           ? `${formatMoney(top.amount)} · ${shareText(top.amount, summary.total)} of the total`
@@ -311,7 +311,7 @@ function ExpenseDate({ expense }: { expense: Expense }) {
 }
 
 function AddedBy({ expense }: { expense: Expense }) {
-  return expense.created_by_name ? <>{expense.created_by_name}</> : <span className={styles.none}>—</span>;
+  return expense.created_by_name ? <>{expense.created_by_name}</> : <span className={styles.none}>–</span>;
 }
 
 const TABLE_COLUMNS: readonly DataColumn<Expense>[] = [
@@ -331,7 +331,7 @@ const TABLE_COLUMNS: readonly DataColumn<Expense>[] = [
           {expense.note}
         </span>
       ) : (
-        <span className={styles.none}>—</span>
+        <span className={styles.none}>–</span>
       ),
   },
   { key: "by", header: "Added by", cell: (expense) => <AddedBy expense={expense} />, width: "150px" },

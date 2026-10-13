@@ -44,12 +44,12 @@ function greeting(name: string | null | undefined): string {
 
 function signature(shop: ShopInfo): string {
   const phone = formatPhone(shop.phone);
-  return phone ? `— ${shop.name}, ${phone}` : `— ${shop.name}`;
+  return phone ? `${shop.name}, ${phone}` : shop.name;
 }
 
 function itemLine(item: MessageOrder["items"][number]): string {
   const quantity = item.unit === "pcs" ? `${formatNumber(roundQty(item.quantity), 3)} ×` : formatQty(item.quantity, item.unit);
-  return `${quantity} ${item.name} — ${formatMoney(item.line_total)}`;
+  return `${quantity} ${item.name}: ${formatMoney(item.line_total)}`;
 }
 
 function dueWhen(dueAt: string): string {
@@ -115,12 +115,26 @@ export function pickupReadyMessage(order: MessageOrder, shop: ShopInfo): string 
   return lines.join("\n");
 }
 
-/** A polite khata reminder: "Namaste Rahul, ₹1,250 is pending on your account at Raj Local Mart." */
-export function paymentReminderMessage(customer: MessageCustomer, shop: ShopInfo): string {
+/**
+ * A polite khata reminder: "Namaste Rahul, ₹1,250 is pending on your account at Raj Local Mart."
+ * With `khataUrl`, the customer's khata link goes in too, so they can check the details and pay.
+ */
+export function paymentReminderMessage(customer: MessageCustomer, shop: ShopInfo, khataUrl?: string): string {
   const lines = [`${greeting(customer.name)}, ${formatMoney(customer.outstanding)} is pending on your account at ${shop.name}.`];
-  if (shop.upi_id) lines.push(`You can pay by UPI to ${shop.upi_id}.`);
+  if (khataUrl) lines.push(`See your khata and pay here: ${khataUrl}`);
+  else if (shop.upi_id) lines.push(`You can pay by UPI to ${shop.upi_id}.`);
   lines.push("Thank you.", signature(shop));
   return lines.join("\n");
+}
+
+/** Sharing the khata link: "Namaste Rahul, here is your khata at Raj Local Mart: <link>". */
+export function khataLinkMessage(customerName: string, shop: ShopInfo, khataUrl: string): string {
+  return [
+    `${greeting(customerName)}, here is your khata at ${shop.name}.`,
+    "See your dues, orders and payments, pay by UPI, and send us your orders:",
+    khataUrl,
+    signature(shop),
+  ].join("\n");
 }
 
 /** A text receipt for an order. */

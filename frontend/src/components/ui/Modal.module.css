@@ -13,7 +13,9 @@
 .backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(22, 26, 35, 0.42);
+  background: var(--scrim);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
   animation: fade-in var(--dur-3) var(--ease) both;
 }
 
@@ -25,7 +27,7 @@
   max-width: 520px;
   max-height: calc(100dvh - 48px);
   border-radius: var(--radius-lg);
-  background: var(--paper);
+  background: var(--surface);
   box-shadow: var(--shadow-lg);
   outline: none;
   animation: modal-in var(--dur-3) var(--ease) both;

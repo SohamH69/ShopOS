@@ -56,13 +56,13 @@ export default function SuppliersPage() {
     {
       key: "count",
       label: "Suppliers",
-      value: suppliers ? formatCount(suppliers.length) : "—",
+      value: suppliers ? formatCount(suppliers.length) : "–",
       hint: suppliers ? (lastPurchase ? `Last purchase ${formatRelative(lastPurchase)}` : "No purchases yet") : undefined,
     },
     {
       key: "owe",
       label: "You owe",
-      value: suppliers ? formatMoney(totalOwed) : "—",
+      value: suppliers ? formatMoney(totalOwed) : "–",
       tone: totalOwed > 0 ? "margin" : "default",
       hint: suppliers ? (totalOwed > 0 ? `To ${pluralize(withDues.length, "supplier")}` : "All settled") : undefined,
     },
@@ -186,7 +186,7 @@ const COLUMNS: readonly DataColumn<Supplier>[] = [
           {supplier.supplies}
         </span>
       ) : (
-        <span className={styles.none}>—</span>
+        <span className={styles.none}>–</span>
       ),
   },
   {

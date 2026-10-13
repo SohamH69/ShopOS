@@ -104,6 +104,20 @@ def attention_items(
     dues = dues if dues is not None else customers_service.dues_by_customer(db, shop_id)
     items: list[schemas.AttentionItem] = []
 
+    # Orders customers sent through their khata link that nobody has started yet.
+    online_new = [order for order in (*pickups, *deliveries) if order.channel == "online" and order.status == "new"]
+    if online_new:
+        items.append(
+            _attention(
+                "online_orders",
+                pluralize(len(online_new), "new order from a customer", "new orders from customers"),
+                len(online_new),
+                "high",
+                "/app/orders?status=open&channel=online",
+                detail="Sent through their khata link",
+            )
+        )
+
     if pickups:
         overdue = sum(1 for order in pickups if is_overdue(order.due_at, order.status, now))
         any_ready = any(order.status == "ready" for order in pickups)

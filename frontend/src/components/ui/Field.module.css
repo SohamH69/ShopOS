@@ -40,7 +40,7 @@
   gap: 6px;
   font-size: var(--text-13);
   line-height: 1.45;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .error svg {

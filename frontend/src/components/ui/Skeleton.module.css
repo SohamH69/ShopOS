@@ -1,6 +1,6 @@
 .skeleton {
   display: block;
-  background: var(--desk-2);
+  background: var(--canvas-2);
   border-radius: var(--radius-sm);
   animation: pulse 1.6s var(--ease) infinite;
 }

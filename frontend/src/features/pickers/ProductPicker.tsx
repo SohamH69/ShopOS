@@ -14,7 +14,7 @@ export interface ProductPickerProps {
   onCustomItem?: (name: string) => void;
   /** Which price to show: "selling" (orders, default) or "purchase" (supplier purchases). */
   price?: "selling" | "purchase";
-  /** Quantities already added, by product id — shown as "2 in order". */
+  /** Quantities already added, by product id, shown as "2 in order". */
   inOrder?: Readonly<Record<number, number>>;
   autoFocus?: boolean;
   placeholder?: string;
@@ -56,7 +56,7 @@ export function ProductPicker({
   price = "selling",
   inOrder,
   autoFocus,
-  placeholder = "Add a product — type a name or SKU",
+  placeholder = "Add a product by name or SKU",
   disabled,
   invalid,
   id,

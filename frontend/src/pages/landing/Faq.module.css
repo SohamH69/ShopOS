@@ -9,20 +9,6 @@
   min-width: 0;
 }
 
-.try {
-  display: grid;
-  justify-items: start;
-  gap: var(--space-4);
-  margin-top: var(--space-6);
-}
-
-.tryText {
-  max-width: 30em;
-  font-size: var(--text-15);
-  line-height: 1.55;
-  color: var(--ink-2);
-}
-
 .list {
   min-width: 0;
   border-bottom: 1px solid var(--rule);
@@ -30,6 +16,20 @@
 
 .item {
   border-top: 1px solid var(--rule);
+  interpolate-size: allow-keywords;
+}
+
+/* Answers slide open where the browser can animate to auto height; elsewhere they simply appear. */
+.item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size var(--dur-3) var(--ease),
+    content-visibility var(--dur-3) allow-discrete;
+}
+
+.item[open]::details-content {
+  block-size: auto;
 }
 
 .question {
@@ -55,7 +55,7 @@
 }
 
 .question:hover {
-  background: var(--desk);
+  background: var(--canvas-2);
 }
 
 .icon {

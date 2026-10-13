@@ -1,0 +1,98 @@
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+/* Two strips of four read as one grid of eight tiles. */
+.kpis {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.chartWrap {
+  position: relative;
+  min-width: 0;
+}
+
+.chartEmpty {
+  position: absolute;
+  /* Centred over the plot: clear of the y-axis labels and the x-axis band. */
+  inset: 0 0 26px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  font-size: var(--text-14);
+  color: var(--ink-3);
+  text-align: center;
+  pointer-events: none;
+}
+
+.chartTotal {
+  display: grid;
+  justify-items: end;
+  margin-right: 6px;
+  line-height: 1;
+}
+
+.chartTotalValue {
+  font-family: var(--font-display);
+  font-size: var(--text-24);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+}
+
+.chartTotalLabel {
+  margin-top: 2px;
+  font-size: var(--text-12);
+  color: var(--ink-3);
+}
+
+.planValue {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.planShare {
+  min-width: 3.2em;
+  font-size: var(--text-13);
+  font-weight: 500;
+  text-align: right;
+  color: var(--ink-3);
+}
+
+.planSkeleton {
+  display: grid;
+  gap: 14px;
+}
+
+@media (max-width: 959px) {
+  .charts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .stack {
+    gap: 16px;
+  }
+
+  .kpis {
+    gap: 10px;
+  }
+
+  .charts {
+    gap: 16px;
+  }
+}

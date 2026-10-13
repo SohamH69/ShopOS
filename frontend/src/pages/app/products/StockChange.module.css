@@ -25,9 +25,9 @@
 }
 
 .low {
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .out {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }

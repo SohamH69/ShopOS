@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from sqlalchemy.orm import Session
 
 from app import schemas
-from app.deps import CurrentAuth, DbSession
+from app.deps import DbSession, SessionAuth
 from app.errors import Unauthorized, SIGN_IN_REQUIRED
 from app.models import Shop, User
 from app.permissions import normalize_permissions, permissions_for
@@ -41,13 +41,13 @@ def demo(db: DbSession) -> schemas.AuthResponse:
 
 
 @router.get("/me", response_model=schemas.Session)
-def me(auth: CurrentAuth) -> schemas.Session:
+def me(auth: SessionAuth) -> schemas.Session:
     return session_out(auth.user, auth.shop, normalize_permissions(auth.permissions))
 
 
 @router.post("/change-password", response_model=schemas.TokenRefreshResponse)
 def change_password(
-    payload: schemas.ChangePasswordRequest, auth: CurrentAuth, db: DbSession
+    payload: schemas.ChangePasswordRequest, auth: SessionAuth, db: DbSession
 ) -> schemas.TokenRefreshResponse:
     token = auth_service.change_password(db, auth.user, payload.current_password, payload.new_password)
     db.commit()

@@ -1,4 +1,5 @@
-"""Password hashing (PBKDF2-SHA256 via hashlib) and JWT access tokens (PyJWT, HS256)."""
+"""Password hashing (PBKDF2-SHA256 via hashlib), JWT access tokens (PyJWT, HS256) for shop staff
+and ShopOS admins, and the signed khata links customers open from WhatsApp."""
 
 from __future__ import annotations
 
@@ -69,6 +70,7 @@ def create_access_token(
     issued_at = datetime.now(timezone.utc)
     payload = {
         "sub": str(user_id),
+        "typ": "user",
         "shop": shop_id,
         "ver": token_version,
         "iat": int(issued_at.timestamp()),
@@ -85,6 +87,9 @@ def decode_access_token(token: str, secret: str) -> TokenClaims | None:
             algorithms=[JWT_ALGORITHM],
             options={"require": ["sub", "exp", "iat"]},
         )
+        # Tokens issued before "typ" existed are staff tokens; admin tokens never pass here.
+        if payload.get("typ", "user") != "user":
+            return None
         return TokenClaims(
             user_id=int(payload["sub"]),
             shop_id=int(payload["shop"]),
@@ -92,6 +97,72 @@ def decode_access_token(token: str, secret: str) -> TokenClaims | None:
         )
     except (jwt.PyJWTError, KeyError, ValueError, TypeError):
         return None
+
+
+@dataclass(frozen=True)
+class AdminClaims:
+    admin_id: int
+    token_version: int
+
+
+def create_admin_token(*, admin_id: int, token_version: int, secret: str, hours: int = 12) -> str:
+    """Admin sessions are short (12 hours by default) and can't be used as a shop token."""
+    issued_at = datetime.now(timezone.utc)
+    payload = {
+        "sub": f"admin:{admin_id}",
+        "typ": "admin",
+        "ver": token_version,
+        "iat": int(issued_at.timestamp()),
+        "exp": int((issued_at + timedelta(hours=hours)).timestamp()),
+    }
+    return jwt.encode(payload, secret, algorithm=JWT_ALGORITHM)
+
+
+def decode_admin_token(token: str, secret: str) -> AdminClaims | None:
+    try:
+        payload = jwt.decode(
+            token,
+            secret,
+            algorithms=[JWT_ALGORITHM],
+            options={"require": ["sub", "exp", "iat", "typ"]},
+        )
+        if payload["typ"] != "admin":
+            return None
+        prefix, _, raw_id = str(payload["sub"]).partition(":")
+        if prefix != "admin":
+            return None
+        return AdminClaims(admin_id=int(raw_id), token_version=int(payload["ver"]))
+    except (jwt.PyJWTError, KeyError, ValueError, TypeError):
+        return None
+
+
+# Khata links ----------------------------------------------------------------------------------
+# "<customer id>.<link version>.<signature>": nothing secret is stored, the same link can be shared
+# again and again, and bumping the customer's version turns every earlier link off.
+
+PORTAL_SIGNATURE_BYTES = 18
+
+
+def _portal_signature(secret: str, customer_id: int, version: int) -> str:
+    mac = hmac.new(secret.encode("utf-8"), f"portal:{customer_id}:{version}".encode("ascii"), hashlib.sha256)
+    return base64.urlsafe_b64encode(mac.digest()[:PORTAL_SIGNATURE_BYTES]).decode("ascii").rstrip("=")
+
+
+def create_portal_token(*, customer_id: int, version: int, secret: str) -> str:
+    return f"{customer_id}.{version}.{_portal_signature(secret, customer_id, version)}"
+
+
+def read_portal_token(token: str, secret: str) -> tuple[int, int] | None:
+    """(customer id, link version) when the signature is right, else None."""
+    parts = token.split(".")
+    if len(parts) != 3 or not (parts[0].isdigit() and parts[1].isdigit()):
+        return None
+    if len(parts[0]) > 18 or len(parts[1]) > 9:
+        return None
+    customer_id, version = int(parts[0]), int(parts[1])
+    if not hmac.compare_digest(parts[2], _portal_signature(secret, customer_id, version)):
+        return None
+    return customer_id, version
 
 
 class LoginRateLimiter:
@@ -131,3 +202,5 @@ class LoginRateLimiter:
 
 
 login_limiter = LoginRateLimiter()
+# The same sliding window counts orders placed through a customer's khata link (per customer).
+portal_order_limiter = LoginRateLimiter(max_failures=10, window_seconds=3600)

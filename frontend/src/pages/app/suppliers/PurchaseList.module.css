@@ -81,7 +81,7 @@
 }
 
 .itemName a:hover {
-  color: var(--pen);
+  color: var(--brand);
   text-decoration: underline;
 }
 

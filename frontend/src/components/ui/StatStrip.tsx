@@ -12,7 +12,7 @@ export interface StatItem {
   key?: string;
   /** Sentence case, no colon: "Sales today". */
   label: ReactNode;
-  /** Pre-formatted text such as formatMoney(x) or a count — shown in the display face. */
+  /** Pre-formatted text such as formatMoney(x) or a count, shown in the display face. */
   value: ReactNode;
   /** Small line under the value, e.g. <Trend …/>. */
   hint?: ReactNode;
@@ -30,7 +30,7 @@ export interface StatStripProps {
   className?: string;
 }
 
-/** A row of key numbers in one paper card divided by rules (2 columns on phones). */
+/** A row of key-number tiles (2 columns on phones). */
 export function StatStrip({ items, loading = false, refreshing = false, className }: StatStripProps) {
   const style = { "--stat-count": items.length } as CSSProperties;
   return (

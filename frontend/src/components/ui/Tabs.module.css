@@ -41,7 +41,7 @@
   left: 0;
   height: 2px;
   border-radius: 2px 2px 0 0;
-  background: var(--pen);
+  background: var(--brand);
 }
 
 .tab:focus-visible {
@@ -61,7 +61,7 @@
   height: 20px;
   padding: 0 6px;
   border-radius: var(--radius-pill);
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink-2);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -69,8 +69,8 @@
 }
 
 .tab[aria-selected="true"] .count {
-  background: var(--pen-tint);
-  color: var(--pen);
+  background: var(--brand-tint);
+  color: var(--brand);
 }
 
 .panel:focus-visible {

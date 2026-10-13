@@ -25,7 +25,10 @@ function SidebarLink({ item, count }: { item: NavItem; count?: number }) {
   );
 }
 
-/** Desktop navigation (≥1024px): logo, permitted pages, shop name + plan, account menu. */
+/**
+ * Desktop navigation (≥1024px), the shop's signboard: a marigold awning, the shop's own name painted
+ * on the night board, the permitted pages, and the account menu.
+ */
 export function Sidebar({ className }: { className?: string }) {
   const { shop } = useAuth();
   const items = useNavItems();
@@ -35,10 +38,19 @@ export function Sidebar({ className }: { className?: string }) {
 
   return (
     <aside className={cx(styles.sidebar, className)}>
-      <div className={styles.brand}>
+      <span className={styles.awning} aria-hidden="true" />
+      <div className={styles.board}>
         <Link to="/app" className={styles.brandLink} aria-label="ShopOS home">
-          <Logo />
+          <Logo tone="dark" size={22} />
         </Link>
+        {shop && (
+          <div className={styles.shop}>
+            <p className={styles.shopName} title={shop.name}>
+              {shop.name}
+            </p>
+            <p className={styles.plan}>{PLAN_LABEL[shop.plan]} plan</p>
+          </div>
+        )}
       </div>
       <nav className={styles.nav} aria-label="Main">
         <ul className={styles.list}>
@@ -62,15 +74,7 @@ export function Sidebar({ className }: { className?: string }) {
         )}
       </nav>
       <div className={styles.footer}>
-        {shop && (
-          <div className={styles.shop}>
-            <span className={styles.shopName} title={shop.name}>
-              {shop.name}
-            </span>
-            <span className={styles.plan}>{PLAN_LABEL[shop.plan]} plan</span>
-          </div>
-        )}
-        <UserMenu />
+        <UserMenu tone="dark" />
       </div>
     </aside>
   );

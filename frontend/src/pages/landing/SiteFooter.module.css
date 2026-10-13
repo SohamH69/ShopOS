@@ -1,7 +1,6 @@
 .footer {
-  padding: var(--space-12) 0 calc(var(--space-8) + var(--safe-bottom));
-  border-top: 1px solid var(--rule);
-  background: var(--paper);
+  padding: var(--space-16) 0 calc(var(--space-8) + var(--safe-bottom));
+  background: var(--surface);
 }
 
 .top {
@@ -9,14 +8,14 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-8);
+  gap: var(--space-10) var(--space-8);
 }
 
 .brand {
   display: grid;
   justify-items: start;
   gap: var(--space-3);
-  max-width: 340px;
+  max-width: 320px;
 }
 
 .logo {
@@ -33,31 +32,53 @@
   color: var(--ink-2);
 }
 
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-2);
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, auto));
+  gap: var(--space-12);
+}
+
+.heading {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+ul.links {
+  display: grid;
+  margin-left: calc(-1 * var(--space-2));
 }
 
 .links a {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
-  padding: 0 var(--space-3);
+  min-height: 36px;
+  padding: 0 var(--space-2);
   border-radius: var(--radius-sm);
   font-size: var(--text-15);
   font-weight: 500;
   color: var(--ink-2);
   text-decoration: none;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease);
 }
 
 .links a:hover {
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink);
 }
 
-.copyright {
-  margin-top: var(--space-10);
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-12);
   padding-top: var(--space-5);
   border-top: 1px solid var(--rule);
   font-size: var(--text-13);
@@ -65,7 +86,13 @@
 }
 
 @media (max-width: 639px) {
-  ul.links {
-    margin-left: calc(-1 * var(--space-3));
+  .footer {
+    padding-top: var(--space-12);
+  }
+
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    width: 100%;
   }
 }

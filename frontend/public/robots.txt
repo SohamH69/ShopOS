@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /app
 Disallow: /api/
+Disallow: /c/
+Disallow: /admin

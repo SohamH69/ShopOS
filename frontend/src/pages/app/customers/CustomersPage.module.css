@@ -80,7 +80,7 @@
 .settled {
   font-size: var(--text-14);
   font-weight: 500;
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 @media (min-width: 720px) {

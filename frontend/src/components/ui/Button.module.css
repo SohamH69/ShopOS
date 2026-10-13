@@ -10,10 +10,11 @@
   min-width: 0;
   padding: 0 16px;
   border: 1px solid transparent;
-  border-radius: var(--radius);
+  border-radius: var(--radius-control);
   font-family: var(--font-body);
   font-size: var(--text-15);
   font-weight: 600;
+  letter-spacing: -0.005em;
   line-height: 1;
   white-space: nowrap;
   text-decoration: none;
@@ -23,7 +24,12 @@
     background-color var(--dur-1) var(--ease),
     border-color var(--dur-1) var(--ease),
     color var(--dur-1) var(--ease),
-    box-shadow var(--dur-1) var(--ease);
+    box-shadow var(--dur-1) var(--ease),
+    transform var(--dur-1) var(--ease);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .button:hover {
@@ -36,8 +42,6 @@
 }
 
 .label {
-  /* Mukta sits slightly high in its box; nudge the text so it centres optically with icons. */
-  padding-top: 1px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -65,34 +69,49 @@
 
 /* Variants ---------------------------------------------------------------- */
 
+/* Primary: peacock with a soft top light, so it reads as something to press. */
 .primary {
-  background: var(--pen);
+  background: var(--brand) linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
   color: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(6, 70, 68, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .primary:hover {
-  background: var(--pen-hover);
+  background-color: var(--brand-hover);
   color: #ffffff;
 }
 
 .primary:active {
-  background: var(--pen-press);
+  background-color: var(--brand-press);
+}
+
+.primary:focus-visible {
+  box-shadow:
+    0 1px 2px rgba(6, 70, 68, 0.3),
+    var(--focus-ring);
 }
 
 .secondary {
-  background: var(--paper);
+  background: var(--surface);
   border-color: var(--rule-strong);
   color: var(--ink);
+  box-shadow: var(--shadow-sm);
 }
 
 .secondary:hover {
-  background: var(--desk);
+  background: var(--surface);
   border-color: var(--ink-4);
   color: var(--ink);
 }
 
+.secondary:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
 .secondary:active {
-  background: var(--desk-2);
+  background: var(--canvas-2);
 }
 
 .ghost {
@@ -101,7 +120,7 @@
 }
 
 .ghost:hover {
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink);
 }
 
@@ -110,17 +129,17 @@
 }
 
 .danger {
-  background: var(--margin-text);
+  background: var(--danger-text);
   color: #ffffff;
 }
 
 .danger:hover {
-  background: #9c2020;
+  background: color-mix(in srgb, var(--danger-text) 86%, black);
   color: #ffffff;
 }
 
 .danger:active {
-  background: #861b1b;
+  background: color-mix(in srgb, var(--danger-text) 74%, black);
 }
 
 .danger:focus-visible {

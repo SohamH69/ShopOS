@@ -12,11 +12,11 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@fontsource-variable/anek-latin": "^5.3.0",
-    "@fontsource-variable/spline-sans-mono": "^5.3.0",
-    "@fontsource/mukta": "^5.3.0",
+    "@fontsource-variable/baloo-2": "^5.3.0",
+    "@fontsource-variable/figtree": "^5.3.0",
     "@tanstack/react-query": "^5.104.1",
     "@vitejs/plugin-react": "^5.0.2",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.542.0",
     "qrcode": "^1.5.4",
     "react": "^19.1.1",
@@ -25,6 +25,7 @@
     "vite": "^7.1.4"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.20",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",

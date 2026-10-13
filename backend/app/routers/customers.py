@@ -10,6 +10,7 @@ from app.serializers import customer_out, order_out, payment_out
 from app.services import customers as customers_service
 from app.services import orders as orders_service
 from app.services import payments as payments_service
+from app.services import portal as portal_service
 from app.timeutil import now_utc, today_ist
 
 router = APIRouter(prefix="/api/customers", tags=["customers"])
@@ -143,3 +144,19 @@ def remove_promise(customer_id: PathId, auth: ManageAuth, db: DbSession) -> sche
     customers_service.remove_promise(db, customer)
     db.commit()
     return _customer_response(db, auth.shop_id, customer_id)
+
+
+@router.get("/{customer_id}/portal-link", response_model=schemas.PortalLink)
+def get_portal_link(customer_id: PathId, auth: ManageAuth, db: DbSession) -> schemas.PortalLink:
+    """The customer's khata link, to share on WhatsApp. The same link every time until reset."""
+    customer = customers_service.get_customer(db, auth.shop_id, customer_id)
+    return portal_service.link_for(customer)
+
+
+@router.post("/{customer_id}/portal-link/reset", response_model=schemas.PortalLink)
+def reset_portal_link(customer_id: PathId, auth: ManageAuth, db: DbSession) -> schemas.PortalLink:
+    """A new link; every link shared before stops working."""
+    customer = customers_service.get_customer(db, auth.shop_id, customer_id)
+    link = portal_service.reset_link(customer)
+    db.commit()
+    return link

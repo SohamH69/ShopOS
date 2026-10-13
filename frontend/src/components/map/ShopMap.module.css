@@ -1,0 +1,67 @@
+.map {
+  position: relative;
+  z-index: 0; /* Leaflet's panes use z-index up to 1000; keep them under the app's sheets and menus */
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--canvas-2);
+  font-family: var(--font-body);
+}
+
+.editable {
+  cursor: crosshair;
+}
+
+/* A picture of the map: the page scrolls through it. */
+.still,
+.still :global(.leaflet-interactive),
+.still :global(.leaflet-grab) {
+  cursor: default;
+  touch-action: pan-y;
+}
+
+/* Leaflet adds its own classes inside; tone its controls down to the house style. */
+.map :global(.leaflet-control-attribution) {
+  font-size: 10px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+}
+
+.map :global(.leaflet-bar a) {
+  color: var(--ink);
+}
+
+.map :global(.leaflet-container),
+.map:global(.leaflet-container) {
+  font: inherit;
+}
+
+/* The pin ------------------------------------------------------------------ */
+
+.pinIcon {
+  background: none;
+  border: 0;
+}
+
+.pin {
+  position: relative;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border: 3px solid #ffffff;
+  border-radius: 50% 50% 50% 0;
+  background: var(--accent);
+  box-shadow: 0 6px 14px -4px rgba(17, 42, 42, 0.5);
+  transform: rotate(-45deg);
+}
+
+.pinDot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--night);
+  transform: translate(-50%, -50%);
+}

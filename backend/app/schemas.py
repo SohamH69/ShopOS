@@ -36,7 +36,7 @@ OrderStatusFilter = Literal[
 ]
 PaymentStatus = Literal["unpaid", "partial", "paid"]
 Fulfillment = Literal["pickup", "delivery"]
-Channel = Literal["walk_in", "phone", "whatsapp"]
+Channel = Literal["walk_in", "phone", "whatsapp", "online"]
 PaymentMethod = Literal["cash", "upi", "card", "bank_transfer"]
 ProductUnit = Literal["pcs", "kg", "g", "l", "ml", "pack", "dozen", "box"]
 ExpenseCategory = Literal[
@@ -52,6 +52,7 @@ ReportBucket = Literal["day", "week", "month"]
 CustomerFilter = Literal["all", "dues", "promises"]
 CustomerSort = Literal["name", "outstanding", "recent"]
 AttentionKey = Literal[
+    "online_orders",
     "pickups",
     "ready_unpaid",
     "customer_dues",
@@ -118,6 +119,7 @@ class TokenRefreshResponse(BaseModel):
 
 class Shop(BaseModel):
     id: int
+    code: str
     name: str
     owner_name: str
     phone: str
@@ -127,7 +129,17 @@ class Shop(BaseModel):
     segment: str
     plan: Plan
     upi_id: str | None
+    photo_url: str | None
+    latitude: float | None
+    longitude: float | None
+    setup_complete: bool
+    portal_catalog: bool
+    portal_orders: bool
     created_at: DateTimeOut
+
+
+Latitude = Annotated[float, Field(allow_inf_nan=False, ge=-90, le=90)]
+Longitude = Annotated[float, Field(allow_inf_nan=False, ge=-180, le=180)]
 
 
 class ShopUpdate(BaseModel):
@@ -139,6 +151,10 @@ class ShopUpdate(BaseModel):
     city: NameText | None = None
     segment: NameText | None = None
     upi_id: NameText | None = None
+    latitude: Latitude | None = None
+    longitude: Longitude | None = None
+    portal_catalog: bool | None = None
+    portal_orders: bool | None = None
 
 
 class User(BaseModel):
@@ -800,3 +816,196 @@ class ImportResult(BaseModel):
     updated: int
     skipped: int
     errors: list[ImportRowError]
+
+
+# ---------------------------------------------------------------------------
+# Customer khata links (the customer side)
+# ---------------------------------------------------------------------------
+
+
+class PortalLink(BaseModel):
+    """What a shopkeeper shares on WhatsApp: ``path`` is ``/c/<token>`` on the ShopOS site."""
+
+    token: str
+    path: str
+    last_seen_at: DateTimeOut | None
+
+
+class PortalShop(BaseModel):
+    code: str
+    name: str
+    phone: str
+    address: str
+    city: str
+    photo_url: str | None
+    latitude: float | None
+    longitude: float | None
+    upi_id: str | None
+    catalog_enabled: bool
+    orders_enabled: bool
+
+
+class PortalCustomer(BaseModel):
+    name: str
+    phone: str
+    outstanding: float
+    promise_date: dt.date | None
+    promise_amount: float | None
+
+
+class PortalOrderItem(BaseModel):
+    name: str
+    unit: str
+    quantity: float
+    unit_price: float
+    line_total: float
+
+
+class PortalOrder(BaseModel):
+    id: int
+    number: int
+    status: OrderStatus
+    payment_status: PaymentStatus
+    fulfillment: Fulfillment
+    channel: Channel
+    total: float
+    paid: float
+    outstanding: float
+    due_at: DateTimeOut | None
+    created_at: DateTimeOut
+    completed_at: DateTimeOut | None
+    items: list[PortalOrderItem]
+
+
+class PortalView(BaseModel):
+    shop: PortalShop
+    customer: PortalCustomer
+    ledger: list[LedgerEntry]
+    orders: list[PortalOrder]
+
+
+class PortalProduct(BaseModel):
+    id: int
+    name: str
+    category: str
+    unit: str
+    price: float
+    in_stock: bool
+
+
+class PortalOrderLine(BaseModel):
+    product_id: IdIn
+    quantity: QuantityIn
+
+
+class PortalOrderCreate(BaseModel):
+    items: Annotated[list[PortalOrderLine], Field(min_length=1, max_length=50)]
+    fulfillment: Fulfillment = "pickup"
+    delivery_address: ShortText | None = None
+    notes: LongText | None = None
+
+
+# ---------------------------------------------------------------------------
+# ShopOS admin (developers and operators)
+# ---------------------------------------------------------------------------
+
+
+class AdminUser(BaseModel):
+    id: int
+    email: str
+    name: str
+    last_login_at: DateTimeOut | None
+
+
+class AdminLoginRequest(BaseModel):
+    email: Annotated[str, Field(max_length=254)]
+    password: Secret
+
+
+class AdminAuthResponse(BaseModel):
+    token: str
+    admin: AdminUser
+
+
+AdminShopStatus = Literal["all", "active", "suspended", "setup_incomplete", "demo"]
+
+
+class AdminShopRow(BaseModel):
+    id: int
+    code: str
+    name: str
+    owner_name: str
+    phone: str
+    email: str | None
+    city: str
+    plan: Plan
+    photo_url: str | None
+    latitude: float | None
+    longitude: float | None
+    setup_complete: bool
+    is_suspended: bool
+    is_demo: bool
+    created_at: DateTimeOut
+    last_active_at: DateTimeOut | None
+    orders_count: int
+    customers_count: int
+
+
+class AdminAction(BaseModel):
+    id: int
+    action: str
+    detail: str
+    admin_name: str
+    created_at: DateTimeOut
+
+
+class AdminShopTotals(BaseModel):
+    sales_30d: float
+    orders_30d: int
+    outstanding: float
+    products: int
+    staff: int
+
+
+class AdminShopDetail(AdminShopRow):
+    address: str
+    segment: str
+    upi_id: str | None
+    suspended_reason: str
+    suspended_at: DateTimeOut | None
+    users: list[User]
+    totals: AdminShopTotals
+    actions: list[AdminAction]
+
+
+class AdminSuspendRequest(BaseModel):
+    reason: ShortText
+
+
+class AdminShopUpdate(BaseModel):
+    plan: Plan
+
+
+class AdminDailyCount(BaseModel):
+    date: dt.date
+    count: int
+
+
+class AdminPlanCount(BaseModel):
+    plan: Plan
+    count: int
+
+
+class AdminStats(BaseModel):
+    """Real shops only: the demo shop is left out of every number here."""
+
+    shops_total: int
+    shops_active_7d: int
+    shops_new_30d: int
+    shops_suspended: int
+    shops_setup_incomplete: int
+    customers_total: int
+    orders_30d: int
+    gmv_30d: float
+    signups_30d: list[AdminDailyCount]
+    by_plan: list[AdminPlanCount]

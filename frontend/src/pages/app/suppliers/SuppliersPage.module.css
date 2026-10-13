@@ -60,7 +60,7 @@
 
 .settled {
   font-weight: 500;
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 /* Phone cards: let the supplies wrap instead of cutting them off. */

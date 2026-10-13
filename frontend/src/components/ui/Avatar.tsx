@@ -14,7 +14,7 @@ function toneFor(name: string): number {
   return hash % 4;
 }
 
-/** Initials in a soft circle; the tint is stable per name. Decorative — show the name next to it. */
+/** Initials in a soft circle; the tint is stable per name. Decorative, so show the name next to it. */
 export function Avatar({ name, size = "md", className }: AvatarProps) {
   const safeName = name ?? "";
   return (

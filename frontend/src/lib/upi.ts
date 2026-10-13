@@ -10,7 +10,7 @@ export interface UpiPaymentOptions {
 }
 
 /**
- * `upi://pay?pa=…&pn=…&am=…&cu=INR&tn=…` — encode this in a QR code so any UPI app can pay.
+ * `upi://pay?pa=…&pn=…&am=…&cu=INR&tn=…`. Encode this in a QR code so any UPI app can pay.
  * Spaces are %20-encoded (several UPI apps mis-read "+") and the "@" of the VPA is kept literal.
  */
 export function upiPaymentUri({ upiId, payeeName, amount, note }: UpiPaymentOptions): string {

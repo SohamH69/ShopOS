@@ -27,6 +27,33 @@ function useScrolled(threshold = 4): boolean {
   return scrolled;
 }
 
+const SECTION_IDS = SECTION_LINKS.map((link) => link.id);
+
+/** The section link whose section is crossing the middle of the screen, for the header's current marker. */
+function useActiveSection(enabled: boolean): string | null {
+  const [active, setActive] = useState<string | null>(null);
+  useEffect(() => {
+    if (!enabled || typeof IntersectionObserver === "undefined") return undefined;
+    const crossing = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) crossing.add(entry.target.id);
+          else crossing.delete(entry.target.id);
+        }
+        setActive(SECTION_IDS.find((id) => crossing.has(id)) ?? null);
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    for (const id of SECTION_IDS) {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    }
+    return () => observer.disconnect();
+  }, [enabled]);
+  return active;
+}
+
 /** Sticky header for the public pages. Signed-in visitors get "Open ShopOS" instead of Sign in. */
 export function SiteHeader({ variant = "full" }: SiteHeaderProps) {
   const { status } = useAuth();
@@ -35,6 +62,7 @@ export function SiteHeader({ variant = "full" }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const scrolled = useScrolled();
   const full = variant === "full";
+  const activeSection = useActiveSection(full);
 
   return (
     <header className={cx(styles.header, full && styles.full)} data-scrolled={scrolled || undefined}>
@@ -50,6 +78,7 @@ export function SiteHeader({ variant = "full" }: SiteHeaderProps) {
                 key={link.id}
                 href={`#${link.id}`}
                 className={styles.navLink}
+                aria-current={activeSection === link.id ? "location" : undefined}
                 onClick={(event) => handleSectionLinkClick(event, link.id)}
               >
                 {link.label}

@@ -103,7 +103,7 @@
 }
 
 .up {
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .down {
@@ -116,19 +116,19 @@
 }
 
 .out {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .link {
   border-radius: 4px;
-  color: var(--pen);
+  color: var(--brand);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
 .link:hover {
-  color: var(--pen-hover);
+  color: var(--brand-hover);
 }
 
 .footer {

@@ -61,9 +61,9 @@ export function formatCount(value: number): string {
   return formatNumber(Math.round(value), 0);
 }
 
-/** "₹18,450" or "₹92.50" — decimals only when there are paise. Nullish → "—". */
+/** "₹18,450" or "₹92.50". Decimals only when there are paise. Nullish → "–". */
 export function formatMoney(value: number | null | undefined): string {
-  if (value == null) return "—";
+  if (value == null) return "–";
   const paise = toPaise(value);
   const absolute = Math.abs(paise);
   const decimals = absolute % 100 === 0 ? 0 : 2;
@@ -71,9 +71,9 @@ export function formatMoney(value: number | null | undefined): string {
   return `${paise < 0 ? MINUS : ""}₹${text}`;
 }
 
-/** Always two decimals: "₹92.50", "₹18,450.00". Nullish → "—". */
+/** Always two decimals: "₹92.50", "₹18,450.00". Nullish → "–". */
 export function formatMoneyExact(value: number | null | undefined): string {
-  if (value == null) return "—";
+  if (value == null) return "–";
   const paise = toPaise(value);
   const text = numberFormat(2, 2).format(Math.abs(paise) / 100);
   return `${paise < 0 ? MINUS : ""}₹${text}`;
@@ -145,7 +145,7 @@ export interface SummaryItem {
   unit: string;
 }
 
-/** "5 kg Basmati rice, 1 Tea powder +2 more" — pieces are counted without a unit. */
+/** "5 kg Basmati rice, 1 Tea powder +2 more". Pieces are counted without a unit. */
 export function formatItemsSummary(items: readonly SummaryItem[], max = 2): string {
   if (items.length === 0) return "No items";
   const shown = items.slice(0, max).map((item) => {
@@ -212,9 +212,9 @@ export interface FormatDateOptions {
 
 /** "4 Oct" (this year) or "4 Oct 2025". Accepts ISO datetimes and "YYYY-MM-DD" dates. */
 export function formatDate(value: DateInput | null | undefined, options: FormatDateOptions = {}): string {
-  if (isBlank(value)) return "—";
+  if (isBlank(value)) return "–";
   const parts = istParts(value);
-  if (!parts) return "—";
+  if (!parts) return "–";
   const year = options.year ?? "auto";
   const showYear = year === "always" || (year === "auto" && parts.year !== currentISTYear(options.now));
   return `${parts.day} ${MONTHS_SHORT[parts.month]}${showYear ? ` ${parts.year}` : ""}`;
@@ -222,9 +222,9 @@ export function formatDate(value: DateInput | null | undefined, options: FormatD
 
 /** "Saturday, 4 October" (year added when it isn't the current year). */
 export function formatDateLong(value: DateInput | null | undefined, options: FormatDateOptions = {}): string {
-  if (isBlank(value)) return "—";
+  if (isBlank(value)) return "–";
   const parts = istParts(value);
-  if (!parts) return "—";
+  if (!parts) return "–";
   const year = options.year ?? "auto";
   const showYear = year === "always" || (year === "auto" && parts.year !== currentISTYear(options.now));
   return `${WEEKDAYS[parts.weekday]}, ${parts.day} ${MONTHS_LONG[parts.month]}${showYear ? ` ${parts.year}` : ""}`;
@@ -232,17 +232,17 @@ export function formatDateLong(value: DateInput | null | undefined, options: For
 
 /** "6:30 pm". */
 export function formatTime(value: DateInput | null | undefined): string {
-  if (isBlank(value)) return "—";
+  if (isBlank(value)) return "–";
   const parts = istParts(value);
-  if (!parts) return "—";
+  if (!parts) return "–";
   const hours12 = parts.hours % 12 === 0 ? 12 : parts.hours % 12;
   return `${hours12}:${pad2(parts.minutes)} ${parts.hours < 12 ? "am" : "pm"}`;
 }
 
 /** "4 Oct, 6:30 pm". */
 export function formatDateTime(value: DateInput | null | undefined, options: FormatDateOptions = {}): string {
-  if (isBlank(value)) return "—";
-  if (!istParts(value)) return "—";
+  if (isBlank(value)) return "–";
+  if (!istParts(value)) return "–";
   return `${formatDate(value, options)}, ${formatTime(value)}`;
 }
 
@@ -259,9 +259,9 @@ export function formatDuration(milliseconds: number): string {
 
 /** "just now", "5 min ago", "2h ago", "yesterday", "3 days ago", "in 30 min", "tomorrow", then a date. */
 export function formatRelative(value: DateInput | null | undefined, now: DateInput = Date.now()): string {
-  if (isBlank(value)) return "—";
+  if (isBlank(value)) return "–";
   const target = toDate(value).getTime();
-  if (Number.isNaN(target)) return "—";
+  if (Number.isNaN(target)) return "–";
   const nowTime = toDate(now).getTime();
   const difference = target - nowTime;
   const future = difference > 0;
@@ -411,7 +411,7 @@ export function telHref(phone: string): string {
 
 /** "#1045". */
 export function orderNo(number: number | null | undefined): string {
-  return number == null ? "—" : `#${number}`;
+  return number == null ? "–" : `#${number}`;
 }
 
 /** "1 order", "3 orders", "1,204 customers". */

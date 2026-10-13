@@ -20,7 +20,7 @@
   padding: 12px 8px 12px 14px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
   box-shadow: var(--shadow-lg);
   pointer-events: auto;
   animation: toast-in var(--dur-3) var(--ease) both;
@@ -42,15 +42,15 @@
 }
 
 .success .icon {
-  color: var(--leaf);
+  color: var(--success);
 }
 
 .error .icon {
-  color: var(--margin);
+  color: var(--danger);
 }
 
 .info .icon {
-  color: var(--pen);
+  color: var(--brand);
 }
 
 .content {
@@ -84,14 +84,14 @@
 
 .action {
   padding: 2px 0;
-  color: var(--pen);
+  color: var(--brand);
   font-size: var(--text-14);
   font-weight: 600;
   text-decoration: none;
 }
 
 .action:hover {
-  color: var(--pen-hover);
+  color: var(--brand-hover);
   text-decoration: underline;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .dismiss:hover {
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink);
 }
 
@@ -142,6 +142,6 @@
 
   /* Inside the app shell, sit above the tab bar and the floating New order button. */
   :global(body:has([data-tabbar])) .viewport {
-    bottom: calc(var(--tabbar-h) + var(--safe-bottom) + 88px);
+    bottom: calc(var(--tabbar-h) + var(--safe-bottom) + 24px);
   }
 }

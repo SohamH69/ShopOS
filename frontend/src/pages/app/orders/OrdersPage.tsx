@@ -39,7 +39,7 @@ const STATUS_TABS: { value: StatusTab; label: string }[] = [
 const STATUS_VALUES: readonly StatusTab[] = STATUS_TABS.map((tab) => tab.value);
 const PAYMENT_VALUES: readonly PaymentStatus[] = ["unpaid", "partial", "paid"];
 const FULFILLMENT_VALUES: readonly Fulfillment[] = ["pickup", "delivery"];
-const CHANNEL_VALUES: readonly Channel[] = ["walk_in", "phone", "whatsapp"];
+const CHANNEL_VALUES: readonly Channel[] = ["walk_in", "phone", "whatsapp", "online"];
 
 const PAYMENT_OPTIONS = toOptions(PAYMENT_STATUS_LABEL);
 const FULFILLMENT_OPTIONS = toOptions(FULFILLMENT_LABEL);
@@ -157,7 +157,7 @@ const COLUMNS: DataColumn<Order>[] = [
       order.status !== "cancelled" && order.outstanding > 0 ? (
         <Money value={order.outstanding} tone="margin" />
       ) : (
-        <span className={styles.none}>—</span>
+        <span className={styles.none}>–</span>
       ),
   },
 ];
@@ -230,11 +230,6 @@ export default function OrdersPage() {
       <PageHeader
         title="Orders"
         description="Every order, its status and what's still due."
-        actions={
-          <Button icon={<Plus aria-hidden="true" />} onClick={() => openNewOrder()} aria-keyshortcuts="N">
-            New order
-          </Button>
-        }
       >
         <div className={styles.filters}>
           <div className={styles.filterRow}>

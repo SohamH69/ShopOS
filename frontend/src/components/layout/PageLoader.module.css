@@ -7,7 +7,7 @@
   min-height: 100vh;
   min-height: 100dvh;
   padding: 24px;
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink-3);
   font-size: var(--text-14);
 }
@@ -51,7 +51,7 @@
   padding: 20px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 @media (max-width: 767px) {
@@ -69,7 +69,7 @@
   min-height: 100vh;
   min-height: 100dvh;
   padding: 24px 16px;
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .screenCard {
@@ -82,7 +82,7 @@
   padding: 28px 24px 8px;
   border: 1px solid var(--rule);
   border-radius: var(--radius-lg);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .inline {
@@ -96,5 +96,5 @@
   max-width: 560px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }

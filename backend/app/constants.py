@@ -31,7 +31,7 @@ ORDER_STATUS_LABEL = {
 }
 
 PAYMENT_STATUS_LABEL = {"unpaid": "Unpaid", "partial": "Partial", "paid": "Paid"}
-CHANNEL_LABEL = {"walk_in": "Walk-in", "phone": "Phone", "whatsapp": "WhatsApp"}
+CHANNEL_LABEL = {"walk_in": "Walk-in", "phone": "Phone", "whatsapp": "WhatsApp", "online": "Online"}
 FULFILLMENT_LABEL = {"pickup": "Pickup", "delivery": "Delivery"}
 METHOD_LABEL = {"cash": "Cash", "upi": "UPI", "card": "Card", "bank_transfer": "Bank transfer"}
 PAYMENT_METHODS: tuple[str, ...] = ("cash", "upi", "card", "bank_transfer")

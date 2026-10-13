@@ -8,7 +8,7 @@
   height: var(--control-md);
   padding: 3px;
   border-radius: var(--radius);
-  background: var(--desk-2);
+  background: var(--canvas-2);
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -63,7 +63,7 @@
 }
 
 .segment[aria-checked="true"] {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
   box-shadow:
     var(--shadow-sm),
@@ -79,9 +79,6 @@
   cursor: not-allowed;
 }
 
-.label {
-  padding-top: 1px;
-}
 
 .count {
   font-family: var(--font-mono);
@@ -91,7 +88,7 @@
 }
 
 .segment[aria-checked="true"] .count {
-  color: var(--pen);
+  color: var(--brand);
 }
 
 @media (max-width: 1023px) {

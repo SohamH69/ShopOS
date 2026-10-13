@@ -227,26 +227,29 @@ export function ColumnChart({
         {activeDatum ? describe(activeDatum) : ""}
       </p>
 
-      <table className="visually-hidden">
-        <caption>{label}</caption>
-        <thead>
-          <tr>
-            <th scope="col">{periodLabel}</th>
-            <th scope="col">{valueLabel}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((datum, index) => (
-            <tr key={`row-${datum.key ?? index}`}>
-              <th scope="row">{datum.label}</th>
-              <td>
-                {formatValue(datum.value)}
-                {datum.secondary ? ` (${datum.secondary})` : ""}
-              </td>
+      {/* A table ignores the 1px box, so a wrapper clips it; screen readers still get the table. */}
+      <div className="visually-hidden">
+        <table>
+          <caption>{label}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{periodLabel}</th>
+              <th scope="col">{valueLabel}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((datum, index) => (
+              <tr key={`row-${datum.key ?? index}`}>
+                <th scope="row">{datum.label}</th>
+                <td>
+                  {formatValue(datum.value)}
+                  {datum.secondary ? ` (${datum.secondary})` : ""}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

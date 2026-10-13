@@ -1,0 +1,236 @@
+/* The balance card: who the khata belongs to, what they owe, and Pay by UPI. It overlaps the signboard. */
+
+.card {
+  position: relative;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--rule-line);
+}
+
+.whoText {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 10px;
+  min-width: 0;
+}
+
+.customer {
+  min-width: 0;
+  font-size: var(--text-15);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.phone {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.label {
+  font-size: var(--text-13);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink-3);
+}
+
+/* Dues ------------------------------------------------------------------- */
+
+.dues {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.duesMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  min-width: 0;
+}
+
+/* The headline amount: display face, the red of the margin line. */
+.amount.amount {
+  margin-top: 2px;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.promise {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 9px 12px;
+  border-radius: var(--radius-control);
+  background: var(--canvas);
+  font-size: var(--text-14);
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.promise svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  color: var(--ink-3);
+}
+
+.pay {
+  margin-top: 16px;
+}
+
+.note {
+  margin-top: 10px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.upiRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  margin-top: 6px;
+  font-size: var(--text-13);
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.upiId {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.copy.copy {
+  margin-left: -6px;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.otherAmount {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Desktop: a QR to scan with the phone, since upi:// links only open on phones. */
+.qr {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  width: 156px;
+  margin: 0;
+  padding: 12px 12px 10px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.qr figcaption {
+  font-size: var(--text-12);
+  line-height: 1.3;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+/* Settled ---------------------------------------------------------------- */
+
+.settled {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  min-width: 0;
+}
+
+/* "All settled" with the violet stamp pressed beside it (it drops below on narrow phones). */
+.settledRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  min-height: 48px;
+}
+
+.settledTitle {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.settledNote {
+  margin-top: 4px;
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.stamp {
+  flex: none;
+  margin: 4px 0 2px 2px;
+}
+
+/* Loading ---------------------------------------------------------------- */
+
+.skeletonBody {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 20px 24px 22px;
+  }
+
+  .dues {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .amount.amount {
+    font-size: 52px;
+  }
+
+  .pay {
+    justify-self: start;
+    width: auto;
+    min-width: 260px;
+  }
+
+  .settledTitle {
+    font-size: 40px;
+  }
+
+  .stamp.stamp {
+    --stamp-size: 24px;
+  }
+}

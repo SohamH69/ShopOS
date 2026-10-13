@@ -14,7 +14,9 @@ Fixtures
     unique_phone   Factory ``unique_phone() -> str``: an unused 10-digit mobile number.
     unique_email   Factory ``unique_email() -> str``: an unused email address.
     signup_shop    Factory ``signup_shop(**overrides) -> ShopAccount``: signs up a brand-new,
-                   empty shop (overrides go into the SignupRequest body).
+                   empty shop (overrides go into the SignupRequest body) and completes its setup
+                   (photo, address, map pin) so every endpoint is open. ``setup=False`` leaves the
+                   shop at the setup gate.
     create_staff   Factory ``create_staff(owner_headers, role="employee", **overrides)
                    -> StaffAccount``: creates a staff user via ``POST /api/users`` and signs
                    them in (overrides go into the StaffCreate body).
@@ -29,8 +31,8 @@ Fixtures
                    earlier are gone.
 
 Helpers importable from tests: ``auth_headers(token)``, ``count_statements()`` (context
-manager counting SQL statements, for N+1 checks), ``ShopAccount``, ``StaffAccount``,
-``DEMO_PASSWORD``, ``TEST_PASSWORD``.
+manager counting SQL statements, for N+1 checks), ``complete_setup(client, headers)``,
+``photo_bytes()``, ``ShopAccount``, ``StaffAccount``, ``DEMO_PASSWORD``, ``TEST_PASSWORD``.
 """
 
 from __future__ import annotations
@@ -58,6 +60,7 @@ os.environ["SHOPOS_SECRET_KEY"] = "shopos-test-secret-key"
 os.environ["SHOPOS_SEED_DEMO"] = "1"
 os.environ["SHOPOS_TOKEN_DAYS"] = "30"
 os.environ["SHOPOS_FRONTEND_DIST"] = str(FRONTEND_DIST)
+os.environ["SHOPOS_UPLOADS_DIR"] = str(TEST_DIR / "uploads")
 os.environ.pop("SHOPOS_CORS_ORIGINS", None)
 
 if str(BACKEND_DIR) not in sys.path:
@@ -77,6 +80,33 @@ _phone_counter = itertools.count(1)
 
 def auth_headers(token: str) -> dict[str, str]:
     return {"Authorization": f"Bearer {token}"}
+
+
+def photo_bytes(size: tuple[int, int] = (480, 320), image_format: str = "JPEG") -> bytes:
+    """A small, valid shop photo for upload tests."""
+    import io
+
+    from PIL import Image
+
+    buffer = io.BytesIO()
+    Image.new("RGB", size, (11, 107, 104)).save(buffer, image_format)
+    return buffer.getvalue()
+
+
+def complete_setup(client: Any, headers: dict[str, str]) -> dict[str, Any]:
+    """Uploads a photo and sets the address and map pin, so the shop passes the setup gate."""
+    upload = client.put(
+        "/api/shop/photo", content=photo_bytes(), headers={**headers, "Content-Type": "image/jpeg"}
+    )
+    assert upload.status_code == 200, upload.text
+    response = client.patch(
+        "/api/shop",
+        json={"address": "12 Market Road", "latitude": 18.52, "longitude": 73.85},
+        headers=headers,
+    )
+    assert response.status_code == 200, response.text
+    assert response.json()["setup_complete"] is True
+    return dict(response.json())
 
 
 @dataclass
@@ -184,7 +214,7 @@ def unique_email() -> Callable[[], str]:
 def signup_shop(
     client: TestClient, unique_phone: Callable[[], str], unique_email: Callable[[], str]
 ) -> Callable[..., ShopAccount]:
-    def make(**overrides: Any) -> ShopAccount:
+    def make(*, setup: bool = True, **overrides: Any) -> ShopAccount:
         body: dict[str, Any] = {
             "shop_name": "Test Kirana",
             "owner_name": "Test Owner",
@@ -197,8 +227,11 @@ def signup_shop(
         body.update(overrides)
         response = client.post("/api/auth/signup", json=body)
         assert response.status_code == 201, response.text
+        session = dict(response.json())
+        if setup:
+            session["shop"] = complete_setup(client, auth_headers(str(session["token"])))
         return ShopAccount(
-            session=dict(response.json()),
+            session=session,
             phone=str(body["phone"]),
             email=str(body.get("email") or ""),
             password=str(body["password"]),

@@ -31,10 +31,9 @@
 .settled {
   font-family: var(--font-display);
   font-size: var(--text-32);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
   line-height: 1.05;
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .balanceHint {

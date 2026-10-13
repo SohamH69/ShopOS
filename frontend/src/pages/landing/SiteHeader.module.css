@@ -3,12 +3,23 @@
   top: 0;
   z-index: var(--z-nav);
   border-bottom: 1px solid transparent;
-  background: var(--paper);
-  transition: border-color var(--dur-2) var(--ease);
+  background: var(--surface);
+  transition:
+    border-color var(--dur-2) var(--ease),
+    background-color var(--dur-2) var(--ease);
 }
 
+/* Once the page moves, the header turns to frosted paper so the page shows faintly through it. */
 .header[data-scrolled] {
   border-bottom-color: var(--rule);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .header[data-scrolled] {
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    backdrop-filter: saturate(1.6) blur(14px);
+  }
 }
 
 .inner {
@@ -53,8 +64,25 @@
 }
 
 .navLink:hover {
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink);
+}
+
+/* The section on screen now: ink, with a short pen underline. */
+.navLink[aria-current] {
+  position: relative;
+  color: var(--ink);
+}
+
+.navLink[aria-current]::after {
+  content: "";
+  position: absolute;
+  right: var(--space-3);
+  bottom: 3px;
+  left: var(--space-3);
+  height: 2px;
+  border-radius: 1px;
+  background: var(--brand);
 }
 
 .actions {
@@ -92,7 +120,7 @@
 
 .sheetLink:hover {
   color: var(--ink);
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .sheetLink svg {

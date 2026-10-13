@@ -64,13 +64,13 @@
 .yours {
   font-size: var(--text-12);
   font-weight: 500;
-  color: var(--pen);
+  color: var(--brand);
 }
 
 .groupRow th {
   padding: 16px 20px 6px;
   border-bottom: 1px solid var(--rule-line);
-  background: var(--desk);
+  background: var(--canvas);
   font-size: var(--text-12);
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -111,12 +111,12 @@
 
 /* The owner column reads as fixed: everything ticked, nothing to change. */
 .ownerCell {
-  background: color-mix(in srgb, var(--desk) 60%, var(--paper));
+  background: color-mix(in srgb, var(--canvas) 60%, var(--surface));
 }
 
 .row:hover > th,
 .row:hover > td {
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .matrix tbody:last-of-type tr:last-child > * {
@@ -126,7 +126,7 @@
 /* Unsaved changes are tinted until saved. */
 .row > .changed,
 .row:hover > .changed {
-  background: var(--pen-tint);
+  background: var(--brand-tint);
 }
 
 /* ------------------------------------------------------------ phone layout */
@@ -169,7 +169,7 @@
 }
 
 .permItem.changed {
-  background: var(--pen-tint);
+  background: var(--brand-tint);
 }
 
 /* ------------------------------------------------------------ notes */
@@ -181,7 +181,7 @@
   margin: 16px 20px 0;
   padding: 10px 12px;
   border-radius: var(--radius);
-  background: var(--desk);
+  background: var(--canvas);
   font-size: var(--text-14);
   color: var(--ink-2);
 }
@@ -233,7 +233,7 @@
   padding: 10px 12px 10px 16px;
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
   box-shadow: var(--shadow-float);
 }
 
@@ -255,7 +255,7 @@
   align-items: flex-start;
   gap: 6px;
   font-size: var(--text-13);
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .caution svg {
@@ -267,7 +267,7 @@
 
 .saveError {
   font-size: var(--text-13);
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .saveActions {

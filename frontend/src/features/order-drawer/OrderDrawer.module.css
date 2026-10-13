@@ -1,4 +1,4 @@
-/* Order drawer: customer, status track, payment, items, details — separated by ledger rules. */
+/* Order drawer: customer, status track, payment, items, details, separated by ledger rules. */
 
 /* Header ------------------------------------------------------------------ */
 
@@ -25,7 +25,7 @@
   padding: 0 8px;
   border: 1px solid var(--rule);
   border-radius: var(--radius-pill);
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink-2);
   font-size: var(--text-12);
   font-weight: 500;
@@ -65,7 +65,7 @@
 }
 
 a.customerName:hover {
-  color: var(--pen);
+  color: var(--brand);
   text-decoration: underline;
 }
 
@@ -88,7 +88,7 @@ a.customerName:hover {
 }
 
 .phone:hover {
-  color: var(--pen);
+  color: var(--brand);
 }
 
 .phone svg {
@@ -98,7 +98,7 @@ a.customerName:hover {
 
 .customerDue {
   font-weight: 500;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 /* Status ------------------------------------------------------------------ */
@@ -118,7 +118,7 @@ a.customerName:hover {
 
 .step {
   --status: var(--ink-3);
-  --status-tint: var(--desk-2);
+  --status-tint: var(--canvas-2);
   position: relative;
   display: grid;
   justify-items: center;
@@ -129,19 +129,19 @@ a.customerName:hover {
 }
 
 .step[data-status="preparing"] {
-  --status: var(--haldi);
-  --status-tint: var(--haldi-tint);
+  --status: var(--warn);
+  --status-tint: var(--warn-tint);
 }
 
 .step[data-status="ready"] {
-  --status: var(--pen);
-  --status-tint: var(--pen-tint);
+  --status: var(--info);
+  --status-tint: var(--info-tint);
 }
 
 .step[data-status="collected"],
 .step[data-status="delivered"] {
-  --status: var(--leaf);
-  --status-tint: var(--leaf-tint);
+  --status: var(--success);
+  --status-tint: var(--success-tint);
 }
 
 /* The line from the previous step's marker to this one. */
@@ -170,8 +170,8 @@ a.customerName:hover {
   height: 22px;
   border: 2px solid var(--rule-strong);
   border-radius: 50%;
-  background: var(--paper);
-  color: var(--paper);
+  background: var(--surface);
+  color: var(--surface);
   transition:
     background-color var(--dur-2) var(--ease),
     border-color var(--dur-2) var(--ease),
@@ -198,7 +198,7 @@ a.customerName:hover {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .stepLabel {
@@ -237,7 +237,7 @@ a.customerName:hover {
   gap: 6px;
   font-size: var(--text-14);
   font-weight: 600;
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .doneNote svg {
@@ -260,7 +260,7 @@ a.customerName:hover {
   padding: 12px 14px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .cancelledText {
@@ -311,7 +311,7 @@ a.customerName:hover {
   height: 20px;
   padding: 0 6px;
   border-radius: var(--radius-pill);
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink-2);
   font-family: var(--font-mono);
   font-size: var(--text-12);
@@ -331,7 +331,7 @@ a.customerName:hover {
 .formError {
   font-size: var(--text-13);
   line-height: 1.45;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 /* Payment ----------------------------------------------------------------- */
@@ -354,7 +354,7 @@ a.customerName:hover {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .stripCell {
@@ -441,7 +441,7 @@ a.customerName:hover {
   padding: 16px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .collectTitle {
@@ -571,7 +571,7 @@ a.customerName:hover {
 
 .overdueText {
   font-weight: 500;
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .note {

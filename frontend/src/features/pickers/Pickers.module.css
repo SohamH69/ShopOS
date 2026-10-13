@@ -48,17 +48,17 @@
 
 .stockLow {
   font-size: var(--text-12);
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .stockOut {
   font-size: var(--text-12);
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .due {
   font-size: var(--text-12);
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 /* Selected customer */
@@ -71,7 +71,7 @@
   padding: 8px 8px 8px 12px;
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .selectedText {
@@ -98,7 +98,7 @@
 }
 
 .selectedDue {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 /* Inline "Add new customer" form */
@@ -110,7 +110,7 @@
   padding: 14px;
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius);
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .createTitle {
@@ -132,7 +132,7 @@
 
 .createError {
   font-size: var(--text-13);
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 @media (max-width: 479px) {

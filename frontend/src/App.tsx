@@ -8,6 +8,7 @@ import { RequireAuth } from "./components/layout/RequireAuth";
 import { RequirePermission } from "./components/layout/RequirePermission";
 import { RouteErrorBoundary } from "./components/layout/RouteErrorBoundary";
 import { ToastProvider } from "./components/ui";
+import { RequireShopSetup } from "./features/shop-setup/ShopSetupGate";
 import { AuthProvider, safeNextPath, useAuth } from "./lib/auth";
 import { onIdle } from "./lib/hooks";
 import { createQueryClient } from "./lib/queries";
@@ -23,6 +24,13 @@ const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
 const SignupPage = lazy(() => import("./pages/auth/SignupPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const ReceiptPage = lazy(() => import("./pages/app/orders/ReceiptPage"));
+// The customer side: a customer's khata link, opened from WhatsApp. No sign-in.
+const PortalPage = lazy(() => import("./pages/portal/PortalPage"));
+// ShopOS admin (developers and operators): its own sign-in, apart from every shop.
+const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));
+const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
+const AdminDashboardPage = lazy(() => import("./pages/admin/AdminDashboardPage"));
+const AdminShopPage = lazy(() => import("./pages/admin/AdminShopPage"));
 
 // App pages: the same loaders feed lazy() and the idle prefetch, keyed by the permission they need.
 const appPages = {
@@ -163,8 +171,10 @@ function AppRoutes() {
             path="/app"
             element={
               <RequireAuth>
-                <PrefetchAppPages />
-                <AppShell />
+                <RequireShopSetup>
+                  <PrefetchAppPages />
+                  <AppShell />
+                </RequireShopSetup>
               </RequireAuth>
             }
           >
@@ -181,6 +191,14 @@ function AppRoutes() {
             <Route path="reports" element={<RequirePermission permission="reports"><ReportsPage /></RequirePermission>} />
             <Route path="staff" element={<RequirePermission permission="staff"><StaffPage /></RequirePermission>} />
             <Route path="settings" element={<SettingsPage />} />
+          </Route>
+
+          <Route path="/c/:token" element={<PortalPage />} />
+
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboardPage />} />
+            <Route path="shops/:id" element={<AdminShopPage />} />
           </Route>
 
           {KitPage && <Route path="/kit" element={<KitPage />} />}

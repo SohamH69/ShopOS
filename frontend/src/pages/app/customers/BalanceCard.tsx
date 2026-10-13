@@ -120,7 +120,7 @@ export function BalanceCard({ customer, settleKey, onEditPromise }: BalanceCardP
                   {customer.last_order_total !== null && <Money value={customer.last_order_total} size="sm" tone="muted" />}
                 </span>
               ) : (
-                <span className="muted">—</span>
+                <span className="muted">–</span>
               )}
             </dd>
           </div>

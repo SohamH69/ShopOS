@@ -1,61 +1,79 @@
 /*
- * ShopOS design tokens — "the khata, digitised".
- * White paper, pale-blue ruling, a red margin line, ballpoint-blue ink and violet stamp ink.
- * Light theme only. Every colour, size and duration in the app should come from here.
+ * ShopOS design tokens: "Dukaan", a shop signboard made calm.
+ * Peacock teal does the work, marigold is the shop's own colour, and the night sidebar is the
+ * signboard the shop's name is painted on. Light canvas, white surfaces, soft depth.
+ * Every colour, size and duration in the app should come from here.
  */
 :root {
   color-scheme: light;
 
-  /* Surfaces: the app background is --desk, everything you read or touch sits on --paper. */
-  --paper: #ffffff;
-  --desk: #f4f6fa;
-  --desk-2: #eceff5;
+  /* Surfaces: the app background is --canvas, everything you read or touch sits on --surface. */
+  --surface: #ffffff;
+  --canvas: #f2f5f4;
+  --canvas-2: #e8eeec;
+
+  /* The signboard: the sidebar and other dark brand panels. */
+  --night: #0f2727;
+  --night-2: #173535;
+  --night-ink: #e9f2f1;
+  --night-ink-2: #9db5b3;
 
   /* Ink */
-  --ink: #161a23;
-  --ink-2: #4a5162;
-  --ink-3: #737b8c;
-  --ink-4: #a6adbb;
+  --ink: #112a2a;
+  --ink-2: #435a5a;
+  --ink-3: #6b7f7f;
+  --ink-4: #a2b1b0;
 
   /* Rules */
-  --rule: #dfe5ef;
-  --rule-strong: #c9d2e1;
-  --rule-line: #e6ebf5; /* ledger ruling */
+  --rule: #e1e8e6;
+  --rule-strong: #cbd6d4;
+  --rule-line: #e7edec; /* ledger ruling */
 
-  /* Pen: primary actions, links, focus */
-  --pen: #2b45b5;
-  --pen-hover: #22389a;
-  --pen-press: #1c2f82;
-  --pen-tint: #eef1fc;
-  --pen-tint-2: #dfe5fa;
+  /* Brand (peacock teal): primary actions, links, focus, the current page */
+  --brand: #0b6b68;
+  --brand-hover: #085855;
+  --brand-press: #064644;
+  --brand-tint: #e2f2f0;
+  --brand-tint-2: #c6e5e1;
 
-  /* Margin: dues, outstanding, errors, destructive, the ledger margin line */
-  --margin: #d63b3b;
-  --margin-text: #b42828;
-  --margin-tint: #fdeeee;
+  /* Accent (marigold): the shop's own colour. Brand moments only, never a status. */
+  --accent: #f5a524;
+  --accent-hover: #e6951a;
+  --accent-ink: #3d2700;
+  --accent-tint: #fff4dd;
 
-  /* Stamp: PAID / settled — the signature only */
-  --stamp: #6e3fb0;
-  --stamp-tint: #f3eefb;
+  /* Danger: dues, outstanding, errors, destructive */
+  --danger: #d43d2f;
+  --danger-text: #b02c20;
+  --danger-tint: #fdeeec;
 
-  /* Haldi: preparing, partial, warnings */
-  --haldi: #e8a317;
-  --haldi-text: #8a5b00;
-  --haldi-tint: #fdf5e1;
+  /* Paid: PAID / settled, the violet stamp only */
+  --paid: #6d45bf;
+  --paid-tint: #f2edfb;
 
-  /* Leaf: completed, received, success */
-  --leaf: #1f8a5b;
-  --leaf-text: #17724a;
-  --leaf-tint: #e7f5ee;
+  /* Warn: preparing, partial, running low */
+  --warn: #e08900;
+  --warn-text: #8a5200;
+  --warn-tint: #fef3df;
 
-  --focus-ring: 0 0 0 3px rgba(43, 69, 181, 0.28);
-  --focus-ring-danger: 0 0 0 3px rgba(214, 59, 59, 0.24);
+  /* Info: ready and waiting */
+  --info: #3657d6;
+  --info-text: #2b47b8;
+  --info-tint: #ecf0fd;
+
+  /* Success: collected, delivered, received */
+  --success: #1f8a4f;
+  --success-text: #17703f;
+  --success-tint: #e5f4ea;
+
+  --focus-ring: 0 0 0 3px rgba(11, 107, 104, 0.3);
+  --focus-ring-danger: 0 0 0 3px rgba(212, 61, 47, 0.26);
 
   /* Type */
-  --font-display: "Anek Latin Variable", "Mukta", system-ui, sans-serif;
-  --font-body: "Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "Spline Sans Mono Variable", ui-monospace, Consolas, monospace;
-  --display-stretch: 78%; /* the display face is always used condensed */
+  --font-display: "Baloo 2 Variable", "Figtree Variable", system-ui, sans-serif;
+  --font-body: "Figtree Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Order numbers, amounts and SKUs: the body face with tabular figures. */
+  --font-mono: "Figtree Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --text-12: 12px;
   --text-13: 13px;
@@ -66,7 +84,7 @@
   --text-24: 24px;
   --text-32: 32px;
   --text-44: 44px;
-  --text-hero: clamp(44px, 7.2vw, 92px);
+  --text-hero: clamp(42px, 6.4vw, 84px);
 
   /* Space: 4px grid */
   --space-1: 4px;
@@ -81,15 +99,18 @@
   --space-16: 64px;
 
   /* Shape */
-  --radius-sm: 6px; /* badges, small inputs */
-  --radius: 10px; /* inputs, buttons, cards */
-  --radius-lg: 14px; /* sheets, modals */
+  --radius-sm: 8px; /* badges, small inputs */
+  --radius-control: 10px; /* buttons and inputs */
+  --radius: 12px; /* inputs, buttons, cards */
+  --radius-lg: 18px; /* sheets, modals */
   --radius-pill: 999px;
 
-  /* Shadows are rare: cards are paper + a 1px rule, never a shadow. */
-  --shadow-sm: 0 1px 2px rgba(22, 26, 35, 0.06);
-  --shadow-lg: 0 16px 48px rgba(22, 26, 35, 0.16);
-  --shadow-float: 0 6px 20px rgba(22, 26, 35, 0.18);
+  /* Depth: surfaces float a little off the canvas. */
+  --shadow-sm: 0 1px 2px rgba(17, 42, 42, 0.05);
+  --shadow-card: 0 1px 2px rgba(17, 42, 42, 0.04), 0 4px 14px -6px rgba(17, 42, 42, 0.08);
+  --shadow-lg: 0 24px 56px -12px rgba(17, 42, 42, 0.24);
+  --shadow-float: 0 10px 24px -6px rgba(17, 42, 42, 0.28);
+  --scrim: rgba(9, 28, 28, 0.46);
 
   /* Controls */
   --control-sm: 36px;
@@ -99,17 +120,18 @@
   /* Layout */
   --page-pad: 32px;
   --content-max: 1240px;
-  --sidebar-w: 240px;
-  --topbar-h: 56px;
-  --tabbar-h: 60px;
+  --sidebar-w: 256px;
+  --topbar-h: 60px;
+  --tabbar-h: 64px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-top: env(safe-area-inset-top, 0px);
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
   --dur-1: 120ms;
   --dur-2: 160ms;
-  --dur-3: 200ms;
+  --dur-3: 220ms;
 
   /* Layers */
   --z-sticky: 10;

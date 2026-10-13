@@ -3,14 +3,17 @@
 from fastapi import APIRouter
 
 from app.routers import (
+    admin,
     auth,
     customers,
     dashboard,
     expenses,
     health,
     io,
+    media,
     orders,
     payments,
+    portal,
     products,
     reports,
     shop,
@@ -32,4 +35,7 @@ ALL_ROUTERS: tuple[APIRouter, ...] = (
     expenses.router,
     reports.router,
     io.router,
+    media.router,
+    portal.router,
+    admin.router,
 )

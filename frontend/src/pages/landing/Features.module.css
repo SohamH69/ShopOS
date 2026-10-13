@@ -15,8 +15,9 @@
 .panel {
   min-width: 0;
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--paper);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .panelHead {
@@ -61,11 +62,11 @@
 }
 
 .high {
-  background: var(--margin);
+  background: var(--danger);
 }
 
 .medium {
-  background: var(--haldi);
+  background: var(--warn);
 }
 
 .low {
@@ -87,7 +88,6 @@
 .value {
   font-family: var(--font-display);
   font-size: var(--text-24);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
@@ -117,29 +117,222 @@
   padding-top: 0;
 }
 
+/* One order, five books: the order card on the left, a ruled bus to every book it updates. */
+.flow {
+  --tick: 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  column-gap: 64px;
+  align-items: center;
+  max-width: 1000px;
+  margin-top: var(--space-12);
+}
+
+.orderCard {
+  position: relative;
+  padding: var(--space-5);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+/* Joins the card to the bus. */
+.orderCard::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 64px;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--brand-tint-2);
+}
+
+.orderHead {
+  font-size: var(--text-15);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.orderNo {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+ul.orderItems {
+  display: grid;
+  gap: 2px;
+  margin-top: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px dashed var(--rule-strong);
+}
+
+.orderItems li,
+.orderTotal {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-size: var(--text-14);
+  color: var(--ink-2);
+}
+
+.orderTotal {
+  margin-top: var(--space-2);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.orderAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  min-height: 40px;
+  border-radius: var(--radius);
+  background: var(--success-tint);
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: var(--success-text);
+}
+
+ul.effects {
+  display: grid;
+  min-width: 0;
+}
+
+.effects li {
+  position: relative;
+  padding: 6px 0 6px var(--tick);
+}
+
+/* The tick from the bus to this book. */
+.effects li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: var(--tick);
+  height: 2px;
+  margin-top: -1px;
+  background: var(--brand-tint-2);
+}
+
+/* The bus, drawn a row at a time: from the first book's middle to the last one's. */
+.effects li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--brand-tint-2);
+}
+
+.effects li:first-child::after {
+  top: 50%;
+}
+
+.effects li:last-child::after {
+  bottom: 50%;
+}
+
+.effect {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  min-height: 60px;
+  padding: 10px var(--space-4) 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition:
+    opacity 420ms var(--ease) calc(var(--i, 0) * 110ms + 120ms),
+    transform 420ms var(--ease) calc(var(--i, 0) * 110ms + 120ms);
+}
+
+/* Before the diagram is in view, the books wait just off their ticks. */
+.flow:not([data-in-view]) .effect {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.effectIcon,
+.moduleIcon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--brand-tint);
+  color: var(--brand);
+}
+
+.effectText {
+  display: grid;
+  min-width: 0;
+}
+
+.effectBook {
+  font-size: var(--text-15);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.effectDetail {
+  font-size: var(--text-13);
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+
+.effectChange {
+  font-family: var(--font-mono);
+  font-size: var(--text-14);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.due {
+  color: var(--danger-text);
+}
+
+.received {
+  color: var(--success-text);
+}
+
 .modules {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--space-12);
-  margin-top: var(--space-12);
+  margin-top: var(--space-16);
 }
 
 .module {
   display: grid;
-  grid-template-columns: 168px minmax(0, 1fr);
+  grid-template-columns: 216px minmax(0, 1fr);
   gap: var(--space-4);
+  align-items: start;
   padding: 18px 0;
   border-top: 1px solid var(--rule);
 }
 
 .moduleName {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   font-size: var(--text-17);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
   color: var(--ink);
 }
 
 .moduleLine {
+  padding-top: 7px;
   font-size: var(--text-15);
   line-height: 1.55;
   color: var(--ink-2);
@@ -161,6 +354,29 @@
 }
 
 @media (max-width: 899px) {
+  /* Stacked: the card on top, the bus running down the left from under it. */
+  .flow {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-6);
+    max-width: 560px;
+  }
+
+  .orderCard::after {
+    top: 100%;
+    left: 23px;
+    width: 2px;
+    height: var(--space-6);
+    margin-top: 0;
+  }
+
+  ul.effects {
+    margin-left: 23px;
+  }
+
+  .effects li:first-child::after {
+    top: 0;
+  }
+
   .modules {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -177,9 +393,23 @@
     margin-top: var(--space-8);
   }
 
+  .flow {
+    --tick: 16px;
+  }
+
+  .effect {
+    gap: var(--space-3);
+    padding-right: var(--space-3);
+  }
+
   .module {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-1);
     padding: var(--space-4) 0;
+  }
+
+  .moduleLine {
+    padding-top: 0;
+    padding-left: 48px;
   }
 }

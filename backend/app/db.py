@@ -71,10 +71,11 @@ SessionLocal = sessionmaker(bind=engine, class_=Session, autoflush=True, expire_
 
 
 def init_database() -> None:
-    """Create all tables (idempotent)."""
-    from app import models  # noqa: F401  (registers the mapped classes)
+    """Create all tables and bring an older database up to date (idempotent)."""
+    from app import migrations, models  # noqa: F401  (models registers the mapped classes)
 
     Base.metadata.create_all(engine)
+    migrations.upgrade(engine)
 
 
 def reset_database() -> None:

@@ -189,7 +189,7 @@ export function RecordPurchaseDrawer({ supplier, open, onClose }: RecordPurchase
               price="purchase"
               inOrder={inPurchase}
               onSelect={addProduct}
-              placeholder="Add a product — type a name or SKU"
+              placeholder="Add a product by name or SKU"
               invalid={showErrors && noLines}
             />
             {showErrors && noLines && <p className={styles.error}>Add at least one item.</p>}

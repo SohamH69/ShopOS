@@ -401,6 +401,7 @@ class DemoSeeder:
         )
         shop.plan = "basic"
         shop.is_demo = True
+        shop_service.apply_demo_setup(shop)  # photo and map pin, so the demo never stops at setup
 
         staff_joined = ist_at(self.first_day, 10, 0)
         self.manager, self.employee, self.accountant = (

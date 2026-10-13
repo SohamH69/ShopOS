@@ -20,7 +20,7 @@
   padding: 14px 18px 12px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .side {
@@ -52,11 +52,11 @@
 }
 
 .level_low {
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .level_out {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .arrow {
@@ -87,7 +87,7 @@
 }
 
 .up {
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .down {
@@ -103,11 +103,11 @@
 }
 
 .tone_low {
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .tone_out {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 @media (max-width: 479px) {

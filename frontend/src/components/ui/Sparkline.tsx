@@ -14,9 +14,9 @@ export interface SparklineProps {
 }
 
 const TONE_COLOR: Record<NonNullable<SparklineProps["tone"]>, string> = {
-  pen: "var(--pen)",
-  leaf: "var(--leaf)",
-  margin: "var(--margin)",
+  pen: "var(--brand)",
+  leaf: "var(--success)",
+  margin: "var(--danger)",
   ink: "var(--ink-3)",
 };
 
@@ -54,7 +54,7 @@ export function Sparkline({ values, label, width = 96, height = 28, tone = "pen"
       {points.length > 1 && (
         <path d={line} fill="none" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
       )}
-      <circle cx={lastX} cy={lastY} r={4} fill={color} stroke="var(--paper)" strokeWidth={2} />
+      <circle cx={lastX} cy={lastY} r={4} fill={color} stroke="var(--surface)" strokeWidth={2} />
     </svg>
   );
 }

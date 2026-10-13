@@ -6,6 +6,12 @@
 
 import { todayISO } from "./format";
 import type {
+  AdminAuthResponse,
+  AdminShopDetail,
+  AdminShopListParams,
+  AdminShopRow,
+  AdminStats,
+  AdminUser,
   AttentionItem,
   AuthResponse,
   ChangePasswordRequest,
@@ -38,6 +44,12 @@ import type {
   Payment,
   PaymentFilters,
   PaymentSummary,
+  Plan,
+  PortalLink,
+  PortalOrder,
+  PortalOrderCreate,
+  PortalProduct,
+  PortalView,
   Product,
   ProductInput,
   ProductListParams,
@@ -210,6 +222,49 @@ export const tokenStore = {
   },
 };
 
+export const ADMIN_TOKEN_STORAGE_KEY = "shopos.admin-token";
+
+/** The ShopOS admin session lives apart from any shop session (sessionStorage: ends with the tab). */
+export const adminTokenStore = {
+  get(): string | null {
+    try {
+      return window.sessionStorage.getItem(ADMIN_TOKEN_STORAGE_KEY);
+    } catch {
+      return null;
+    }
+  },
+  set(token: string): void {
+    try {
+      window.sessionStorage.setItem(ADMIN_TOKEN_STORAGE_KEY, token);
+    } catch {
+      // Blocked storage: the admin signs in again on the next page load.
+    }
+  },
+  clear(): void {
+    try {
+      window.sessionStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY);
+    } catch {
+      // Nothing stored.
+    }
+  },
+};
+
+const adminUnauthorizedListeners = new Set<() => void>();
+
+/** Subscribe to "the admin session ended". Returns an unsubscribe. */
+export function onAdminUnauthorized(listener: () => void): () => void {
+  adminUnauthorizedListeners.add(listener);
+  return () => {
+    adminUnauthorizedListeners.delete(listener);
+  };
+}
+
+function handleAdminUnauthorized(sentToken: string): void {
+  if (adminTokenStore.get() !== sentToken) return;
+  adminTokenStore.clear();
+  adminUnauthorizedListeners.forEach((listener) => listener());
+}
+
 // ---------------------------------------------------------------------------
 // 401 handling
 // ---------------------------------------------------------------------------
@@ -247,9 +302,13 @@ type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 interface RequestOptions {
   query?: object;
   body?: unknown;
+  /** A file sent as the raw request body (with its own content type) instead of JSON. */
+  file?: Blob;
   signal?: AbortSignal;
   /** false for public endpoints: no token is sent and a 401 is just an error. */
   auth?: boolean;
+  /** "admin" sends the ShopOS admin token instead of the shop token. */
+  realm?: "shop" | "admin";
 }
 
 /** `?a=1&b=true` from a flat params object; undefined, null and "" are skipped. */
@@ -267,15 +326,17 @@ export function toQueryString(params?: object): string {
 }
 
 async function send(method: HttpMethod, path: string, options: RequestOptions): Promise<{ response: Response; token: string | null }> {
-  const token = options.auth === false ? null : tokenStore.get();
+  const store = options.realm === "admin" ? adminTokenStore : tokenStore;
+  const token = options.auth === false ? null : store.get();
   const headers: Record<string, string> = { Accept: "application/json" };
-  if (options.body !== undefined) headers["Content-Type"] = "application/json";
+  if (options.file) headers["Content-Type"] = options.file.type || "application/octet-stream";
+  else if (options.body !== undefined) headers["Content-Type"] = "application/json";
   if (token) headers.Authorization = `Bearer ${token}`;
   try {
     const response = await fetch(`${API_BASE}${path}${toQueryString(options.query)}`, {
       method,
       headers,
-      body: options.body === undefined ? undefined : JSON.stringify(options.body),
+      body: options.file ?? (options.body === undefined ? undefined : JSON.stringify(options.body)),
       signal: options.signal,
       credentials: "same-origin",
     });
@@ -288,7 +349,10 @@ async function send(method: HttpMethod, path: string, options: RequestOptions): 
 
 async function request<T>(method: HttpMethod, path: string, options: RequestOptions = {}): Promise<T> {
   const { response, token } = await send(method, path, options);
-  if (response.status === 401 && token) handleUnauthorized(token);
+  if (response.status === 401 && token) {
+    if (options.realm === "admin") handleAdminUnauthorized(token);
+    else handleUnauthorized(token);
+  }
   if (!response.ok) throw await toApiError(response);
   if (response.status === 204) return undefined as T;
   const contentType = response.headers.get("content-type") ?? "";
@@ -328,6 +392,9 @@ export const changePassword = (body: ChangePasswordRequest) =>
 export const getShop = (signal?: AbortSignal) => request<Shop>("GET", "/shop", { signal });
 
 export const updateShop = (body: ShopUpdate) => request<Shop>("PATCH", "/shop", { body });
+
+/** The shop front photo: the file itself is the body (the server re-encodes it to JPEG). */
+export const uploadShopPhoto = (file: Blob) => request<Shop>("PUT", "/shop/photo", { file });
 
 // ---------------------------------------------------------------------------
 // Staff & roles
@@ -543,3 +610,53 @@ export async function downloadCsv(kind: ExportKind): Promise<void> {
   anchor.remove();
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+
+// ---------------------------------------------------------------------------
+// Customer khata links: shopkeeper side
+// ---------------------------------------------------------------------------
+
+export const getPortalLink = (customerId: ID, signal?: AbortSignal) =>
+  request<PortalLink>("GET", `/customers/${customerId}/portal-link`, { signal });
+
+/** A new link; every link shared before stops working. */
+export const resetPortalLink = (customerId: ID) => request<PortalLink>("POST", `/customers/${customerId}/portal-link/reset`);
+
+// ---------------------------------------------------------------------------
+// Customer khata links: the customer's page (public, the token is the key)
+// ---------------------------------------------------------------------------
+
+export const getPortal = (token: string, signal?: AbortSignal) =>
+  request<PortalView>("GET", `/portal/${encodeURIComponent(token)}`, { signal, auth: false });
+
+export const getPortalProducts = (token: string, signal?: AbortSignal) =>
+  request<PortalProduct[]>("GET", `/portal/${encodeURIComponent(token)}/products`, { signal, auth: false });
+
+export const placePortalOrder = (token: string, body: PortalOrderCreate) =>
+  request<PortalOrder>("POST", `/portal/${encodeURIComponent(token)}/orders`, { body, auth: false });
+
+// ---------------------------------------------------------------------------
+// ShopOS admin
+// ---------------------------------------------------------------------------
+
+export const adminLogin = (body: { email: string; password: string }) =>
+  request<AdminAuthResponse>("POST", "/admin/auth/login", { body, auth: false });
+
+export const getAdminMe = (signal?: AbortSignal) => request<AdminUser>("GET", "/admin/me", { signal, realm: "admin" });
+
+export const getAdminStats = (signal?: AbortSignal) =>
+  request<AdminStats>("GET", "/admin/stats", { signal, realm: "admin" });
+
+export const getAdminShops = (params: AdminShopListParams = {}, signal?: AbortSignal) =>
+  request<Paginated<AdminShopRow>>("GET", "/admin/shops", { query: params, signal, realm: "admin" });
+
+export const getAdminShop = (id: ID, signal?: AbortSignal) =>
+  request<AdminShopDetail>("GET", `/admin/shops/${id}`, { signal, realm: "admin" });
+
+export const suspendShop = (id: ID, reason: string) =>
+  request<AdminShopDetail>("POST", `/admin/shops/${id}/suspend`, { body: { reason }, realm: "admin" });
+
+export const reactivateShop = (id: ID) =>
+  request<AdminShopDetail>("POST", `/admin/shops/${id}/reactivate`, { realm: "admin" });
+
+export const changeShopPlan = (id: ID, plan: Plan) =>
+  request<AdminShopDetail>("PATCH", `/admin/shops/${id}`, { body: { plan }, realm: "admin" });

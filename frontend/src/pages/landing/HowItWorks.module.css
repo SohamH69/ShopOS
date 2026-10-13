@@ -1,74 +1,192 @@
+/*
+ * Paper beside ShopOS. The two sheets keep their natural heights on purpose: the nine-step page is
+ * visibly longer than the three-step card.
+ */
+
 .compare {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-12);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: var(--space-10);
   align-items: start;
   margin-top: var(--space-12);
 }
 
-.sideTitle {
-  padding-bottom: var(--space-3);
+.pageHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: 22px 0 14px;
   border-bottom: 1px solid var(--rule-strong);
+}
+
+.sideTitle {
   font-size: var(--text-17);
   font-weight: 600;
   line-height: 1.3;
   color: var(--ink);
 }
 
-/* The old way: plain text on the desk, every step crossed out. */
-.paperList li {
-  display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
-  align-items: baseline;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--rule);
-  font-size: var(--text-15);
-  line-height: 1.45;
-  color: var(--ink-3);
+.count {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--danger-text);
 }
 
-.paperList s {
-  text-decoration-color: var(--ink-4);
-  text-decoration-thickness: 1px;
+.countPen {
+  color: var(--brand);
+}
+
+/* The notebook page ---------------------------------------------------------- */
+
+.notebook {
+  --margin-x: 56px;
+  --line: 44px;
+  position: relative;
+  padding: 0 0 var(--line);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* The double red margin, top to bottom of the page. */
+.notebook::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--margin-x);
+  width: 4px;
+  border-left: 1px solid var(--danger);
+  border-right: 1px solid var(--danger);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.notebook .pageHead {
+  padding-right: var(--space-6);
+  padding-left: calc(var(--margin-x) + 20px);
+}
+
+/* One step per ruled line. */
+.paperList li {
+  --tilt: -1.4deg;
+  display: grid;
+  grid-template-columns: var(--margin-x) minmax(0, 1fr);
+  align-items: center;
+  min-height: var(--line);
+  border-bottom: 1px solid var(--rule-line);
+  font-size: var(--text-17);
+  line-height: 1.35;
+}
+
+.paperList li:nth-child(3n + 2) {
+  --tilt: 0.7deg;
+}
+
+.paperList li:nth-child(3n) {
+  --tilt: -0.4deg;
 }
 
 .paperIndex {
+  justify-self: center;
   font-family: var(--font-mono);
   font-size: var(--text-12);
   font-variant-numeric: tabular-nums;
   color: var(--ink-4);
 }
 
-/* The ShopOS way: one clean sheet of paper. */
+.paperText {
+  position: relative;
+  justify-self: start;
+  margin-left: 20px;
+  text-decoration: none;
+  color: var(--ink-2);
+  transition: color 300ms var(--ease) calc(var(--i, 0) * 150ms + 320ms);
+}
+
+/* The pen stroke: drawn left to right, each line a little after the last, never quite level. */
+.paperText::after {
+  content: "";
+  position: absolute;
+  top: 47%;
+  right: -6px;
+  left: -4px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--brand);
+  opacity: 0.85;
+  transform: rotate(var(--tilt)) scaleX(0);
+  transform-origin: left center;
+  transition: transform 340ms cubic-bezier(0.65, 0.05, 0.35, 1) calc(var(--i, 0) * 150ms + 160ms);
+}
+
+.notebook[data-struck] .paperText {
+  color: var(--ink-3);
+}
+
+.notebook[data-struck] .paperText::after {
+  transform: rotate(var(--tilt)) scaleX(1);
+}
+
+/* The ShopOS card -------------------------------------------------------------- */
+
 .shoposSide {
-  padding: var(--space-6) var(--space-8) var(--space-2);
+  padding: 0 var(--space-8) var(--space-3);
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--paper);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .shoposList li {
+  position: relative;
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr);
-  gap: var(--space-3);
-  padding: var(--space-6) 0;
-  border-bottom: 1px solid var(--rule);
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
 }
 
-.shoposList li:last-child {
-  border-bottom: 0;
+/* A rail joins each step to the next. */
+.shoposList li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-5) + 40px + 6px);
+  bottom: calc(6px - var(--space-5));
+  left: 19px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--brand-tint-2);
 }
 
-.shoposIndex {
+.node {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--brand-tint);
   font-family: var(--font-display);
-  font-size: var(--text-44);
-  font-stretch: var(--display-stretch);
+  font-size: var(--text-20);
   font-weight: 720;
-  line-height: 0.9;
-  color: var(--pen);
+  line-height: 1;
+  color: var(--brand);
+}
+
+/* The last step ends in the app's own "completed" green. */
+.shoposList li:last-child .node {
+  background: var(--success);
+  color: #ffffff;
 }
 
 .stepTitle {
+  padding-top: 7px;
   font-size: var(--text-20);
   font-weight: 600;
   line-height: 1.3;
@@ -86,26 +204,35 @@
 @media (max-width: 899px) {
   .compare {
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-10);
+    gap: var(--space-6);
     margin-top: var(--space-10);
   }
 }
 
 @media (max-width: 639px) {
+  .notebook {
+    --margin-x: 40px;
+  }
+
+  .notebook .pageHead {
+    padding-right: var(--space-4);
+    padding-left: calc(var(--margin-x) + 14px);
+  }
+
+  .paperList li {
+    font-size: var(--text-15);
+  }
+
+  .paperText {
+    margin-left: 14px;
+  }
+
   .shoposSide {
-    padding: var(--space-5) var(--space-4) 0;
-  }
-
-  .shoposList li {
-    grid-template-columns: 40px minmax(0, 1fr);
-    padding: var(--space-5) 0;
-  }
-
-  .shoposIndex {
-    font-size: var(--text-32);
+    padding: 0 var(--space-4) var(--space-1);
   }
 
   .stepTitle {
+    padding-top: 8px;
     font-size: var(--text-17);
   }
 }

@@ -1,44 +1,49 @@
-/* One paper card divided by hairline rules — never a row of boxed cards. */
+/* Separate tiles on the canvas, each a white surface with its number set large in the display face. */
 .strip {
   display: grid;
   grid-template-columns: repeat(var(--stat-count, 4), minmax(0, 1fr));
-  gap: 1px;
-  overflow: hidden;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--rule);
+  gap: 14px;
 }
 
 .item {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   min-width: 0;
-  padding: 16px 20px 18px;
-  background: var(--paper);
+  padding: 16px 18px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: inherit;
   text-decoration: none;
 }
 
 a.item {
-  transition: background-color var(--dur-1) var(--ease);
+  transition:
+    border-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease),
+    transform var(--dur-2) var(--ease);
 }
 
 a.item:hover {
-  background: var(--desk);
+  border-color: var(--rule-strong);
+  box-shadow: 0 1px 2px rgba(17, 42, 42, 0.05), 0 10px 24px -12px rgba(17, 42, 42, 0.2);
   color: inherit;
+  transform: translateY(-1px);
 }
 
 a.item:focus-visible {
-  box-shadow: inset var(--focus-ring);
+  box-shadow: var(--focus-ring);
 }
 
 .label {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: var(--text-13);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--ink-3);
 }
 
@@ -51,28 +56,29 @@ a.item:focus-visible {
 .value {
   font-family: var(--font-display);
   font-size: var(--text-32);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--ink);
   overflow-wrap: anywhere;
+  /* Baloo's tall metrics leave room above the Latin figures; pull the number up to its label. */
+  margin-top: 2px;
 }
 
 .tone_margin {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .tone_leaf {
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .tone_haldi {
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .tone_pen {
-  color: var(--pen);
+  color: var(--brand);
 }
 
 .hint {
@@ -97,6 +103,10 @@ a.item:focus-visible {
 }
 
 @media (max-width: 639px) {
+  .strip {
+    gap: 10px;
+  }
+
   .strip,
   .strip[data-count="5"],
   .strip[data-count="6"] {
@@ -116,7 +126,8 @@ a.item:focus-visible {
   }
 
   .item {
-    padding: 14px 16px 16px;
+    padding: 14px 14px 14px;
+    border-radius: 14px;
   }
 
   .value {
@@ -126,6 +137,7 @@ a.item:focus-visible {
 
 /* Trend ------------------------------------------------------------------- */
 
+/* A small pill: green when the change is good for the shop, red when it isn't. */
 .trend {
   display: inline-flex;
   align-items: baseline;
@@ -135,14 +147,24 @@ a.item:focus-visible {
   color: var(--ink-3);
 }
 
+.good,
+.bad {
+  align-self: flex-start;
+  padding: 1px 8px 1px 6px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
 .good {
-  color: var(--leaf-text);
+  background: var(--success-tint);
+  color: var(--success-text);
 }
 
 .bad {
-  color: var(--margin-text);
+  background: var(--danger-tint);
+  color: var(--danger-text);
 }
 
 .arrow {
-  font-family: var(--font-mono);
+  font-weight: 700;
 }

@@ -17,6 +17,14 @@ export default function NotFoundPage() {
         </Link>
       </header>
       <main className={styles.main}>
+        {/* A small signboard hanging from a nail, swaying a little. */}
+        <div className={styles.sign} aria-hidden="true">
+          <svg className={styles.strings} viewBox="0 0 160 44">
+            <path d="M24 44 80 6l56 38" />
+            <circle cx="80" cy="6" r="4.5" />
+          </svg>
+          <span className={styles.board}>404</span>
+        </div>
         <p className={styles.code}>
           404 · <span className={styles.path}>{pathname}</span>
         </p>

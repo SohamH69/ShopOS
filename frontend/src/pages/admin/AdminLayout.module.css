@@ -1,0 +1,200 @@
+/* The admin console: a slim night signboard on top, the canvas below. */
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--canvas);
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  flex: none;
+  background: var(--night);
+  color: var(--night-ink);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* The marigold awning along the top, scallops hanging over the board. */
+.awning {
+  display: block;
+  height: 13px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 100% 6px no-repeat,
+    radial-gradient(circle 7px at 50% 6px, var(--accent) 0 6.5px, transparent 7px) 0 0 / 14px 13px repeat-x;
+}
+
+.barInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 52px;
+  max-width: calc(var(--content-max) + var(--page-pad) * 2);
+  margin: 0 auto;
+  padding: 0 var(--page-pad) 4px;
+}
+
+.brand {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.brand:focus-visible,
+.signOut:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.45);
+}
+
+/* The one marigold label in the console: this is the inside of the shop. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--text-12);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.end {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.whoText {
+  display: grid;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.whoName {
+  overflow: hidden;
+  font-size: var(--text-14);
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.whoEmail {
+  overflow: hidden;
+  font-size: var(--text-12);
+  color: var(--night-ink-2);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.whoSkeleton {
+  opacity: 0.25;
+}
+
+.signOut {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-control);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-size: var(--text-14);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease);
+}
+
+.signOut:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.signOut svg {
+  width: 16px;
+  height: 16px;
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  padding: 32px var(--page-pad) 64px;
+  outline: none;
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: var(--z-toast);
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  background: var(--brand);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform var(--dur-2) var(--ease);
+}
+
+.skip:focus,
+.skip:focus-visible {
+  color: #ffffff;
+  transform: none;
+}
+
+@media (max-width: 767px) {
+  .who {
+    display: none;
+  }
+
+  .content {
+    padding-top: 20px;
+    padding-bottom: calc(48px + var(--safe-bottom));
+  }
+}
+
+@media (max-width: 379px) {
+  .signOut {
+    width: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .signOut span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}

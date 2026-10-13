@@ -2,7 +2,7 @@
 
 .page {
   min-height: 100vh;
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
   overflow-x: clip;
 }
@@ -23,14 +23,14 @@
   background: var(--ink);
   font-size: var(--text-14);
   font-weight: 600;
-  color: var(--paper);
+  color: var(--surface);
   text-decoration: none;
   transform: translateY(-200%);
   transition: transform var(--dur-2) var(--ease);
 }
 
 .skipLink:hover {
-  color: var(--paper);
+  color: var(--surface);
 }
 
 .skipLink:focus-visible {
@@ -50,11 +50,63 @@
 }
 
 .desk {
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .ruled {
   border-top: 1px solid var(--rule);
+}
+
+/* The signboard: a night band for the hero and the closing invitation. */
+.night {
+  background: var(--night);
+  color: var(--night-ink);
+}
+
+/* The marigold awning: a solid band with half-moon scallops, along the top of a night band. */
+.awning {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  height: 18px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 100% 8px no-repeat,
+    radial-gradient(circle 10px at 50% 8px, var(--accent) 0 9.5px, transparent 10px) 0 0 / 20px 18px repeat-x;
+  pointer-events: none;
+}
+
+/* Buttons on the night board. Two classes, so they win over the shared button variants. */
+.night .accentButton {
+  border-color: transparent;
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 8px 20px -8px rgba(245, 165, 36, 0.6);
+}
+
+.night .accentButton:hover {
+  background: var(--accent-hover);
+  color: var(--accent-ink);
+}
+
+.night .outlineButton {
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.night .outlineButton:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.night .accentButton:focus-visible,
+.night .outlineButton:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.5);
 }
 
 /* Every anchored section clears the sticky header. */
@@ -63,23 +115,21 @@
 }
 
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--text-12);
-  font-weight: 500;
+  font-size: var(--text-13);
+  font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1.4;
   text-transform: uppercase;
-  color: var(--ink-3);
+  color: var(--brand);
 }
 
 .title {
   margin-top: var(--space-3);
   font-family: var(--font-display);
-  font-size: var(--text-44);
-  font-stretch: var(--display-stretch);
-  font-weight: 720;
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 800;
   line-height: 1.02;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.025em;
   color: var(--ink);
   text-wrap: balance;
 }
@@ -108,7 +158,7 @@
   }
 
   .title {
-    font-size: var(--text-32);
+    font-size: 32px;
   }
 
   .lede {

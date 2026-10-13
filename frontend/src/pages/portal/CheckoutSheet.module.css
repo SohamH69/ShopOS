@@ -1,0 +1,119 @@
+/* The order review sheet: lines with steppers, the total, pickup or delivery, a note. */
+
+.sheet {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.lines {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-top: 1px solid var(--rule-line);
+}
+
+.line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "info total"
+    "controls controls";
+  gap: 8px 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule-line);
+}
+
+.lineInfo {
+  grid-area: info;
+  min-width: 0;
+}
+
+.lineName {
+  font-size: var(--text-15);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.linePrice {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+
+.lineTotal.lineTotal {
+  grid-area: total;
+  align-self: start;
+  font-size: var(--text-15);
+  font-weight: 600;
+}
+
+.lineControls {
+  grid-area: controls;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.totalRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.totalLabel {
+  font-size: var(--text-15);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.total.total {
+  font-size: var(--text-32);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.totalNote {
+  margin-top: -10px;
+  font-size: var(--text-13);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-control);
+  background: var(--danger-tint);
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--danger-text);
+}
+
+.error svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+@media (min-width: 640px) {
+  .line {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas: "info controls total";
+    align-items: center;
+  }
+
+  .lineTotal.lineTotal {
+    align-self: center;
+    min-width: 72px;
+    text-align: right;
+  }
+}

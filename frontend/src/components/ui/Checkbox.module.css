@@ -62,7 +62,7 @@
   margin-top: 1px;
   border: 1.5px solid var(--rule-strong);
   border-radius: var(--radius-sm);
-  background: var(--paper);
+  background: var(--surface);
   color: #ffffff;
   transition:
     background-color var(--dur-1) var(--ease),
@@ -87,8 +87,8 @@
 
 .input:checked + .box,
 .input:indeterminate + .box {
-  border-color: var(--pen);
-  background: var(--pen);
+  border-color: var(--brand);
+  background: var(--brand);
 }
 
 .root .input:checked + .box svg,
@@ -129,7 +129,7 @@
   height: 16px;
   border-radius: 50%;
   background: #ffffff;
-  box-shadow: 0 1px 2px rgba(22, 26, 35, 0.22);
+  box-shadow: 0 1px 2px rgba(17, 42, 42, 0.22);
   transition: transform var(--dur-2) var(--ease);
 }
 
@@ -139,7 +139,7 @@
 
 .input:checked + .track,
 .root:hover .input:checked + .track {
-  background: var(--pen);
+  background: var(--brand);
 }
 
 .input:checked + .track .thumb {

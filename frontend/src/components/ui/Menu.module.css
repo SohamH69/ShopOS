@@ -6,7 +6,7 @@
   overflow-y: auto;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
   box-shadow: var(--shadow-lg);
   outline: none;
   animation: menu-in var(--dur-1) var(--ease) both;
@@ -33,12 +33,12 @@
 .item:focus-visible {
   outline: none;
   box-shadow: none;
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink);
 }
 
 .item:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--pen-tint-2);
+  box-shadow: inset 0 0 0 2px var(--brand-tint-2);
 }
 
 .itemIcon {
@@ -68,11 +68,11 @@
 .danger,
 .danger:hover,
 .danger:focus {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .danger .itemIcon {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .item[aria-disabled="true"] {

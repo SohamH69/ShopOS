@@ -9,7 +9,7 @@
   min-width: 0;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .table {
@@ -57,7 +57,7 @@
 .table .dateCell {
   padding-right: 0;
   padding-left: 0;
-  border-right: 1px solid var(--margin);
+  border-right: 1px solid var(--danger);
   text-align: center;
 }
 
@@ -107,19 +107,19 @@
 .orderLink {
   display: inline;
   border-radius: 4px;
-  color: var(--pen);
+  color: var(--brand);
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
   text-decoration: underline;
-  text-decoration-color: var(--pen-tint-2);
+  text-decoration-color: var(--brand-tint-2);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: text-decoration-color var(--dur-1) var(--ease);
 }
 
 .orderLink:hover {
-  color: var(--pen-hover);
+  color: var(--brand-hover);
   text-decoration-color: currentColor;
 }
 
@@ -134,7 +134,7 @@
   padding-bottom: 14px;
   border-top: 1px solid var(--rule-strong);
   border-bottom: 0;
-  background: var(--paper);
+  background: var(--surface);
   font-size: var(--text-15);
   font-weight: 600;
 }

@@ -20,7 +20,7 @@
 }
 
 .back:hover {
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink);
 }
 
@@ -44,17 +44,16 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: var(--text-32);
-  font-stretch: var(--display-stretch);
-  font-weight: 700;
+  font-size: 36px;
+  font-weight: 800;
   line-height: 1.05;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
   color: var(--ink);
   overflow-wrap: anywhere;
 }
 
 .description {
-  margin-top: 6px;
+  margin-top: 4px;
   font-size: var(--text-15);
   line-height: 1.5;
   color: var(--ink-3);
@@ -77,10 +76,19 @@
   }
 
   .title {
-    font-size: var(--text-24);
+    font-size: 28px;
   }
 
   .actions {
     width: 100%;
+  }
+
+  /* Three or more actions: the main (first) one takes a full row, the others share the next. */
+  .actions:has(> :nth-child(3)) > :first-child {
+    flex: 1 1 100%;
+  }
+
+  .actions:has(> :nth-child(3)) > :not(:first-child):not(:last-child) {
+    flex: 1 1 auto;
   }
 }

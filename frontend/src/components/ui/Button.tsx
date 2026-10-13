@@ -50,7 +50,7 @@ export interface ButtonProps extends Omit<ComponentProps<"button">, "children"> 
   children?: ReactNode;
 }
 
-/** A button. Defaults to type="button" — pass type="submit" inside forms. */
+/** A button. Defaults to type="button"; pass type="submit" inside forms. */
 export function Button({
   variant = "secondary",
   size = "md",

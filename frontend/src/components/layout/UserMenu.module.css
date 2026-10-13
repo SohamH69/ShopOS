@@ -4,14 +4,28 @@
   gap: 10px;
   width: 100%;
   padding: 6px 8px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   text-align: left;
   transition: background-color var(--dur-1) var(--ease);
 }
 
 .user:hover,
 .user[aria-expanded="true"] {
-  background: var(--desk);
+  background: var(--canvas);
+}
+
+.dark:hover,
+.dark[aria-expanded="true"] {
+  background: var(--night-2);
+}
+
+.dark .name {
+  color: var(--night-ink);
+}
+
+.dark .role,
+.dark .chevron {
+  color: var(--night-ink-2);
 }
 
 .text {

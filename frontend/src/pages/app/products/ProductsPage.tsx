@@ -81,7 +81,7 @@ function lowStockStat(summary: Summary | null): StatItem {
   } else if (summary) {
     hint = "Everything is above its low-stock level";
   }
-  return { key: "low", label: "Running low", value: summary ? formatCount(summary.low) : "—", tone, hint };
+  return { key: "low", label: "Running low", value: summary ? formatCount(summary.low) : "–", tone, hint };
 }
 
 export default function ProductsPage() {
@@ -157,13 +157,13 @@ export default function ProductsPage() {
     {
       key: "count",
       label: "Products",
-      value: summary ? formatCount(summary.count) : "—",
+      value: summary ? formatCount(summary.count) : "–",
       hint: summary && summary.categories > 0 ? `In ${pluralize(summary.categories, "category", "categories")}` : undefined,
     },
     {
       key: "value",
       label: "Stock value (at cost)",
-      value: summary ? formatMoney(summary.stockValue) : "—",
+      value: summary ? formatMoney(summary.stockValue) : "–",
       hint: "What you paid for it",
     },
     lowStockStat(summary),
@@ -372,7 +372,7 @@ function StockCell({ product }: { product: Product }) {
 }
 
 function MarginCell({ value }: { value: number | null }) {
-  if (value === null) return <span className={styles.none}>—</span>;
+  if (value === null) return <span className={styles.none}>–</span>;
   return <span className={cx(styles.margin, value < 0 && styles.loss)}>{formatPercent(value, 1)}</span>;
 }
 

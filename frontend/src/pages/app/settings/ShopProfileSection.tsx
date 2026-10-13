@@ -22,6 +22,7 @@ import { useShop, useUpdateShop } from "../../../lib/queries";
 import type { Shop, ShopUpdate } from "../../../lib/types";
 import { isValidEmail, isValidPhone } from "../staff/staffUtils";
 import styles from "./SettingsPage.module.css";
+import { ShopIdRow } from "./ShopPresenceSection";
 import { UpiQrPreview } from "./UpiQrPreview";
 
 const OTHER_SEGMENT = "Other";
@@ -59,7 +60,10 @@ function draftFrom(shop: Shop): ProfileDraft {
   };
 }
 
-function toUpdate(draft: ProfileDraft): Required<ShopUpdate> {
+/** The fields this form edits (location, photo and link settings have their own sections). */
+type ProfileUpdate = Required<Pick<ShopUpdate, "name" | "owner_name" | "phone" | "email" | "address" | "city" | "segment" | "upi_id">>;
+
+function toUpdate(draft: ProfileDraft): ProfileUpdate {
   return {
     name: draft.name.trim(),
     owner_name: draft.owner_name.trim(),
@@ -77,7 +81,7 @@ function changes(draft: ProfileDraft, shop: Shop): ShopUpdate {
   const next = toUpdate(draft);
   const before = toUpdate(draftFrom(shop));
   const update: Record<string, string | null> = {};
-  for (const key of Object.keys(next) as (keyof ShopUpdate)[]) {
+  for (const key of Object.keys(next) as (keyof ProfileUpdate)[]) {
     if (next[key] !== before[key]) update[key] = next[key];
   }
   return update as ShopUpdate;
@@ -90,6 +94,7 @@ function validate(draft: ProfileDraft): ProfileErrors {
   if (!draft.phone.trim()) errors.phone = "Enter the shop's phone number.";
   else if (!isValidPhone(draft.phone)) errors.phone = "Enter a valid phone number with at least 10 digits.";
   if (draft.email.trim() && !isValidEmail(draft.email)) errors.email = "Enter a valid email address.";
+  if (!draft.address.trim()) errors.address = "Enter the shop's address. Customers see it on their khata link.";
   if (draft.upi_id.trim() && !UPI_PATTERN.test(draft.upi_id.trim())) errors.upi_id = "Enter a valid UPI ID, like yourshop@upi.";
   return errors;
 }
@@ -106,15 +111,18 @@ function fieldForMessage(message: string): ProfileField | null {
 
 function PlanRow({ shop }: { shop: Shop }) {
   return (
-    <div className={styles.planRow}>
-      <span className={styles.planLabel}>Plan</span>
-      <Badge tone="pen">{PLAN_LABEL[shop.plan]}</Badge>
-      {/* Hidden with the pricing section.
-      <Link to="/#pricing" className={styles.planLink}>
-        Change plan
-      </Link>
-      */}
-    </div>
+    <>
+      <ShopIdRow shop={shop} />
+      <div className={styles.planRow}>
+        <span className={styles.planLabel}>Plan</span>
+        <Badge tone="pen">{PLAN_LABEL[shop.plan]}</Badge>
+        {/* Hidden with the pricing section.
+        <Link to="/#pricing" className={styles.planLink}>
+          Change plan
+        </Link>
+        */}
+      </div>
+    </>
   );
 }
 
@@ -168,12 +176,13 @@ function ProfileReadOnly({ shop }: { shop: Shop }) {
         items={[
           { key: "name", label: "Shop name", value: shop.name },
           { key: "owner", label: "Owner", value: shop.owner_name },
-          { key: "phone", label: "Phone", value: formatPhone(shop.phone) || "—" },
-          { key: "email", label: "Email", value: shop.email || "—" },
-          { key: "address", label: "Address", value: shop.address || "—" },
-          { key: "city", label: "City", value: shop.city || "—" },
-          { key: "segment", label: "Shop type", value: shop.segment || "—" },
-          { key: "upi", label: "UPI ID", value: shop.upi_id ? <span className="mono">{shop.upi_id}</span> : "—" },
+          { key: "phone", label: "Phone", value: formatPhone(shop.phone) || "–" },
+          { key: "email", label: "Email", value: shop.email || "–" },
+          { key: "address", label: "Address", value: shop.address || "–" },
+          { key: "city", label: "City", value: shop.city || "–" },
+          { key: "segment", label: "Shop type", value: shop.segment || "–" },
+          { key: "upi", label: "UPI ID", value: shop.upi_id ? <span className="mono">{shop.upi_id}</span> : "–" },
+          { key: "code", label: "Shop ID", value: <span className="mono">{shop.code}</span> },
           { key: "plan", label: "Plan", value: <Badge tone="pen">{PLAN_LABEL[shop.plan]}</Badge> },
         ]}
       />
@@ -299,7 +308,7 @@ function ProfileForm({ shop }: { shop: Shop }) {
             autoComplete="email"
           />
         </Field>
-        <Field label="Address" id="shop-address" optional error={errors.address} className={styles.full}>
+        <Field label="Address" id="shop-address" error={errors.address} className={styles.full}>
           <Textarea
             rows={2}
             value={draft.address}

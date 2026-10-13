@@ -21,7 +21,8 @@ body {
   line-height: 1.5;
   font-weight: 400;
   color: var(--ink);
-  background: var(--desk);
+  background: var(--canvas);
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -105,13 +106,13 @@ button:disabled {
 }
 
 a {
-  color: var(--pen);
+  color: var(--brand);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
 a:hover {
-  color: var(--pen-hover);
+  color: var(--brand-hover);
 }
 
 table {
@@ -156,7 +157,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 ::selection {
-  background: var(--pen-tint-2);
+  background: var(--brand-tint-2);
   color: var(--ink);
 }
 
@@ -212,11 +213,10 @@ input[type="search"]::-webkit-search-decoration {
   border: 0;
 }
 
-/* Order numbers, amounts in tables and receipts, timestamps, SKUs. */
+/* Order numbers, amounts in tables and receipts, timestamps, SKUs: figures that line up. */
 .mono {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
 }
 
 /* Tabular figures in the body face (columns of numbers that must line up). */
@@ -224,13 +224,12 @@ input[type="search"]::-webkit-search-decoration {
   font-variant-numeric: tabular-nums;
 }
 
-/* The condensed display face: page titles, KPI numbers and landing headlines only. */
+/* The display face: page titles, KPI numbers and landing headlines only. */
 .display {
   font-family: var(--font-display);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .muted {

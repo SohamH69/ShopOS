@@ -95,6 +95,7 @@ export const CHANNEL_LABEL: Readonly<Record<Channel, string>> = {
   walk_in: "Walk-in",
   phone: "Phone",
   whatsapp: "WhatsApp",
+  online: "Online",
 };
 
 export const FULFILLMENT_LABEL: Readonly<Record<Fulfillment, string>> = {

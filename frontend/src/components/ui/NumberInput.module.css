@@ -22,8 +22,8 @@
   max-width: 100%;
   height: var(--control-md);
   border: 1px solid var(--rule-strong);
-  border-radius: var(--radius);
-  background: var(--paper);
+  border-radius: var(--radius-control);
+  background: var(--surface);
   transition:
     border-color var(--dur-1) var(--ease),
     box-shadow var(--dur-1) var(--ease);
@@ -34,12 +34,12 @@
 }
 
 .qty:focus-within {
-  border-color: var(--pen);
+  border-color: var(--brand);
   box-shadow: var(--focus-ring);
 }
 
 .qty[data-invalid="true"] {
-  border-color: var(--margin);
+  border-color: var(--danger);
 }
 
 .qty[data-invalid="true"]:focus-within {
@@ -48,7 +48,7 @@
 
 .qty[data-disabled="true"] {
   border-color: var(--rule);
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink-3);
 }
 
@@ -71,7 +71,7 @@
 }
 
 .step:hover:not(:disabled) {
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink);
 }
 

@@ -243,6 +243,7 @@ export function Parchi() {
           <Button
             variant="ghost"
             size="sm"
+            className={styles.replay}
             icon={<RotateCcw aria-hidden="true" />}
             aria-disabled={playing || undefined}
             onClick={() => {

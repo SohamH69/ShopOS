@@ -1,3 +1,4 @@
+/* The signboard: a night panel under a scalloped marigold awning, with the shop's name painted on. */
 .sidebar {
   position: sticky;
   top: 0;
@@ -6,28 +7,72 @@
   width: var(--sidebar-w);
   height: 100vh;
   height: 100dvh;
-  border-right: 1px solid var(--rule);
-  background: var(--paper);
+  background: var(--night);
+  color: var(--night-ink);
 }
 
-.brand {
-  display: flex;
+/* A solid band with half-moon scallops hanging from it. */
+.awning {
+  display: block;
   flex: none;
-  align-items: center;
-  height: var(--topbar-h);
-  padding: 0 20px;
+  height: 15px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 100% 7px no-repeat,
+    radial-gradient(circle 8px at 50% 7px, var(--accent) 0 7.5px, transparent 8px) 0 0 / 16px 15px repeat-x;
+}
+
+.board {
+  display: grid;
+  gap: 14px;
+  flex: none;
+  padding: 18px 20px 18px;
 }
 
 .brandLink {
   display: inline-flex;
+  justify-self: start;
   border-radius: var(--radius-sm);
   text-decoration: none;
 }
 
+.brandLink:focus-visible,
+.link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.45);
+}
+
+.shop {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 14px 14px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  background: var(--night-2);
+}
+
+.shopName {
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.plan {
+  font-size: var(--text-12);
+  font-weight: 500;
+  color: var(--night-ink-2);
+}
+
 .nav {
   flex: 1;
-  padding: 10px 12px 16px;
+  padding: 4px 12px 16px;
   overflow-y: auto;
+  scrollbar-color: var(--night-2) transparent;
 }
 
 .list {
@@ -37,21 +82,24 @@
 }
 
 .section {
-  margin: 20px 10px 6px;
-  font-size: var(--text-12);
+  margin: 20px 12px 8px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--night-ink-2);
+  opacity: 0.75;
 }
 
 .link {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
-  height: 36px;
-  padding: 0 10px;
-  border-radius: 8px;
-  color: var(--ink-2);
+  gap: 12px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: var(--radius);
+  color: var(--night-ink-2);
   font-size: var(--text-15);
   font-weight: 500;
   text-decoration: none;
@@ -61,36 +109,41 @@
 }
 
 .link svg {
-  width: 18px;
-  height: 18px;
-  color: var(--ink-3);
+  width: 19px;
+  height: 19px;
   transition: color var(--dur-1) var(--ease);
 }
 
 .link:hover {
-  background: var(--desk);
-  color: var(--ink);
-}
-
-.link:hover svg {
-  color: var(--ink-2);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--night-ink);
 }
 
 .active,
 .active:hover {
-  background: var(--pen-tint);
-  color: var(--pen);
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
 }
 
-.active svg,
-.active:hover svg {
-  color: var(--pen);
+/* A marigold marker on the current page. */
+.active::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: -12px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--accent);
+}
+
+.active svg {
+  color: var(--accent);
 }
 
 .linkLabel {
   flex: 1;
   min-width: 0;
-  padding-top: 1px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -104,50 +157,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 22px;
-  height: 20px;
-  padding: 0 6px;
+  min-width: 24px;
+  height: 22px;
+  padding: 0 7px;
   border-radius: var(--radius-pill);
-  background: var(--desk-2);
-  color: var(--ink-2);
-  font-family: var(--font-mono);
+  background: var(--accent);
+  color: var(--accent-ink);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
-.active .count {
-  background: var(--paper);
-  color: var(--pen);
-}
-
 .footer {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
   flex: none;
-  gap: 8px;
-  padding: 14px 12px;
-  border-top: 1px solid var(--rule);
-}
-
-.shop {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1px;
-  min-width: 0;
-  padding: 0 10px;
-}
-
-.shopName {
-  overflow: hidden;
-  font-size: var(--text-14);
-  font-weight: 600;
-  color: var(--ink);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.plan {
-  font-size: var(--text-12);
-  color: var(--ink-3);
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }

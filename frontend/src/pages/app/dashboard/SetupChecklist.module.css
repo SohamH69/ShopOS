@@ -19,14 +19,14 @@
   height: 6px;
   overflow: hidden;
   border-radius: 3px;
-  background: var(--desk-2);
+  background: var(--canvas-2);
 }
 
 .fill {
   display: block;
   height: 100%;
   border-radius: 3px;
-  background: var(--leaf);
+  background: var(--success);
   transition: width var(--dur-3) var(--ease);
 }
 
@@ -69,8 +69,8 @@
 
 .complete .marker {
   border-color: transparent;
-  background: var(--leaf-tint);
-  color: var(--leaf-text);
+  background: var(--success-tint);
+  color: var(--success-text);
 }
 
 .stepText {

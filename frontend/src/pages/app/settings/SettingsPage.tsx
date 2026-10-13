@@ -1,11 +1,13 @@
-import { Database, LogOut, Smartphone, Store, UserRound } from "lucide-react";
+import { Database, Link2, LogOut, MapPin, Smartphone, Store, UserRound } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button, Card, PageHeader } from "../../../components/ui";
 import { useAuth } from "../../../lib/auth";
 import { useDocumentTitle } from "../../../lib/hooks";
 import { AccountSection } from "./AccountSection";
+import { CustomerLinksSection } from "./CustomerLinksSection";
 import { DataSection } from "./DataSection";
 import { InstallSection } from "./InstallSection";
+import { ShopPresenceSection } from "./ShopPresenceSection";
 import { ShopProfileSection } from "./ShopProfileSection";
 import { useActiveSection } from "./useActiveSection";
 import styles from "./SettingsPage.module.css";
@@ -23,6 +25,8 @@ export default function SettingsPage() {
 
   const links: SectionLink[] = [
     { id: "shop", label: "Shop profile", icon: <Store size={16} aria-hidden="true" /> },
+    { id: "location", label: "Photo & location", icon: <MapPin size={16} aria-hidden="true" /> },
+    ...(canManage ? [{ id: "links", label: "Customer links", icon: <Link2 size={16} aria-hidden="true" /> }] : []),
     { id: "account", label: "Your account", icon: <UserRound size={16} aria-hidden="true" /> },
     { id: "app", label: "Get the app", icon: <Smartphone size={16} aria-hidden="true" /> },
     ...(canManage ? [{ id: "data", label: "Import & export", icon: <Database size={16} aria-hidden="true" /> }] : []),
@@ -58,6 +62,8 @@ export default function SettingsPage() {
 
         <div className={styles.sections}>
           <ShopProfileSection id="shop" />
+          <ShopPresenceSection id="location" />
+          {canManage && <CustomerLinksSection id="links" />}
           <AccountSection id="account" />
           <InstallSection id="app" />
           {canManage && <DataSection id="data" />}

@@ -22,7 +22,7 @@ a.barRow {
 }
 
 a.barRow:hover {
-  background: var(--desk);
+  background: var(--canvas);
   color: inherit;
 }
 
@@ -61,27 +61,27 @@ a.barRow:hover {
   height: 6px;
   overflow: hidden;
   border-radius: 3px;
-  background: var(--desk-2);
+  background: var(--canvas-2);
 }
 
 .fill {
   height: 100%;
   min-width: 2px;
   border-radius: 3px;
-  background: var(--pen);
+  background: var(--brand);
   transition: width var(--dur-3) var(--ease);
 }
 
 .tone_leaf .fill {
-  background: var(--leaf);
+  background: var(--success);
 }
 
 .tone_haldi .fill {
-  background: var(--haldi);
+  background: var(--warn);
 }
 
 .tone_margin .fill {
-  background: var(--margin);
+  background: var(--danger);
 }
 
 .tone_ink .fill {
@@ -156,20 +156,20 @@ a.barRow:hover {
 }
 
 .column {
-  fill: var(--pen-tint-2);
+  fill: var(--brand-tint-2);
   transition: fill var(--dur-1) var(--ease);
 }
 
 .columnHighlight {
-  fill: var(--pen);
+  fill: var(--brand);
 }
 
 .columnActive {
-  fill: color-mix(in srgb, var(--pen) 38%, var(--pen-tint-2));
+  fill: color-mix(in srgb, var(--brand) 38%, var(--brand-tint-2));
 }
 
 .columnHighlight.columnActive {
-  fill: var(--pen-hover);
+  fill: var(--brand-hover);
 }
 
 .hit {
@@ -184,7 +184,7 @@ a.barRow:hover {
   padding: 8px 10px;
   border: 1px solid var(--rule);
   border-radius: 8px;
-  background: var(--paper);
+  background: var(--surface);
   box-shadow: var(--shadow-lg);
   pointer-events: none;
   transform: translate(-50%, calc(-100% - 10px));
@@ -230,27 +230,27 @@ a.barRow:hover {
 }
 
 .meter_ok .meterTrack {
-  background: var(--leaf-tint);
+  background: var(--success-tint);
 }
 
 .meter_ok .meterFill {
-  background: var(--leaf);
+  background: var(--success);
 }
 
 .meter_low .meterTrack {
-  background: var(--haldi-tint);
+  background: var(--warn-tint);
 }
 
 .meter_low .meterFill {
-  background: var(--haldi);
+  background: var(--warn);
 }
 
 .meter_out .meterTrack {
-  background: var(--margin-tint);
+  background: var(--danger-tint);
 }
 
 .meter_out .meterFill {
-  background: var(--margin);
+  background: var(--danger);
 }
 
 .meterLabel {
@@ -260,9 +260,9 @@ a.barRow:hover {
 }
 
 .meter_low .meterLabel {
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .meter_out .meterLabel {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }

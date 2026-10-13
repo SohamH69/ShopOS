@@ -6,8 +6,8 @@
   height: var(--control-md);
   padding: 0 12px;
   border: 1px solid var(--rule-strong);
-  border-radius: var(--radius);
-  background: var(--paper);
+  border-radius: var(--radius-control);
+  background: var(--surface);
   color: var(--ink);
   font-size: var(--text-15);
   line-height: 1.4;
@@ -23,12 +23,12 @@
 .control:focus,
 .control:focus-visible {
   outline: 2px solid transparent;
-  border-color: var(--pen);
+  border-color: var(--brand);
   box-shadow: var(--focus-ring);
 }
 
 .control[aria-invalid="true"] {
-  border-color: var(--margin);
+  border-color: var(--danger);
 }
 
 .control[aria-invalid="true"]:focus {
@@ -37,13 +37,13 @@
 
 .control:disabled {
   border-color: var(--rule);
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink-3);
   cursor: not-allowed;
 }
 
 .control[readonly] {
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .sm {
@@ -68,8 +68,8 @@
   min-width: 0;
   height: var(--control-md);
   border: 1px solid var(--rule-strong);
-  border-radius: var(--radius);
-  background: var(--paper);
+  border-radius: var(--radius-control);
+  background: var(--surface);
   color: var(--ink);
   font-size: var(--text-15);
   cursor: text;
@@ -83,12 +83,12 @@
 }
 
 .group:focus-within {
-  border-color: var(--pen);
+  border-color: var(--brand);
   box-shadow: var(--focus-ring);
 }
 
 .group[data-invalid="true"] {
-  border-color: var(--margin);
+  border-color: var(--danger);
 }
 
 .group[data-invalid="true"]:focus-within {
@@ -97,7 +97,7 @@
 
 .group[data-disabled="true"] {
   border-color: var(--rule);
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink-3);
   cursor: not-allowed;
 }

@@ -1,0 +1,305 @@
+/*
+ * The shop's signboard: the night board under a scalloped marigold awning, the shop's name
+ * painted in marigold, the shopfront photo and three big contact buttons.
+ * The bottom padding leaves room for the balance card, which overlaps the board.
+ */
+
+.board {
+  position: relative;
+  overflow: hidden;
+  background: var(--night);
+  color: var(--night-ink);
+}
+
+/* A low marigold glow, like the shop lamp on the board. */
+.board::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -30%;
+  width: 90%;
+  height: 80%;
+  background: radial-gradient(closest-side, rgba(245, 165, 36, 0.14), transparent);
+  pointer-events: none;
+}
+
+/* The marigold awning: a solid band with half-moon scallops along the top of the board. */
+.awning {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  height: 18px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 100% 8px no-repeat,
+    radial-gradient(circle 10px at 50% 8px, var(--accent) 0 9.5px, transparent 10px) 0 0 / 20px 18px repeat-x;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: var(--portal-max, 600px);
+  margin: 0 auto;
+  padding: 40px 16px 68px;
+}
+
+.topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-12);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--night-ink-2);
+}
+
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.2);
+}
+
+.code {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: var(--text-12);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.codeLabel {
+  color: var(--night-ink-2);
+}
+
+.codeValue {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--night-ink);
+}
+
+/* The name, painted on the board. */
+.name {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(34px, 10vw, 48px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  margin-top: 12px;
+  font-size: var(--text-14);
+  line-height: 1.45;
+  color: var(--night-ink-2);
+}
+
+.address,
+.phone {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.address span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.details svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: var(--night-ink-2);
+}
+
+.phone a {
+  border-radius: 4px;
+  color: var(--night-ink);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+
+.phone a:hover {
+  color: var(--night-ink);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+}
+
+.phone a:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.5);
+}
+
+/* The shopfront. */
+.photoFrame {
+  margin-top: 20px;
+  overflow: hidden;
+  aspect-ratio: 2 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: var(--night-2);
+  box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.7);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Call · WhatsApp · Directions: big, equal tiles on the board. */
+.actions {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  min-height: 64px;
+  padding: 10px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--night-ink);
+  font-size: var(--text-13);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease);
+}
+
+.action span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.action svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .action:hover {
+    border-color: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--night-ink);
+  }
+}
+
+.action:active {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.action:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.5);
+}
+
+/* Loading: the same board, quiet shapes instead of words. */
+.ghost,
+.ghostPhoto,
+.ghostAction {
+  display: block;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.ghostPhoto {
+  margin-top: 20px;
+  aspect-ratio: 2 / 1;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ghostAction {
+  height: 64px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (min-width: 640px) {
+  .inner {
+    padding: 52px 24px 76px;
+  }
+
+  .details {
+    font-size: var(--text-15);
+  }
+
+  .photoFrame,
+  .ghostPhoto {
+    aspect-ratio: 5 / 2;
+  }
+
+  .action {
+    flex-direction: row;
+    gap: 8px;
+    min-height: 48px;
+    font-size: var(--text-15);
+  }
+
+  .action svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ghostAction {
+    height: 48px;
+  }
+}

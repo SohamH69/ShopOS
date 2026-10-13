@@ -57,7 +57,8 @@ type CustomerChoice =
 /** How much is being paid now: the whole total (follows the total as items change), nothing, or a typed amount. */
 type PaidMode = "full" | "none" | "custom";
 
-const CHANNEL_OPTIONS = toOptions(CHANNEL_LABEL);
+// "Online" is only for orders customers send through their khata link.
+const CHANNEL_OPTIONS = toOptions(CHANNEL_LABEL, ["walk_in", "phone", "whatsapp"]);
 const FULFILLMENT_OPTIONS = toOptions(FULFILLMENT_LABEL);
 const METHOD_OPTIONS = toOptions(METHOD_SHORT_LABEL);
 
@@ -73,7 +74,7 @@ function defaultPaidMode(channel: Channel): PaidMode {
 }
 
 /**
- * The new order sheet: customer, items, how it goes out, payment. Keyboard-first — the customer
+ * The new order sheet: customer, items, how it goes out, payment. Keyboard-first: the customer
  * search has focus on open, choosing one moves to the product search, Ctrl+Enter creates the order.
  * It is remounted for every open, so its state always starts from `initial`.
  */

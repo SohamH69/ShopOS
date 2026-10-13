@@ -75,18 +75,18 @@
 
 .orderLink {
   border-radius: 4px;
-  color: var(--pen);
+  color: var(--brand);
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
   text-decoration: underline;
-  text-decoration-color: var(--pen-tint-2);
+  text-decoration-color: var(--brand-tint-2);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
 .orderLink:hover {
-  color: var(--pen-hover);
+  color: var(--brand-hover);
   text-decoration-color: currentColor;
 }
 

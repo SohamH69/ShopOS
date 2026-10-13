@@ -1,7 +1,7 @@
 """Roles, permissions, staff management and cross-shop isolation.
 
 Derived from SPEC section 2 ("Roles & permissions") and section 3 (permission column,
-"every query is scoped to the caller's shop_id — another shop's id must 404").
+"every query is scoped to the caller's shop_id; another shop's id must 404").
 """
 
 from __future__ import annotations
@@ -56,7 +56,7 @@ def team(
     return Team(owner, api, staff, {"product": product["id"], "customer": customer["id"], "order": order["id"]})
 
 
-# (permission, method, path) — read-only probes guarded by exactly one permission.
+# (permission, method, path): read-only probes guarded by exactly one permission.
 SINGLE_PERMISSION_PROBES = [
     ("dashboard", "GET", "/api/dashboard"),
     ("dashboard", "GET", "/api/attention"),
@@ -83,7 +83,7 @@ SINGLE_PERMISSION_PROBES = [
     ("settings", "GET", "/api/export/expenses.csv"),
 ]
 
-# (any of these permissions, method, path) — the read helpers from SPEC section 2.
+# (any of these permissions, method, path): the read helpers from SPEC section 2.
 ANY_OF_PROBES = [
     ({"orders", "customers", "payments"}, "GET", "/api/customers"),
     ({"orders", "customers", "payments"}, "GET", "/api/customers/{customer}"),

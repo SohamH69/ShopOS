@@ -211,7 +211,7 @@ function PriceStrip({ product }: { product: Product }) {
       <div className={styles.price}>
         <dt>Margin</dt>
         <dd className={cx(styles.margin, size === "lg" && styles.marginLarge, margin !== null && margin < 0 && styles.loss)}>
-          {margin === null ? "—" : formatPercent(margin, 1)}
+          {margin === null ? "–" : formatPercent(margin, 1)}
         </dd>
         <dd className={styles.priceHint}>{margin === null ? "No selling price" : `${formatMoney(profit)} per ${per}`}</dd>
       </div>

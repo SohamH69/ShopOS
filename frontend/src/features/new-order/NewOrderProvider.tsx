@@ -63,7 +63,7 @@ export function NewOrderProvider({ children }: { children: ReactNode }) {
     if (canOrder) openNewOrder();
   }, [location, navigate, canOrder, openNewOrder]);
 
-  // N starts a new order — not while typing, and not over another dialog.
+  // N starts a new order, but not while typing, and not over another dialog.
   useHotkey(
     "n",
     () => {

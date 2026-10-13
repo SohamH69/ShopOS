@@ -62,7 +62,7 @@ export function isMacPlatform(): boolean {
   return /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent);
 }
 
-/** "⌘" on Apple devices, "Ctrl" elsewhere — for shortcut hints like "Ctrl K". */
+/** "⌘" on Apple devices, "Ctrl" elsewhere, for shortcut hints like "Ctrl K". */
 export function modifierKeyLabel(): string {
   return isMacPlatform() ? "⌘" : "Ctrl";
 }

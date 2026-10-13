@@ -220,7 +220,7 @@ export default function PaymentsPage() {
       {
         key: "by",
         header: "Received by",
-        cell: (payment) => payment.received_by_name ?? <span className="muted">—</span>,
+        cell: (payment) => payment.received_by_name ?? <span className="muted">–</span>,
       },
       {
         key: "amount",

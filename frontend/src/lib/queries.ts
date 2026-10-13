@@ -1,6 +1,6 @@
 // TanStack Query hooks for every endpoint.
 // Queries: useX(params?, overrides?). Mutations: useCreateX / useUpdateX / ... returning useMutation results.
-// Every successful mutation invalidates ALL queries (see createQueryClient) — simple and always fresh.
+// Every successful mutation invalidates ALL queries (see createQueryClient): simple and always fresh.
 // Mutations that return an OrderDetail / Customer / Product also seed that record's cache so open
 // drawers update instantly.
 
@@ -20,6 +20,7 @@ import { useMemo } from "react";
 import * as api from "./api";
 import { ApiError, tokenStore, type ExpenseSummaryParams, type ProductUpdate, type SupplierListParams, type SupplierUpdate } from "./api";
 import type {
+  AdminShopListParams,
   ChangePasswordRequest,
   CustomerInput,
   CustomerListParams,
@@ -40,12 +41,15 @@ import type {
   Payment,
   PaymentFilters,
   Permission,
+  Plan,
+  PortalOrderCreate,
   ProductInput,
   ProductListParams,
   PromiseInput,
   PurchaseCreate,
   ReportRange,
   Session,
+  Shop,
   ShopUpdate,
   StaffCreate,
   StaffRole,
@@ -119,6 +123,13 @@ export const queryKeys = {
   expensesInfinite: (filters: ExpenseFilters, pageSize: number) => ["expenses", "infinite", filters, pageSize] as const,
   expenseSummary: (params: ExpenseSummaryParams) => ["expenses", "summary", params] as const,
   report: (range: ReportRange) => ["reports", range] as const,
+  portalLink: (customerId: ID) => ["customers", "detail", customerId, "portal-link"] as const,
+  portal: (token: string) => ["portal", token] as const,
+  portalProducts: (token: string) => ["portal", token, "products"] as const,
+  adminMe: ["admin", "me"] as const,
+  adminStats: ["admin", "stats"] as const,
+  adminShops: (params: AdminShopListParams) => ["admin", "shops", params] as const,
+  adminShop: (id: ID) => ["admin", "shop", id] as const,
 };
 
 // ---------------------------------------------------------------------------
@@ -154,7 +165,7 @@ export interface PagedList<T> {
   error: Error | null;
   /** Any request in flight, including background refreshes. */
   isFetching: boolean;
-  /** Rows are from the previous filters while the new ones load — dim them. */
+  /** Rows are from the previous filters while the new ones load; dim them. */
   isPlaceholderData: boolean;
   hasMore: boolean;
   isLoadingMore: boolean;
@@ -478,15 +489,24 @@ type WithId<T> = T & { id: ID };
 
 // Shop & account ------------------------------------------------------------
 
-export function useUpdateShop() {
+/** Puts a saved shop into the shop and session caches, so the setup gate opens at once. */
+function useSeedShop(): (shop: Shop) => void {
   const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (body: ShopUpdate) => api.updateShop(body),
-    onSuccess: (shop) => {
-      queryClient.setQueryData(queryKeys.shop, shop);
-      queryClient.setQueryData<Session>(queryKeys.session, (session) => (session ? { ...session, shop } : session));
-    },
-  });
+  return (shop: Shop) => {
+    queryClient.setQueryData(queryKeys.shop, shop);
+    queryClient.setQueryData<Session>(queryKeys.session, (session) => (session ? { ...session, shop } : session));
+  };
+}
+
+export function useUpdateShop() {
+  const seed = useSeedShop();
+  return useMutation({ mutationFn: (body: ShopUpdate) => api.updateShop(body), onSuccess: seed });
+}
+
+/** Uploads a new shop photo. Variables: the image file (or a resized blob of it). */
+export function useUploadShopPhoto() {
+  const seed = useSeedShop();
+  return useMutation({ mutationFn: (file: Blob) => api.uploadShopPhoto(file), onSuccess: seed });
 }
 
 /** Changes the signed-in user's password and switches to the new token the server returns. */
@@ -694,4 +714,80 @@ export function useImportCsv() {
 /** Downloads an export as a CSV file. Variables: the export kind. Doesn't refetch anything. */
 export function useDownloadCsv() {
   return useMutation({ mutationFn: (kind: ExportKind) => api.downloadCsv(kind), meta: { invalidates: false } });
+}
+
+// Customer khata links --------------------------------------------------------
+
+/** The customer's khata link (same link until reset). */
+export function usePortalLink(customerId: ID | undefined, options?: QueryOverrides) {
+  return useQuery({
+    queryKey: queryKeys.portalLink(customerId ?? 0),
+    queryFn: customerId ? ({ signal }) => api.getPortalLink(customerId, signal) : skipToken,
+    ...overrides(options),
+  });
+}
+
+/** Turns every earlier link off and returns a new one. Variables: the customer id. */
+export function useResetPortalLink() {
+  return useMutation({ mutationFn: (customerId: ID) => api.resetPortalLink(customerId) });
+}
+
+/** The customer's own page (public: the token in the link is the key). */
+export function usePortal(token: string | undefined, options?: QueryOverrides) {
+  return useQuery({
+    queryKey: queryKeys.portal(token ?? ""),
+    queryFn: token ? ({ signal }) => api.getPortal(token, signal) : skipToken,
+    ...overrides(options),
+  });
+}
+
+export function usePortalProducts(token: string | undefined, options?: QueryOverrides) {
+  return useQuery({
+    queryKey: queryKeys.portalProducts(token ?? ""),
+    queryFn: token ? ({ signal }) => api.getPortalProducts(token, signal) : skipToken,
+    ...overrides(options),
+  });
+}
+
+export function usePlacePortalOrder(token: string) {
+  return useMutation({ mutationFn: (body: PortalOrderCreate) => api.placePortalOrder(token, body) });
+}
+
+// ShopOS admin ----------------------------------------------------------------
+
+export function useAdminMe(options?: QueryOverrides) {
+  return useQuery({ queryKey: queryKeys.adminMe, queryFn: ({ signal }) => api.getAdminMe(signal), ...overrides(options) });
+}
+
+export function useAdminStats(options?: QueryOverrides) {
+  return useQuery({ queryKey: queryKeys.adminStats, queryFn: ({ signal }) => api.getAdminStats(signal), ...overrides(options) });
+}
+
+export function useAdminShops(params: AdminShopListParams, options?: QueryOverrides) {
+  return useQuery({
+    queryKey: queryKeys.adminShops(params),
+    queryFn: ({ signal }) => api.getAdminShops(params, signal),
+    placeholderData: keepPreviousData,
+    ...overrides(options),
+  });
+}
+
+export function useAdminShop(id: ID | undefined, options?: QueryOverrides) {
+  return useQuery({
+    queryKey: queryKeys.adminShop(id ?? 0),
+    queryFn: id ? ({ signal }) => api.getAdminShop(id, signal) : skipToken,
+    ...overrides(options),
+  });
+}
+
+export function useSuspendShop() {
+  return useMutation({ mutationFn: ({ id, reason }: { id: ID; reason: string }) => api.suspendShop(id, reason) });
+}
+
+export function useReactivateShop() {
+  return useMutation({ mutationFn: (id: ID) => api.reactivateShop(id) });
+}
+
+export function useChangeShopPlan() {
+  return useMutation({ mutationFn: ({ id, plan }: { id: ID; plan: Plan }) => api.changeShopPlan(id, plan) });
 }

@@ -1,8 +1,10 @@
+/* White surfaces float a little off the canvas: a hairline and a soft, low shadow. */
 .card {
   min-width: 0;
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--paper);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .header {
@@ -10,7 +12,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 20px 0;
+  padding: 18px 20px 0;
 }
 
 .flush > .header {
@@ -23,9 +25,10 @@
 }
 
 .title {
-  font-size: var(--text-17);
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   line-height: 1.3;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 

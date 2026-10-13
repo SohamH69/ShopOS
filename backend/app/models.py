@@ -52,6 +52,8 @@ class Shop(Base):
     __tablename__ = "shops"
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    # Public shop ID such as "SO-7K2Q9M": shown to the owner and in the admin view.
+    code: Mapped[str | None] = mapped_column(String(16), unique=True, index=True, default=None)
     name: Mapped[str] = mapped_column(String(120))
     owner_name: Mapped[str] = mapped_column(String(120))
     phone: Mapped[str] = mapped_column(String(32))
@@ -61,9 +63,29 @@ class Shop(Base):
     segment: Mapped[str] = mapped_column(String(60), default="Grocery")
     plan: Mapped[str] = mapped_column(String(20), default="free")
     upi_id: Mapped[str | None] = mapped_column(String(120), default=None)
+    # Shop setup: a photo of the shop front and its map pin. Required before the app opens.
+    photo_file: Mapped[str | None] = mapped_column(String(80), default=None)
+    latitude: Mapped[float | None] = mapped_column(Float, default=None)
+    longitude: Mapped[float | None] = mapped_column(Float, default=None)
+    # What customers see through their khata link.
+    portal_catalog: Mapped[bool] = mapped_column(Boolean, default=True)
+    portal_orders: Mapped[bool] = mapped_column(Boolean, default=True)
+    # Set by a ShopOS admin: nobody in the shop can sign in, and customer links stop working.
+    is_suspended: Mapped[bool] = mapped_column(Boolean, default=False)
+    suspended_reason: Mapped[str] = mapped_column(Text, default="")
+    suspended_at: Mapped[datetime | None] = mapped_column(UTCDateTime, default=None)
     is_demo: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
     next_order_number: Mapped[int] = mapped_column(Integer, default=1001)
     created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=now_utc)
+
+    @property
+    def setup_complete(self) -> bool:
+        return bool(
+            self.photo_file
+            and self.latitude is not None
+            and self.longitude is not None
+            and self.address.strip()
+        )
 
 
 class User(Base):
@@ -119,6 +141,9 @@ class Customer(Base):
     promise_date: Mapped[date | None] = mapped_column(Date, default=None)
     promise_amount_paise: Mapped[int | None] = mapped_column(Integer, default=None)
     promise_note: Mapped[str] = mapped_column(Text, default="")
+    # Bumped to revoke the customer's khata link; last_seen is when they last opened it.
+    portal_version: Mapped[int] = mapped_column(Integer, default=0)
+    portal_last_seen_at: Mapped[datetime | None] = mapped_column(UTCDateTime, default=None)
     is_archived: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=now_utc)
     updated_at: Mapped[datetime] = mapped_column(UTCDateTime, default=now_utc)
@@ -335,3 +360,33 @@ class Expense(Base):
     created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=now_utc)
 
     created_by: Mapped[User | None] = relationship()
+
+
+class Admin(Base):
+    """A ShopOS developer/operator. Not part of any shop; signs in at /admin."""
+
+    __tablename__ = "admins"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(String(254), unique=True)
+    name: Mapped[str] = mapped_column(String(120))
+    password_hash: Mapped[str] = mapped_column(String(255))
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    token_version: Mapped[int] = mapped_column(Integer, default=0)
+    last_login_at: Mapped[datetime | None] = mapped_column(UTCDateTime, default=None)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=now_utc)
+
+
+class AdminAction(Base):
+    """Audit trail of what admins changed: suspensions, reactivations, plan changes."""
+
+    __tablename__ = "admin_actions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    admin_id: Mapped[int] = mapped_column(ForeignKey("admins.id"), index=True)
+    shop_id: Mapped[int | None] = mapped_column(ForeignKey("shops.id"), index=True, default=None)
+    action: Mapped[str] = mapped_column(String(40))
+    detail: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime, default=now_utc)
+
+    admin: Mapped[Admin] = relationship()

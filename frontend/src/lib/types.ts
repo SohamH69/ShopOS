@@ -1,4 +1,4 @@
-// ShopOS API contract — the single source of truth for every JSON shape exchanged
+// ShopOS API contract: the single source of truth for every JSON shape exchanged
 // between the FastAPI backend and this frontend. The backend MUST produce exactly
 // these shapes (snake_case keys, same nullability); the frontend MUST NOT invent others.
 //
@@ -39,7 +39,7 @@ export type Permission =
 export type OrderStatus = "new" | "preparing" | "ready" | "collected" | "delivered" | "cancelled";
 export type PaymentStatus = "unpaid" | "partial" | "paid";
 export type Fulfillment = "pickup" | "delivery";
-export type Channel = "walk_in" | "phone" | "whatsapp";
+export type Channel = "walk_in" | "phone" | "whatsapp" | "online"; // online: sent by the customer through their khata link
 export type PaymentMethod = "cash" | "upi" | "card" | "bank_transfer";
 export type ProductUnit = "pcs" | "kg" | "g" | "l" | "ml" | "pack" | "dozen" | "box";
 export type ExpenseCategory =
@@ -74,6 +74,7 @@ export interface Paginated<T> {
 
 export interface Shop {
   id: ID;
+  code: string; // public shop ID, e.g. "SO-7K2Q9M"
   name: string;
   owner_name: string;
   phone: string;
@@ -83,6 +84,13 @@ export interface Shop {
   segment: string; // e.g. "Grocery", "Pharmacy", "Hardware" (free text, UI offers a list)
   plan: Plan;
   upi_id: string | null; // used to print a UPI QR on receipts with dues
+  photo_url: string | null; // the shop front, "/api/media/shops/<file>.jpg"
+  latitude: number | null;
+  longitude: number | null;
+  /** Photo, address and map pin are all in. Until then only the setup screen opens. */
+  setup_complete: boolean;
+  portal_catalog: boolean; // customers see products and prices on their khata link
+  portal_orders: boolean; // customers can send orders through their khata link
   created_at: ISODateTime;
 }
 
@@ -95,6 +103,10 @@ export interface ShopUpdate {
   city?: string;
   segment?: string;
   upi_id?: string | null;
+  latitude?: number | null; // set together with longitude
+  longitude?: number | null;
+  portal_catalog?: boolean;
+  portal_orders?: boolean;
 }
 
 export interface User {
@@ -581,6 +593,7 @@ export interface ExpenseSummary {
 // ---------------------------------------------------------------------------
 
 export type AttentionKey =
+  | "online_orders"
   | "pickups"
   | "ready_unpaid"
   | "customer_dues"
@@ -749,4 +762,164 @@ export interface ImportResult {
   updated: number; // rows matched to an existing record (by phone for customers, by name for products)
   skipped: number;
   errors: { row: number; message: string }[]; // row numbers are 1-based, header excluded
+}
+
+// ---------------------------------------------------------------------------
+// Customer khata links (the customer side, /c/:token)
+// ---------------------------------------------------------------------------
+
+/** What a shopkeeper shares on WhatsApp. The same link every time until it is reset. */
+export interface PortalLink {
+  token: string;
+  path: string; // "/c/<token>"
+  last_seen_at: ISODateTime | null; // when the customer last opened it
+}
+
+export interface PortalShop {
+  code: string;
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+  photo_url: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  upi_id: string | null;
+  catalog_enabled: boolean;
+  orders_enabled: boolean;
+}
+
+export interface PortalCustomer {
+  name: string;
+  phone: string;
+  outstanding: Money;
+  promise_date: ISODate | null;
+  promise_amount: Money | null;
+}
+
+export interface PortalOrderItem {
+  name: string;
+  unit: string;
+  quantity: Quantity;
+  unit_price: Money;
+  line_total: Money;
+}
+
+export interface PortalOrder {
+  id: ID;
+  number: number;
+  status: OrderStatus;
+  payment_status: PaymentStatus;
+  fulfillment: Fulfillment;
+  channel: Channel;
+  total: Money;
+  paid: Money;
+  outstanding: Money;
+  due_at: ISODateTime | null;
+  created_at: ISODateTime;
+  completed_at: ISODateTime | null;
+  items: PortalOrderItem[];
+}
+
+export interface PortalView {
+  shop: PortalShop;
+  customer: PortalCustomer;
+  ledger: LedgerEntry[]; // chronological, oldest first (the latest 100)
+  orders: PortalOrder[]; // newest first (the latest 50)
+}
+
+export interface PortalProduct {
+  id: ID;
+  name: string;
+  category: string;
+  unit: ProductUnit;
+  price: Money;
+  in_stock: boolean;
+}
+
+export interface PortalOrderCreate {
+  items: { product_id: ID; quantity: Quantity }[];
+  fulfillment?: Fulfillment;
+  delivery_address?: string; // defaults to the customer's saved address
+  notes?: string;
+}
+
+// ---------------------------------------------------------------------------
+// ShopOS admin (/admin): developers and operators, never shop staff
+// ---------------------------------------------------------------------------
+
+export interface AdminUser {
+  id: ID;
+  email: string;
+  name: string;
+  last_login_at: ISODateTime | null;
+}
+
+export interface AdminAuthResponse {
+  token: string;
+  admin: AdminUser;
+}
+
+export type AdminShopStatus = "all" | "active" | "suspended" | "setup_incomplete" | "demo";
+
+export interface AdminShopRow {
+  id: ID;
+  code: string;
+  name: string;
+  owner_name: string;
+  phone: string;
+  email: string | null;
+  city: string;
+  plan: Plan;
+  photo_url: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  setup_complete: boolean;
+  is_suspended: boolean;
+  is_demo: boolean;
+  created_at: ISODateTime;
+  last_active_at: ISODateTime | null; // latest order or sign-in
+  orders_count: number;
+  customers_count: number;
+}
+
+export interface AdminActionEntry {
+  id: ID;
+  action: "suspend" | "reactivate" | "plan" | string;
+  detail: string;
+  admin_name: string;
+  created_at: ISODateTime;
+}
+
+export interface AdminShopDetail extends AdminShopRow {
+  address: string;
+  segment: string;
+  upi_id: string | null;
+  suspended_reason: string;
+  suspended_at: ISODateTime | null;
+  users: User[];
+  totals: { sales_30d: Money; orders_30d: number; outstanding: Money; products: number; staff: number };
+  actions: AdminActionEntry[];
+}
+
+export interface AdminShopListParams {
+  search?: string;
+  status?: AdminShopStatus;
+  plan?: Plan;
+  offset?: number;
+  limit?: number;
+}
+
+/** Real shops only: the demo shop is left out of every number. */
+export interface AdminStats {
+  shops_total: number;
+  shops_active_7d: number;
+  shops_new_30d: number;
+  shops_suspended: number;
+  shops_setup_incomplete: number;
+  customers_total: number;
+  orders_30d: number;
+  gmv_30d: Money;
+  signups_30d: { date: ISODate; count: number }[];
+  by_plan: { plan: Plan; count: number }[];
 }

@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background: var(--desk);
+  background: var(--canvas);
 }
 
 .header {
@@ -8,7 +8,7 @@
   top: 0;
   z-index: var(--z-nav);
   border-bottom: 1px solid var(--rule);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .headerInner {
@@ -34,7 +34,7 @@
 }
 
 .nav a:hover {
-  color: var(--pen);
+  color: var(--brand);
 }
 
 .main {
@@ -56,7 +56,6 @@
 .sectionTitle {
   font-family: var(--font-display);
   font-size: var(--text-24);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
   line-height: 1.1;
 }
@@ -116,7 +115,7 @@
   overflow: hidden;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
   font-size: var(--text-12);
 }
 
@@ -146,7 +145,6 @@
 .displayXL {
   font-family: var(--font-display);
   font-size: var(--text-44);
-  font-stretch: var(--display-stretch);
   font-weight: 760;
   line-height: 1.02;
   letter-spacing: -0.015em;
@@ -155,7 +153,6 @@
 .displayL {
   font-family: var(--font-display);
   font-size: var(--text-32);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
   line-height: 1.05;
 }
@@ -178,7 +175,7 @@
   padding: 16px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .paymentCell {
@@ -210,7 +207,7 @@
   min-height: 140px;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .chartCard {

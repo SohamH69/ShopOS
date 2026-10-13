@@ -21,7 +21,7 @@ export interface CardProps {
   children?: ReactNode;
 }
 
-/** Paper surface with a 1px rule — no shadow. Optional header (title, description, actions) and footer. */
+/** A white surface with a hairline and a soft low shadow. Optional header (title, description, actions) and footer. */
 export function Card({
   title,
   description,

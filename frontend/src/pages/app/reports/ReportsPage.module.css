@@ -134,7 +134,6 @@
 .factValue {
   font-family: var(--font-display);
   font-size: var(--text-24);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.01em;
@@ -149,11 +148,11 @@
 }
 
 .tone_margin .factValue {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .tone_leaf .factValue {
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 /* ------------------------------------------------------------ lists */
@@ -205,7 +204,7 @@ a.itemName {
 }
 
 a.itemName:hover {
-  color: var(--pen);
+  color: var(--brand);
   text-decoration: underline;
 }
 
@@ -304,7 +303,7 @@ a.itemName:hover {
 }
 
 .outOfStock {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .notSold {

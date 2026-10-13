@@ -62,7 +62,7 @@ export function CustomerOrdersTable({ orders, error, onRetry, onOpenOrder, empty
           order.status !== "cancelled" && order.outstanding > 0 ? (
             <Money value={order.outstanding} tone="margin" />
           ) : (
-            <span className="muted">—</span>
+            <span className="muted">–</span>
           ),
       },
     ],
@@ -121,7 +121,7 @@ export function CustomerPaymentsTable({ payments, error, onRetry, onOpenOrder }:
       {
         key: "by",
         header: "Received by",
-        cell: (payment) => payment.received_by_name ?? <span className="muted">—</span>,
+        cell: (payment) => payment.received_by_name ?? <span className="muted">–</span>,
       },
       {
         key: "amount",

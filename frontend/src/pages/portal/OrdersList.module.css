@@ -1,0 +1,238 @@
+/* The customer's orders: one card each, tap to see the items. */
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.empty {
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.card {
+  min-width: 0;
+  /* Clears the sticky tabs when scrolled to from the khata. */
+  scroll-margin-top: 64px;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--dur-2) var(--ease);
+}
+
+.open {
+  border-color: var(--rule-strong);
+}
+
+.heading {
+  font: inherit;
+}
+
+.toggle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 15px;
+  color: var(--ink);
+  text-align: left;
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+@media (hover: hover) {
+  .toggle:hover {
+    background: color-mix(in srgb, var(--canvas) 55%, transparent);
+  }
+}
+
+.open .toggle {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: var(--text-15);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.total.total {
+  font-size: var(--text-15);
+  font-weight: 600;
+}
+
+.cancelled .total {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+
+.meta {
+  font-size: var(--text-13);
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.meta > span:first-child {
+  min-width: 0;
+}
+
+.due {
+  flex: none;
+  font-size: var(--text-13);
+  font-weight: 600;
+  color: var(--danger-text);
+  white-space: nowrap;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-top: 2px;
+}
+
+.source {
+  font-size: var(--text-12);
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.chevron {
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  color: var(--ink-3);
+  transition: transform var(--dur-2) var(--ease);
+}
+
+.open .chevron {
+  transform: rotate(180deg);
+}
+
+.progress {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--canvas);
+  font-size: var(--text-13);
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+/* Items --------------------------------------------------------------------- */
+
+.body {
+  padding: 4px 16px 16px;
+  border-top: 1px solid var(--rule-line);
+}
+
+.items {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "name total"
+    "qty total";
+  column-gap: 12px;
+  row-gap: 1px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--rule);
+}
+
+.itemName {
+  grid-area: name;
+  min-width: 0;
+  font-size: var(--text-14);
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.itemQty {
+  grid-area: qty;
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+
+.itemTotal {
+  grid-area: total;
+  align-self: center;
+  font-size: var(--text-14);
+}
+
+.totals {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.totals > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.totals dt {
+  font-size: var(--text-14);
+  color: var(--ink-3);
+}
+
+.totals dd {
+  font-size: var(--text-14);
+}
+
+.dueRow dt {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dueRow dd > span {
+  font-weight: 600;
+}
+
+.finished {
+  margin-top: 10px;
+  font-size: var(--text-13);
+  color: var(--ink-3);
+}
+
+.pay {
+  margin-top: 12px;
+}
+
+@media (min-width: 640px) {
+  .toggle {
+    padding: 16px 20px;
+  }
+
+  .body {
+    padding: 4px 20px 18px;
+  }
+
+  .number,
+  .total.total {
+    font-size: var(--text-17);
+  }
+}

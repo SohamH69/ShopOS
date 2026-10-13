@@ -5,11 +5,11 @@ Everything is CSS Modules on the tokens in `src/styles/tokens.css`. Open **/kit*
 
 Conventions
 - Icons: lucide-react. The kit sizes icons inside its components; elsewhere pass `size={16|18|20}`. Stroke width is 1.75 globally (override with `style={{ strokeWidth: 2 }}`, not the prop). Give decorative icons `aria-hidden="true"`.
-- Global classes from `base.css`: `mono` (Spline Sans Mono + tabular figures: order numbers, SKUs, times), `num` (tabular figures in Mukta), `display` (condensed Anek Latin: titles and big numbers only), `muted` (ink-3), `truncate`, `visually-hidden`.
-- Display face in your own CSS: `font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 700;`.
-- Colours only via tokens: `--paper --desk --desk-2 --ink --ink-2 --ink-3 --ink-4 --rule --rule-strong --rule-line --pen(-hover/-press/-tint/-tint-2) --margin(-text/-tint) --stamp(-tint) --haldi(-text/-tint) --leaf(-text/-tint)`. Radius `--radius-sm` 6 · `--radius` 10 · `--radius-lg` 14. Space `--space-1…16` (4px grid). Motion `--ease`, `--dur-1/2/3`. Layers `--z-sticky --z-nav --z-fab --z-overlay --z-popover --z-toast`.
+- Global classes from `base.css`: `mono` (Figtree with tabular figures: order numbers, SKUs, times, amounts), `num` (tabular figures), `display` (Baloo 2: titles and big numbers only), `muted` (ink-3), `truncate`, `visually-hidden`.
+- Display face in your own CSS: `font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em;`.
+- Colours only via tokens: `--surface --canvas --canvas-2 --ink --ink-2 --ink-3 --ink-4 --rule --rule-strong --rule-line --brand(-hover/-press/-tint/-tint-2) --accent(-hover/-ink/-tint) --night(-2) --night-ink(-2) --danger(-text/-tint) --paid(-tint) --warn(-text/-tint) --info(-text/-tint) --success(-text/-tint) --scrim`. Marigold `--accent` is for brand moments only, never a status. Radius `--radius-sm` 8 · `--radius-control` 10 · `--radius` 12 · `--radius-lg` 18. Shadows `--shadow-sm --shadow-card --shadow-lg --shadow-float`. Space `--space-1…16` (4px grid). Motion `--ease`, `--dur-1/2/3`. Layers `--z-sticky --z-nav --z-fab --z-overlay --z-popover --z-toast`.
 - Single-column CSS grids: write `grid-template-columns: minmax(0, 1fr)` so long text or a wide SegmentedControl can't push the page wider than a phone.
-- Forms: `Button` defaults to `type="button"`; use `type="submit"`. Put fields in `<Field>` — kit controls pick up the label, hint and error automatically.
+- Forms: `Button` defaults to `type="button"`; use `type="submit"`. Put fields in `<Field>`; kit controls pick up the label, hint and error automatically.
 
 ## Actions
 
@@ -33,7 +33,7 @@ Conventions
 | `Checkbox` | `label?`, `description?`, `checked`, `onCheckedChange(checked)`, `indeterminate`, `disabled` | Without label pass `aria-label`. 40px touch area. |
 | `Switch` | same as Checkbox (no indeterminate) | `role="switch"`. |
 | `MoneyInput` | **`value: number \| null`**, **`onChange(value \| null)`** + Input props | ₹ prefix, decimal keyboard, max 2 decimals, rounds to paise. |
-| `QuantityInput` | **`value`**, **`onChange`**, `step` (1; use `unitStep(unit)`), `min` (0 — pass `step` for order lines), `max`, `unit`, `size` sm · md, `invalid`, `disabled`, `aria-label`, `inputRef`, `onKeyDown` | − / + stepper; ↑/↓ keys; 3 decimals. |
+| `QuantityInput` | **`value`**, **`onChange`**, `step` (1; use `unitStep(unit)`), `min` (0; pass `step` for order lines), `max`, `unit`, `size` sm · md, `invalid`, `disabled`, `aria-label`, `inputRef`, `onKeyDown` | − / + stepper; ↑/↓ keys; 3 decimals. |
 | `SearchInput` | **`value`**, **`onChange(text)`** + Input props | Clear button; Esc clears. Debounce yourself with `useDebouncedValue`. Outside a Field the placeholder is its label. |
 | `SegmentedControl<T>` | **`options: {value,label,count?,disabled?}[]`**, **`value`**, **`onChange`**, `label` (aria; Field label used inside a Field), `size` sm · md, `block`, `disabled` | Radio group; arrows move. Scrolls sideways when too wide. |
 | `Combobox<T>` | **`inputValue`**, **`onInputChange`**, **`options`**, **`getOptionKey`**, **`renderOption(option, {active})`**, **`onSelect`**, `leadingActions` / `trailingActions: {key,label,icon?,onSelect(query)}[]` ("create new" rows), `loading`, `emptyMessage`, `footer`, `placeholder`, `label`, `keepOpenOnSelect`, `openOnFocus` (true), `leading`, `inputRef`, `onKeyDown`, `size`, `disabled`, `invalid` | ARIA combobox; focus stays in the field. You filter/fetch options. |
@@ -53,7 +53,7 @@ Pickers (in `features/pickers/`):
 | `OrderStatusBadge` | **`status`** | Dot + word. Cancelled is struck through. |
 | `PaymentStatusBadge` | **`status`** | UNPAID / PARTIAL / PAID stamped mark. |
 | `Stamp` | `label` **Paid** · Settled · Collected · Delivered, `size` sm · **md** · lg, `animate`, `className`, `style` | Signature. Only: landing demo, order becomes fully paid (animate), receipts (static), settled khata. Replay with a new `key`. |
-| `Money` | **`value`** (null → "—"), `tone` default · muted · margin · leaf · pen, `exact`, `sign` auto · always (+/−) · never, `size` sm · md · lg, `display` | Mono, tabular. |
+| `Money` | **`value`** (null → "–"), `tone` default · muted · margin · leaf · pen, `exact`, `sign` auto · always (+/−) · never, `size` sm · md · lg, `display` | Mono, tabular. |
 | `Avatar` | **`name`**, `size` sm · **md** · lg | Initials, stable tint, decorative. |
 | `Kbd` | children | Use `modifierKeyLabel()` for Ctrl / ⌘. |
 | `DescriptionList` | **`items: {label, value, key?}[]`**, `stacked` | Detail rows in drawers. |

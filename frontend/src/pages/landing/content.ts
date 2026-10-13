@@ -60,6 +60,23 @@ export const ATTENTION_EXAMPLE: readonly AttentionExample[] = [
   { key: "supplier_dues", value: "2", label: "supplier payments due", detail: "₹9,850 in total", severity: "low" },
 ];
 
+export interface OrderEffect {
+  key: "pickups" | "payments" | "khata" | "stock" | "reports";
+  book: string;
+  change: string;
+  detail: string;
+  tone?: "due" | "received";
+}
+
+/** What marking the hero's order #1045 collected (₹300 paid by UPI, the rest on khata) updates. */
+export const ORDER_EFFECTS: readonly OrderEffect[] = [
+  { key: "pickups", book: "Pickups", change: "Collected", detail: "#1045 leaves the pickup list" },
+  { key: "payments", book: "Payments", change: "+₹300", detail: "Received by UPI", tone: "received" },
+  { key: "khata", book: "Khata", change: "+₹358", detail: "Added to Rahul Sharma's balance", tone: "due" },
+  { key: "stock", book: "Stock", change: "−5 kg", detail: "Basmati rice, and 1 Tea powder" },
+  { key: "reports", book: "Reports", change: "+₹658", detail: "In today's sales" },
+];
+
 export const MODULES: ReadonlyArray<{ name: string; line: string }> = [
   {
     name: "Orders",
@@ -67,7 +84,7 @@ export const MODULES: ReadonlyArray<{ name: string; line: string }> = [
   },
   {
     name: "Pending pickups",
-    line: "“Keep it ready, I’ll collect it later” — handled. Every waiting order in one list, ready ones first.",
+    line: "“Keep it ready, I’ll collect it later” is handled. Every waiting order in one list, ready ones first.",
   },
   { name: "Khata", line: "A credit ledger for every customer, with a running balance and payment promises." },
   { name: "Payments", line: "Cash, UPI, card and bank transfer. Part payments, and several payments on one order." },
@@ -169,7 +186,7 @@ export const FAQS: ReadonlyArray<{ question: string; answer: string }> = [
   {
     question: "Do I need a computer?",
     answer:
-      "No. ShopOS works on a phone, a tablet or the computer at your counter — use whichever is closest. Everything stays in sync.",
+      "No. ShopOS works on a phone, a tablet or the computer at your counter. Use whichever is closest. Everything stays in sync.",
   },
   {
     question: "Can my staff use it?",

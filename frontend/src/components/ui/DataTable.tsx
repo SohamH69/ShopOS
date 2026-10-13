@@ -13,8 +13,8 @@ export interface DataColumn<T> {
   /** CSS width, e.g. "120px" or "18%". */
   width?: string;
   /**
-   * Role in the phone card: "title" (card heading — default for the first column), "aside"
-   * (top-right, e.g. an amount), "meta" (label + value grid — default), or "hidden".
+   * Role in the phone card: "title" (card heading, default for the first column), "aside"
+   * (top-right, e.g. an amount), "meta" (label + value grid, default), or "hidden".
    */
   mobile?: "title" | "aside" | "meta" | "hidden";
   /** Label in the phone card; defaults to `header`. */
@@ -41,7 +41,7 @@ export interface DataTableProps<T> {
   /** Shows an ErrorState (with onRetry) when there are no rows to show. */
   error?: unknown;
   onRetry?: () => void;
-  /** Shown when rows is an empty array — usually an <EmptyState>. */
+  /** Shown when rows is an empty array, usually an <EmptyState>. */
   empty?: ReactNode;
   /** Visually hidden table caption. */
   caption?: string;

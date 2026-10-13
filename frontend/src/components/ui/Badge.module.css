@@ -5,10 +5,10 @@
   align-items: center;
   gap: 5px;
   height: 22px;
-  padding: 0 8px;
-  border-radius: var(--radius-sm);
+  padding: 0 9px;
+  border-radius: var(--radius-pill);
   font-size: var(--text-13);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1;
   white-space: nowrap;
   vertical-align: middle;
@@ -26,33 +26,33 @@
 }
 
 .neutral {
-  background: var(--desk-2);
+  background: var(--canvas-2);
   color: var(--ink-2);
 }
 
 .pen {
-  background: var(--pen-tint);
-  color: var(--pen);
+  background: var(--brand-tint);
+  color: var(--brand);
 }
 
 .margin {
-  background: var(--margin-tint);
-  color: var(--margin-text);
+  background: var(--danger-tint);
+  color: var(--danger-text);
 }
 
 .haldi {
-  background: var(--haldi-tint);
-  color: var(--haldi-text);
+  background: var(--warn-tint);
+  color: var(--warn-text);
 }
 
 .leaf {
-  background: var(--leaf-tint);
-  color: var(--leaf-text);
+  background: var(--success-tint);
+  color: var(--success-text);
 }
 
 .stamp {
-  background: var(--stamp-tint);
-  color: var(--stamp);
+  background: var(--paid-tint);
+  color: var(--paid);
 }
 
 /* Order status: a dot and a word ----------------------------------------- */
@@ -70,23 +70,23 @@
 
 .dot {
   flex: none;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--ink-3);
 }
 
 .status_preparing .dot {
-  background: var(--haldi);
+  background: var(--warn);
 }
 
 .status_ready .dot {
-  background: var(--pen);
+  background: var(--info);
 }
 
 .status_collected .dot,
 .status_delivered .dot {
-  background: var(--leaf);
+  background: var(--success);
 }
 
 .status_cancelled {
@@ -102,19 +102,19 @@
   text-decoration-thickness: 1px;
 }
 
-/* Payment status: a small stamped mark ------------------------------------- */
+/* Payment status: a small solid-edged pill ------------------------------- */
 
 .payment {
   display: inline-flex;
   align-items: center;
-  height: 20px;
-  padding: 0 6px;
-  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
-  border-radius: 4px;
-  font-family: var(--font-mono);
+  height: 21px;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -122,16 +122,16 @@
 }
 
 .payment_unpaid {
-  background: var(--margin-tint);
-  color: var(--margin-text);
+  background: var(--danger-tint);
+  color: var(--danger-text);
 }
 
 .payment_partial {
-  background: var(--haldi-tint);
-  color: var(--haldi-text);
+  background: var(--warn-tint);
+  color: var(--warn-text);
 }
 
 .payment_paid {
-  background: var(--stamp-tint);
-  color: var(--stamp);
+  background: var(--paid-tint);
+  color: var(--paid);
 }

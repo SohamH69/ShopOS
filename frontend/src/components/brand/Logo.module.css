@@ -2,33 +2,39 @@
   --logo-size: 28px;
   display: inline-flex;
   align-items: center;
-  gap: calc(var(--logo-size) * 0.26);
+  gap: calc(var(--logo-size) * 0.3);
   color: var(--ink);
   text-decoration: none;
   line-height: 1;
 }
 
-/* The slip is portrait: 19.5 x 26.5 viewBox units. */
 .mark {
   display: block;
   flex: none;
-  width: calc(var(--logo-size) * 0.736);
+  width: var(--logo-size);
   height: var(--logo-size);
 }
 
 .wordmark {
   font-family: var(--font-display);
-  font-size: calc(var(--logo-size) * 0.8);
-  font-stretch: 78%;
-  font-weight: 760;
-  letter-spacing: -0.012em;
+  font-size: calc(var(--logo-size) * 0.78);
+  font-weight: 800;
+  letter-spacing: -0.02em;
   line-height: 1;
   color: var(--ink);
   white-space: nowrap;
-  /* The display face sits a touch low next to the mark. */
-  transform: translateY(-0.02em);
+  /* Baloo carries tall Devanagari metrics; lift the Latin glyphs to sit level with the mark. */
+  transform: translateY(0.06em);
 }
 
 .os {
-  color: var(--pen);
+  color: var(--brand);
+}
+
+.dark .wordmark {
+  color: #ffffff;
+}
+
+.dark .os {
+  color: var(--accent);
 }

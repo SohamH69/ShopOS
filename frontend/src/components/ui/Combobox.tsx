@@ -40,7 +40,7 @@ export interface ComboboxProps<T> {
   onSelect: (option: T) => void;
   /** Rows above the results. */
   leadingActions?: readonly ComboboxAction[];
-  /** Rows below the results — the "create new" row goes here. */
+  /** Rows below the results; the "create new" row goes here. */
   trailingActions?: readonly ComboboxAction[];
   /** Shows a spinner (results may still be the previous ones). */
   loading?: boolean;

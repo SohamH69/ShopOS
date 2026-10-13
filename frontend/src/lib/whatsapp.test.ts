@@ -4,6 +4,7 @@ import { upiPaymentUri } from "./upi";
 import {
   hasWhatsAppNumber,
   orderConfirmationMessage,
+  khataLinkMessage,
   paymentReminderMessage,
   pickupReadyMessage,
   receiptMessage,
@@ -91,12 +92,12 @@ describe("messages", () => {
   it("confirms an order with items, amounts and pickup time", () => {
     const text = orderConfirmationMessage(order({ due_at: "2026-10-04T13:00:00+00:00" }), shop);
     expect(text.startsWith("Namaste Rahul,\nyour order #1045 at Raj Local Mart is confirmed.")).toBe(true);
-    expect(text).toContain("5 kg Basmati rice — ₹460");
-    expect(text).toContain("1 × Tea powder 500g — ₹198");
+    expect(text).toContain("5 kg Basmati rice: ₹460");
+    expect(text).toContain("1 × Tea powder 500g: ₹198");
     expect(text).toContain("*Total: ₹658*");
     expect(text).toContain("Paid: ₹300\nDue: ₹358");
     expect(text).toContain("We'll keep it ready for pickup by 6:30 pm.");
-    expect(text.endsWith("— Raj Local Mart, +91 98765 00001")).toBe(true);
+    expect(text.endsWith("\nRaj Local Mart, +91 98765 00001")).toBe(true);
   });
 
   it("confirms a delivery order with the address", () => {
@@ -125,6 +126,23 @@ describe("messages", () => {
     const text = paymentReminderMessage({ name: "Rahul Sharma", outstanding: 1250 }, shop);
     expect(text.split("\n")[0]).toBe("Namaste Rahul, ₹1,250 is pending on your account at Raj Local Mart.");
     expect(text).toContain("You can pay by UPI to rajlocalmart@upi.");
+  });
+
+  it("puts the khata link in the reminder instead of the bare UPI ID", () => {
+    const url = "https://shopos.app/c/12.0.abc";
+    const text = paymentReminderMessage({ name: "Rahul Sharma", outstanding: 1250 }, shop, url);
+    expect(text).toContain(`See your khata and pay here: ${url}`);
+    expect(text).not.toContain("You can pay by UPI to");
+  });
+
+  it("shares the khata link", () => {
+    const text = khataLinkMessage("Rahul Sharma", shop, "https://shopos.app/c/12.0.abc");
+    expect(text.split("\n")).toEqual([
+      "Namaste Rahul, here is your khata at Raj Local Mart.",
+      "See your dues, orders and payments, pay by UPI, and send us your orders:",
+      "https://shopos.app/c/12.0.abc",
+      "Raj Local Mart, +91 98765 00001",
+    ]);
   });
 
   it("leaves out UPI when the shop has none", () => {

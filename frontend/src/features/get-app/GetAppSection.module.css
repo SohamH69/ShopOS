@@ -15,7 +15,6 @@
 .title {
   font-family: var(--font-display);
   font-size: var(--text-44);
-  font-stretch: var(--display-stretch);
   font-weight: 720;
   line-height: 1.02;
   letter-spacing: -0.015em;
@@ -51,7 +50,7 @@
   padding: var(--space-6);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .cardTitle {
@@ -110,7 +109,7 @@
 .installedIcon {
   flex: none;
   margin-top: 2px;
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .installedTitle {
@@ -172,7 +171,7 @@
   margin: 0 2px;
   border: 1px solid var(--rule);
   border-radius: var(--radius-sm);
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink-2);
   vertical-align: -5px;
 }
@@ -183,10 +182,10 @@
   gap: var(--space-2);
   padding: var(--space-3);
   border-radius: var(--radius-sm);
-  background: var(--haldi-tint);
+  background: var(--warn-tint);
   font-size: var(--text-14);
   line-height: 1.5;
-  color: var(--haldi-text);
+  color: var(--warn-text);
 }
 
 .note svg {
@@ -209,7 +208,7 @@
   padding: var(--space-2);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--surface);
 }
 
 .qrCaption {
@@ -238,7 +237,7 @@
 .signedIn {
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-sm);
-  background: var(--pen-tint);
+  background: var(--brand-tint);
   font-size: var(--text-14);
   line-height: 1.5;
   color: var(--ink-2);
@@ -275,7 +274,7 @@ ul.facts {
 .facts svg {
   flex: none;
   margin-top: 2px;
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 /* Responsive -------------------------------------------------------------- */

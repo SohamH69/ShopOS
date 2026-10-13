@@ -185,7 +185,7 @@ export default function PickupsPage() {
         description="Orders customers will collect, and orders going out."
         actions={
           <Button icon={<Plus aria-hidden="true" />} onClick={() => openNewOrder({ fulfillment: tab === "deliveries" ? "delivery" : "pickup" })}>
-            New order
+            {tab === "deliveries" ? "New delivery" : "New pickup"}
           </Button>
         }
       >

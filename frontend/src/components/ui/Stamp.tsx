@@ -38,7 +38,7 @@ function seedFrom(id: string): number {
 }
 
 /**
- * The violet PAID stamp — ShopOS's signature. Use ONLY on: the landing hero demo, the order drawer
+ * The violet PAID stamp, ShopOS's signature. Use ONLY on: the landing hero demo, the order drawer
  * when an order becomes fully paid, receipts, and a settled customer khata.
  */
 export function Stamp({ label = "Paid", size = "md", animate = false, className, style }: StampProps) {

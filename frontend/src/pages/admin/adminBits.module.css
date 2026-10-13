@@ -1,0 +1,59 @@
+.photo {
+  display: block;
+  flex: none;
+  object-fit: cover;
+  background: var(--canvas-2);
+}
+
+.photoSm {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+}
+
+.photoLg {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+}
+
+.photoEmpty {
+  display: grid;
+  place-items: center;
+  color: var(--ink-4);
+}
+
+.photoSm.photoEmpty svg {
+  width: 20px;
+  height: 20px;
+}
+
+.photoLg.photoEmpty svg {
+  width: 40px;
+  height: 40px;
+}
+
+.badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--text-14);
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+}

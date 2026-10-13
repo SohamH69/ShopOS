@@ -21,7 +21,7 @@ export function KhataSection() {
             orders first, and a polite reminder goes out on WhatsApp in one tap.
           </p>
           <ul className={styles.points}>
-            <li>Dues add up by themselves — no adding up pages at night</li>
+            <li>Dues add up by themselves, so no adding up pages at night</li>
             <li>Record a promise like “I’ll pay on Friday”, and see when it’s missed</li>
             <li>Settled accounts get the violet stamp</li>
           </ul>

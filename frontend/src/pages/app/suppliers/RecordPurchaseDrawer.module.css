@@ -27,7 +27,7 @@
 
 .error {
   font-size: var(--text-13);
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 /* Lines -------------------------------------------------------------------- */

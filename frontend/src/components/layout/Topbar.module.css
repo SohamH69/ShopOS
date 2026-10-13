@@ -1,3 +1,4 @@
+/* Desktop: frosted canvas, so the page slides under it. */
 .topbar {
   position: sticky;
   top: 0;
@@ -5,7 +6,9 @@
   flex: none;
   height: var(--topbar-h);
   border-bottom: 1px solid var(--rule);
-  background: var(--paper);
+  background: color-mix(in srgb, var(--canvas) 86%, transparent);
+  -webkit-backdrop-filter: saturate(1.5) blur(14px);
+  backdrop-filter: saturate(1.5) blur(14px);
 }
 
 .inner {
@@ -20,37 +23,64 @@
 
 .brand {
   display: none;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
   border-radius: var(--radius-sm);
   text-decoration: none;
 }
 
+.brand svg {
+  width: 30px;
+  height: 30px;
+  flex: none;
+}
+
+.shopName {
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transform: translateY(0.06em);
+}
+
 .search {
   display: flex;
-  flex: 0 1 440px;
+  flex: 0 1 460px;
   align-items: center;
   gap: 10px;
   min-width: 0;
-  height: var(--control-sm);
-  padding: 0 8px 0 12px;
+  height: var(--control-md);
+  padding: 0 8px 0 14px;
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--desk);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
   color: var(--ink-3);
   font-size: var(--text-14);
   text-align: left;
   transition:
     border-color var(--dur-1) var(--ease),
-    background-color var(--dur-1) var(--ease);
+    box-shadow var(--dur-1) var(--ease);
 }
 
 .search:hover {
   border-color: var(--rule-strong);
-  background: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.search:focus-visible {
+  box-shadow: var(--focus-ring);
 }
 
 .search svg {
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   flex: none;
 }
 
@@ -58,7 +88,6 @@
   flex: 1;
   min-width: 0;
   overflow: hidden;
-  padding-top: 1px;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -73,21 +102,80 @@
   flex: 1;
 }
 
-.searchIcon {
+.newOrder {
+  border-radius: var(--radius-pill);
+  padding-left: 14px;
+}
+
+.phoneOnly {
   display: none !important;
 }
 
+/* Phones and tablets: the bar becomes the shop's signboard. ------------------ */
+
 @media (max-width: 1023px) {
+  .topbar {
+    height: calc(var(--topbar-h) + var(--safe-top));
+    padding-top: var(--safe-top);
+    border-bottom: 0;
+    background: var(--night);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .inner {
+    gap: 4px;
+    padding-right: calc(var(--page-pad) - 8px);
+  }
+
   .brand {
     display: inline-flex;
+    margin-right: auto;
+  }
+
+  .brand:focus-visible {
+    box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.45);
   }
 
   .search,
-  .newOrder {
+  .newOrder,
+  .spacer {
     display: none !important;
   }
 
-  .searchIcon {
+  .phoneOnly {
     display: inline-flex !important;
+  }
+
+  /* Two classes so these beat the shared ghost button colours. */
+  .topbar .onBoard {
+    color: var(--night-ink);
+  }
+
+  .topbar .onBoard:hover,
+  .topbar .onBoard[aria-expanded="true"] {
+    background: var(--night-2);
+    color: #ffffff;
+  }
+
+  .topbar .onBoard:focus-visible {
+    box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.45);
+  }
+
+  /* You're on a page that lives in the More sheet. */
+  .moreActive {
+    position: relative;
+  }
+
+  .moreActive::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--night);
+    border-radius: 50%;
+    background: var(--accent);
   }
 }

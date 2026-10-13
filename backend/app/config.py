@@ -69,6 +69,16 @@ def _cors_origins() -> list[str]:
     return origins
 
 
+def _default_uploads_dir(database_url: str) -> Path:
+    """Next to a SQLite database file (so a throwaway database gets throwaway uploads)."""
+    prefix = "sqlite:///"
+    if database_url.startswith(prefix):
+        path = database_url[len(prefix) :]
+        if path and path != ":memory:" and not path.startswith("file:"):
+            return Path(path).parent / "uploads"
+    return DATA_DIR / "uploads"
+
+
 @dataclass
 class Settings:
     database_url: str
@@ -77,17 +87,21 @@ class Settings:
     cors_origins: list[str]
     seed_demo: bool
     frontend_dist: Path
+    uploads_dir: Path
 
 
 def load_settings() -> Settings:
     dist = _env("SHOPOS_FRONTEND_DIST")
+    uploads = _env("SHOPOS_UPLOADS_DIR")
+    database_url = _env("SHOPOS_DATABASE_URL") or _default_database_url()
     return Settings(
-        database_url=_env("SHOPOS_DATABASE_URL") or _default_database_url(),
+        database_url=database_url,
         secret_key=_load_secret_key(),
         token_days=max(1, _env_int("SHOPOS_TOKEN_DAYS", 30)),
         cors_origins=_cors_origins(),
         seed_demo=_env_bool("SHOPOS_SEED_DEMO", True),
         frontend_dist=Path(dist) if dist else PROJECT_DIR / "frontend" / "dist",
+        uploads_dir=Path(uploads) if uploads else _default_uploads_dir(database_url),
     )
 
 

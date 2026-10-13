@@ -38,6 +38,7 @@ demo shop. `backend/data/` is git-ignored.
 | `SHOPOS_CORS_ORIGINS` | none | Extra allowed origins, comma separated. `localhost`/`127.0.0.1` on ports 5173 and 4173 are always allowed |
 | `SHOPOS_SEED_DEMO` | `1` | Set to `0` to skip seeding the demo shop when the database is empty |
 | `SHOPOS_FRONTEND_DIST` | `<project>/frontend/dist` | Folder with the built frontend to serve |
+| `SHOPOS_UPLOADS_DIR` | `uploads/` next to the SQLite database (else `backend/data/uploads`) | Where shop photos are stored |
 
 ## Demo shop
 
@@ -67,6 +68,36 @@ python -m app.seed            # only seed when no demo shop exists yet
 The data is generated relative to the current date with a fixed random seed, and is built
 through the same service functions as the API, so stock movements, payment statuses and
 balances always add up.
+
+## Shop setup, customer links and the admin
+
+- **Shop ID.** Every shop gets a public ID such as `SO-7K2Q9M` (no 0/O or 1/I/L), shown in Settings
+  and the admin. Older databases get IDs on the next start.
+- **Setup gate.** A shop needs a photo (`PUT /api/shop/photo`, the image itself as the body) and an
+  address plus map pin (`PATCH /api/shop` with `address`, `latitude`, `longitude`) before anything
+  else opens: every shop endpoint answers 403 until then, except `/api/auth/me`, `/api/shop` and the
+  photo upload. Photos are re-encoded to JPEG (max 1600 px, EXIF/GPS removed) and served at
+  `/api/media/shops/<random>.jpg`.
+- **Customer khata links** (the customer side). `GET /api/customers/{id}/portal-link` returns
+  `/c/<token>` for the shopkeeper to share on WhatsApp; `POST .../portal-link/reset` turns earlier
+  links off. The token is signed with the server secret, so nothing secret is stored. The customer's
+  page uses `GET /api/portal/{token}` (shop, balance, khata, orders), `GET .../products` and
+  `POST .../orders` (new, unpaid, channel `online`; at most 10 an hour per customer). Shops can turn
+  the product list and ordering off (`portal_catalog`, `portal_orders`).
+- **Admin** (`/admin` in the web app, `/api/admin/*`). Admins are separate accounts with their own
+  12-hour tokens; shop tokens never work there and admin tokens never work on shop endpoints. They
+  see every shop, platform numbers (demo shop excluded), and can suspend/reactivate a shop (its
+  sign-ins and customer links stop) or change its plan; each action is kept in `admin_actions`.
+  There is no admin sign-up and no default admin. From `backend/`:
+
+  ```powershell
+  python -m app.admin_cli create --email you@example.com --name "Your Name"   # asks for a password
+  python -m app.admin_cli password --email you@example.com
+  python -m app.admin_cli disable --email you@example.com
+  python -m app.admin_cli list
+  ```
+- **Upgrades.** `app/migrations.py` adds columns introduced after a database was created and fills
+  them in (shop IDs, the demo shop's photo and pin). It runs on every start.
 
 ## Tests
 
@@ -104,6 +135,9 @@ app/services/      business rules (orders, payments, customers, inventory, suppl
 app/routers/       thin HTTP layer, one module per area
 app/seed.py        demo data
 app/spa.py         serves frontend/dist
+app/migrations.py  adds newer columns to older databases on start
+app/admin_cli.py   create and manage ShopOS admin accounts
+app/assets/        the demo shop's shopfront picture
 ```
 
 Conventions:

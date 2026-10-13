@@ -25,7 +25,7 @@ function allocationText(allocations: readonly PaymentAllocation[]): string {
 }
 
 /**
- * What a payment of `amount` will clear, oldest unpaid order first — the same FIFO rule the server
+ * What a payment of `amount` will clear, oldest unpaid order first; the same FIFO rule the server
  * applies: "Pays off #1124 and ₹120 of #1133."
  */
 function previewText(amount: number, unpaidOldestFirst: readonly Order[]): string | null {

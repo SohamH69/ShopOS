@@ -62,7 +62,7 @@ function DueCell({ customer }: { customer: Customer }) {
     );
   }
   if (customer.orders_count > 0) return <span className={styles.settled}>Settled</span>;
-  return <span className="muted">—</span>;
+  return <span className="muted">–</span>;
 }
 
 /** The customer list: who buys from you, who owes you, and who promised to pay. */

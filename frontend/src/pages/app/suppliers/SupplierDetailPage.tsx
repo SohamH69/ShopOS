@@ -272,7 +272,7 @@ const PAYMENT_COLUMNS: readonly DataColumn<SupplierPayment>[] = [
   {
     key: "note",
     header: "Note",
-    cell: (payment) => (payment.note ? payment.note : <span className={styles.none}>—</span>),
+    cell: (payment) => (payment.note ? payment.note : <span className={styles.none}>–</span>),
   },
   {
     key: "amount",

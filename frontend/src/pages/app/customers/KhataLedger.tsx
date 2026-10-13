@@ -74,7 +74,7 @@ export interface KhataLedgerProps {
 
 /**
  * The digital khata: ruled rows, the red margin line with the date in the margin, purchases (+) in ink,
- * payments (−) in leaf, and the running balance — newest first, with the outstanding amount at the foot.
+ * payments (−) in leaf, and the running balance, newest first, with the outstanding amount at the foot.
  */
 export function KhataLedger({ ledger, error, onRetry, customerName, onOpenOrder, emptyAction }: KhataLedgerProps) {
   const [limit, setLimit] = useState(FIRST_PAGE);

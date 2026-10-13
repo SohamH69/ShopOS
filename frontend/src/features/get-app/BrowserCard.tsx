@@ -20,7 +20,7 @@ export function BrowserCard() {
         <h3 id={titleId} className={styles.cardTitle}>
           Use it in your browser
         </h3>
-        <p className={styles.cardSub}>Nothing to install. Sign in from any computer or phone — your data stays in sync.</p>
+        <p className={styles.cardSub}>Nothing to install. Sign in from any computer or phone. Your data stays in sync.</p>
       </header>
 
       {signedIn && shop && (

@@ -22,7 +22,7 @@
 }
 
 .link:hover {
-  background: var(--desk);
+  background: var(--canvas);
   color: var(--ink);
 }
 
@@ -35,13 +35,13 @@
 
 .active,
 .active:hover {
-  border-color: var(--pen-tint-2);
-  background: var(--pen-tint);
-  color: var(--pen);
+  border-color: var(--brand-tint-2);
+  background: var(--brand-tint);
+  color: var(--brand);
 }
 
 .active svg {
-  color: var(--pen);
+  color: var(--brand);
 }
 
 .account {

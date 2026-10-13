@@ -1,6 +1,6 @@
 /*
- * The hero parchi: a paper order slip lying on the counter (a --desk panel), torn along the
- * bottom, with an order track and a payment track that move independently.
+ * The hero parchi: a paper order slip pinned to the night signboard, torn along the bottom, with an
+ * order track and a payment track that move independently.
  */
 
 .figure {
@@ -12,20 +12,17 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   justify-items: center;
-  gap: var(--space-3);
-  padding: 44px var(--space-8) var(--space-4);
-  border-radius: var(--radius-lg);
-  background: var(--desk);
-  /* The slip is turned slightly; keep its corners inside the panel. */
-  overflow: hidden;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-4) 0;
 }
 
 /* Shadows follow the torn edge only as a filter on a wrapper (a mask clips box-shadows). */
 .lift {
+  position: relative;
   width: 100%;
-  max-width: 380px;
-  filter: drop-shadow(0 0 1px var(--rule-strong)) drop-shadow(var(--shadow-sm));
-  transform: rotate(-1.2deg);
+  max-width: 390px;
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.45)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transform: rotate(-2deg);
 }
 
 .slip {
@@ -33,7 +30,7 @@
   position: relative;
   padding: 22px 24px 34px;
   border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
   /* Torn zig-zag bottom edge: each tile keeps everything above a V cut into its bottom. */
   -webkit-mask-image: conic-gradient(from -45deg at bottom, transparent, black 1deg 89deg, transparent 90deg);
@@ -67,7 +64,6 @@
 .shop {
   font-family: var(--font-display);
   font-size: var(--text-14);
-  font-stretch: var(--display-stretch);
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1.2;
@@ -155,11 +151,11 @@
 }
 
 .paidRow dd {
-  color: var(--leaf-text);
+  color: var(--success-text);
 }
 
 .dueRow dd {
-  color: var(--margin-text);
+  color: var(--danger-text);
 }
 
 .paidRow[data-zero] dd,
@@ -212,39 +208,39 @@
 /* Colours by stage: the same status encoding as the app. */
 .step[data-stage="new"] {
   --stage: var(--ink-3);
-  --stage-tint: var(--desk-2);
+  --stage-tint: var(--canvas-2);
   --stage-text: var(--ink-2);
 }
 
 .step[data-stage="preparing"],
 .step[data-stage="partial"] {
-  --stage: var(--haldi);
-  --stage-tint: var(--haldi-tint);
-  --stage-text: var(--haldi-text);
+  --stage: var(--warn);
+  --stage-tint: var(--warn-tint);
+  --stage-text: var(--warn-text);
 }
 
 .step[data-stage="ready"] {
-  --stage: var(--pen);
-  --stage-tint: var(--pen-tint);
-  --stage-text: var(--pen);
+  --stage: var(--info);
+  --stage-tint: var(--info-tint);
+  --stage-text: var(--info-text);
 }
 
 .step[data-stage="collected"] {
-  --stage: var(--leaf);
-  --stage-tint: var(--leaf-tint);
-  --stage-text: var(--leaf-text);
+  --stage: var(--success);
+  --stage-tint: var(--success-tint);
+  --stage-text: var(--success-text);
 }
 
 .step[data-stage="unpaid"] {
-  --stage: var(--margin);
-  --stage-tint: var(--margin-tint);
-  --stage-text: var(--margin-text);
+  --stage: var(--danger);
+  --stage-tint: var(--danger-tint);
+  --stage-text: var(--danger-text);
 }
 
 .step[data-stage="paid"] {
-  --stage: var(--stamp);
-  --stage-tint: var(--stamp-tint);
-  --stage-text: var(--stamp);
+  --stage: var(--paid);
+  --stage-tint: var(--paid-tint);
+  --stage-text: var(--paid);
 }
 
 .rail {
@@ -259,7 +255,7 @@
   height: 10px;
   border: 1.5px solid var(--rule-strong);
   border-radius: 50%;
-  background: var(--paper);
+  background: var(--surface);
   transition:
     background-color var(--dur-2) var(--ease),
     border-color var(--dur-2) var(--ease),
@@ -398,9 +394,19 @@
   visibility: visible;
 }
 
+/* Two classes, so the night-board colours win over the shared ghost button. */
+.replayRow .replay {
+  color: var(--night-ink-2);
+}
+
+.replayRow .replay:hover {
+  background: var(--night-2);
+  color: #ffffff;
+}
+
 @media (max-width: 639px) {
   .counter {
-    padding: 32px var(--space-3) var(--space-3);
+    padding: var(--space-3) 0 0;
   }
 
   .slip {
